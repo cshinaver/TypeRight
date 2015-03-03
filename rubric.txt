@@ -1,0 +1,9 @@
+Lab 8 Milestones
+
+10 pts - Animation of a human sprite avatar (can be practice)
+8 pts - Creation of a background consistent for whole animation using openGL
+10 pts - Successfully reading user typing input, storing in temp variable
+6 pts - Created ten files of 100 words each, pertaining to each level of the game
+6 pts - Words are displayed on background (not necessarily in the right place)
+
+Total: 40 pts
