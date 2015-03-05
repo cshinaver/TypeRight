@@ -1,2 +1,2 @@
 language: cpp
-script: cd build & make && make test
+script: cd build; cmake ..; make; make test;
