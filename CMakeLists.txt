@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
 # Cmake options
-option(test "Build all tests." ON) # Makes boolean "test" available
 enable_testing()
 
 set(PROJECT_NAME TypeRight)
@@ -10,7 +9,15 @@ project(${PROJECT_NAME})
 ##################################
 # Normal Libraries & Executables #
 ##################################
-add_library(sample1_lib sample1.cc)
+
+# Find SDL
+include(FindPkgConfig)
+pkg_search_module(SDL2 REQUIRED sdl2)
+include_directories(${SDL2_INCLUDE_DIRS})
+
+# main
+add_executable(main main.cpp)
+target_link_libraries(main ${SDL2_LIBRARIES})
 
 ###########
 # Testing #
@@ -21,7 +28,7 @@ add_subdirectory(gtest)
 # Include gtest library
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-add_executable(sample1test sample1_unittest.cc)
-target_link_libraries(sample1test sample1_lib gtest gtest_main)
-
-add_test(sample1test sample1test)
+#add_executable(sample1test sample1_unittest.cc)
+#target_link_libraries(sample1test sample1_lib gtest gtest_main)
+#
+#add_test(sample1test sample1test)
