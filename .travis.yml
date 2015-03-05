@@ -1,5 +1,5 @@
 language: cpp
-script: run_tests
+script: "./run-tests.sh"
 compiler:
     - clang
     - gcc
