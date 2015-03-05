@@ -1,6 +1,2 @@
 language: cpp
-script: "./run-tests.sh"
-compiler:
-    - clang
-    - gcc
-
+script: cd build; make && make test
