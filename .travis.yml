@@ -1,0 +1,6 @@
+language: cpp
+script: run_tests
+compiler:
+    - clang
+    - gcc
+
