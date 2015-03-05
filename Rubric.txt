@@ -1,0 +1,14 @@
+Jared Rodgers & Charles Shinaver
+
+======================
+ Rubric for TypeRight
+======================
+
+08 pts: Develop relevant classes to TypeRight (ie. create character/enemy/text class).
+05 pts: Tutorials on SDL and create basic program based on it.
+05 pts: Get a character/enemies to display using SDL.
+05 pts: Make multiple characters and enemies using sprites for game.
+10 pts: Make typing levels (3 minimum, easy, medium, hard).
+02 pts: Display which finger should press each key when typing.
+03 pts: Properly take user input when they typing to advance through levels.
+02 pts: Add cool animations and scenery for character to move through.
