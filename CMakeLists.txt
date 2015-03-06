@@ -16,7 +16,8 @@ pkg_search_module(SDL2 REQUIRED sdl2)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 # Add SDLWrapper library
-add_library(sdlwrapper_lib SDLWrapper.cpp ${SDL2_INCLUDE_DIRS})
+add_library(sdlwrapper_lib SDLWrapper.cpp)
+target_link_libraries(sdlwrapper_lib ${SDL2_LIBRARIES})
 
 # main
 add_executable(main main.cpp)
