@@ -34,13 +34,16 @@ SDLWrapper::~SDLWrapper()
     SDL_Quit();
 }
 
-int SDLWrapper::init()
+bool SDLWrapper::init()
 {
+    // init flag
+    bool success = true;
+
     //Initialize SDL
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
         cout << "SDL could not initialize! SDL_Error: " <<  SDL_GetError() << endl;;
-        return 0;
+        success = false;
     }
     else
     {
@@ -49,6 +52,7 @@ int SDLWrapper::init()
         if( window == NULL )
         {
             cout << "Window could not be created! SDL_Error: " << SDL_GetError();
+            success = false;
         }
         else
         {
@@ -58,7 +62,7 @@ int SDLWrapper::init()
         }
     }
 
-    return 0;
+    return success;
 }
 
 void SDLWrapper::updateWindow()
