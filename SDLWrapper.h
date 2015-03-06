@@ -6,7 +6,7 @@
 
 #ifndef SDLWRAPPER_H
 #define SDLWRAPPER_H
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 class SDLWrapper
 {

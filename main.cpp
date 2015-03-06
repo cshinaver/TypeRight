@@ -4,7 +4,7 @@
  * Driver for TypeWrite
 */
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "SDLWrapper.h"
 
 int main()
