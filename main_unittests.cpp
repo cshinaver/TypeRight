@@ -12,3 +12,10 @@ TEST(SDLTest, IsWindowCreated) {
     SDLWrapper sw;
     ASSERT_TRUE(sw.window != NULL);
 }
+
+// Test if bmp image loaded
+TEST(SDLTest, IsBmpImageLoaded) {
+    SDLWrapper sw;
+    SDL_Surface *img = sw.loadBmpImg("hello_world.bmp");
+    ASSERT_TRUE(sw.window != NULL);
+}

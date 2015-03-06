@@ -69,3 +69,22 @@ void SDLWrapper::updateWindow()
 
     SDL_UpdateWindowSurface( window);
 }
+
+SDL_Surface * SDLWrapper::loadBmpImg(string imgName)
+{
+    /*
+     * Opens image from img directory and returns surface for that image
+    */
+
+    string fullImgPath = "../imgs/" + imgName;
+    SDL_Surface *img = NULL;
+
+    // Image surface
+    img = SDL_LoadBMP(fullImgPath.c_str());
+    if (img == NULL)
+    {
+        cout << "Unable to load image " << fullImgPath << "! SDL Error: " << SDL_GetError() << endl;
+    }
+
+    return img;
+}

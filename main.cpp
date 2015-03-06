@@ -6,20 +6,31 @@
 
 #include <SDL2/SDL.h>
 #include "SDLWrapper.h"
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
     SDLWrapper sw;
     sw.init();
 
-    //Fill the surface white
-    SDL_FillRect( sw.screenSurface, NULL, SDL_MapRGB( sw.screenSurface->format, 0xFF, 0xFF, 0xFF ) );
+    // Image surface
+    SDL_Surface *img = sw.loadBmpImg("hello_world.bmp");
 
-    //Update the surface
+    // Blit image to surface
+    if (img)
+    {
+        SDL_BlitSurface(img, NULL, sw.screenSurface, NULL);
+    }
+
     sw.updateWindow();
-
+    
     //Wait two seconds
     SDL_Delay( 2000 );
+
+    // Free
+    SDL_FreeSurface(img);
 
     return 0;
 }
