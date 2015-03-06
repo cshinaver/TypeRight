@@ -18,6 +18,7 @@ SDLWrapper::SDLWrapper(int h, int w) : SCREEN_WIDTH(w), SCREEN_HEIGHT(h)
     // Initialize pointers to null
     window = NULL;
     screenSurface = NULL;
+    init();
 }
 
 SDLWrapper::~SDLWrapper()

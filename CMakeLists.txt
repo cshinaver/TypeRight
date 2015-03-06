@@ -16,11 +16,11 @@ pkg_search_module(SDL2 REQUIRED sdl2)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 # Add SDLWrapper library
-add_library(sdlwrapper SDLWrapper.cpp)
+add_library(sdlwrapper_lib SDLWrapper.cpp)
 
 # main
 add_executable(main main.cpp)
-target_link_libraries(main ${SDL2_LIBRARIES} sdlwrapper)
+target_link_libraries(main ${SDL2_LIBRARIES} sdlwrapper_lib)
 
 ###########
 # Testing #
@@ -31,7 +31,7 @@ add_subdirectory(gtest)
 # Include gtest library
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-#add_executable(sample1test sample1_unittest.cc)
-#target_link_libraries(sample1test sample1_lib gtest gtest_main)
-#
-#add_test(sample1test sample1test)
+add_executable(main_unittests main_unittests.cpp)
+target_link_libraries(main_unittests sdlwrapper_lib gtest gtest_main ${SDL2_LIBRARIES})
+
+add_test(main_unittests main_unittests)

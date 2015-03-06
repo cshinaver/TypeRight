@@ -27,7 +27,8 @@ have to rerun `cmake ..` from your build dir to rebuild the Makefile.
 ## Testing
 To run the testing suite, cd into the build directory (after generating the
 makefile) and run `$ make test`. This will run all the tests that have been
-added.
+added. If you want better testing output, run the build/main_unittests
+executable.
 
 
 ## Todos
