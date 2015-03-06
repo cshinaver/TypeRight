@@ -33,6 +33,6 @@ add_subdirectory(gtest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 add_executable(main_unittests main_unittests.cpp)
-target_link_libraries(main_unittests sdlwrapper_lib gtest gtest_main ${SDL2_LIBRARIES})
+target_link_libraries(main_unittests ${SDL2_LIBRARIES} sdlwrapper_lib gtest gtest_main)
 
 add_test(main_unittests main_unittests)
