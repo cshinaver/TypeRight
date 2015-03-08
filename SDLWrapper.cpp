@@ -89,6 +89,7 @@ SDL_Surface * SDLWrapper::loadBmpImg(string imgName)
 
     string fullImgPath = "../imgs/" + imgName;
     SDL_Surface *img = NULL;
+    SDL_Surface *optimizedSurface = NULL;
 
     // Image surface
     img = SDL_LoadBMP(fullImgPath.c_str());
@@ -96,7 +97,19 @@ SDL_Surface * SDLWrapper::loadBmpImg(string imgName)
     {
         cout << "Unable to load image " << fullImgPath << "! SDL Error: " << SDL_GetError() << endl;
     }
+    else
+    {
+        // Convert image surface to screen format
+        optimizedSurface = SDL_ConvertSurface(img, screenSurface->format, 0);
+        if (optimizedSurface == NULL)
+        {
+            cout << "Unable to optimize image " << imgName << "! SDL Error: " << SDL_GetError() << endl;
+        }
 
-    return img;
+        SDL_FreeSurface(img);
+
+    }
+
+    return optimizedSurface;
 }
 
