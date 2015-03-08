@@ -22,6 +22,8 @@ class SDLWrapper
         SDL_Window *window;
         SDL_Surface *screenSurface;
         SDL_Surface * loadBmpImg(string);
+        SDL_Surface * scaleToScreenSize(SDL_Surface *);
+        void scaleToScreenAndBlit(SDL_Surface *);
     private:
         const int SCREEN_HEIGHT;
         const int SCREEN_WIDTH;
