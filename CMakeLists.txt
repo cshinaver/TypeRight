@@ -19,9 +19,13 @@ include_directories(${SDL2_INCLUDE_DIRS})
 add_library(sdlwrapper_lib SDLWrapper.cpp)
 target_link_libraries(sdlwrapper_lib ${SDL2_LIBRARIES})
 
+# TypeRight Library
+add_library(TypeRight_lib TypeRight.cpp)
+target_link_libraries(TypeRight_lib sdlwrapper_lib ${SDL2_LIBRARIES})
+
 # main
 add_executable(main main.cpp)
-target_link_libraries(main ${SDL2_LIBRARIES} sdlwrapper_lib)
+target_link_libraries(main ${SDL2_LIBRARIES} sdlwrapper_lib TypeRight_lib)
 
 ###########
 # Testing #

@@ -17,6 +17,7 @@ class SDLWrapper
         SDLWrapper(int h = 480, int w = 640);
         ~SDLWrapper();
         bool init(); // Inits SDL window and initial surface
+        void quit(); // Deallocs SDL window and surface
         void updateWindow(); // Updates window surface
         SDL_Window *window;
         SDL_Surface *screenSurface;
