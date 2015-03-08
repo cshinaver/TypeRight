@@ -29,3 +29,6 @@
 
 # Build dir
 build/
+
+# Vim files
+*.vim
