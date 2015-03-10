@@ -31,5 +31,12 @@ executable.
 
 
 ## Todos
+### Week of March 9th
+- [ ] Get Repo on local machine using git (Everybody)
+- [ ] Install Cmake (everybody)
+- [ ] Install sdl2  on local machines (everybody)
+- [ ] Figure out how to compile on windows machine (Charles)
+- [ ] Figure out how to compile on engineering machines (Charles)
+
 - [x] Setup Automated testing (TravisCI)
 - [x] Make basic makefile for sdl
