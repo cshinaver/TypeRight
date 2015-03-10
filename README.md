@@ -5,6 +5,10 @@ TypeRight CSE 20212 Final Project
 To build the files, change into the build directory and run:
 `$ cmake ..`
 
+On the engineering machines, you will have to do 
+`$ cmake -G "Unix Makefiles" ..`
+from the build directory
+
 This will analyze your system and create a makefile in that directory. To make
 the executables run:
 `$ make`
@@ -36,7 +40,7 @@ executable.
 - [ ] Install Cmake (everybody)
 - [ ] Install sdl2  on local machines (everybody)
 - [ ] Figure out how to compile on windows machine (Charles)
-- [ ] Figure out how to compile on engineering machines (Charles)
+- [x] Figure out how to compile on engineering machines (Charles)
 
 - [x] Setup Automated testing (TravisCI)
 - [x] Make basic makefile for sdl
