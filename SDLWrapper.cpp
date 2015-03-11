@@ -5,6 +5,7 @@
 */
 
 #include "SDLWrapper.h"
+#include <SDL2/SDL_image.h>
 #include <iostream>
 #include <stdexcept>
 
@@ -64,9 +65,17 @@ bool SDLWrapper::init()
         }
         else
         {
-            //Get window surface
-            screenSurface = SDL_GetWindowSurface( window );
-            return 1;
+            // Init SDL_image
+            int imgFlags = IMG_INIT_PNG;
+            if (!(IMG_Init(imgFlags) &imgFlags))
+            {
+                cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
+            }
+            else
+            {
+                //Get window surface
+                screenSurface = SDL_GetWindowSurface( window );
+            }
         }
     }
 

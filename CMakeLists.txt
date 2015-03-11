@@ -22,20 +22,23 @@ elseif(CYGWIN)
 else()
     include(FindPkgConfig)
     pkg_search_module(SDL2 REQUIRED sdl2)
+    set(SDL2_IMAGE_LIBRARIES -L"/usr/local/lib" -lSDL2_image)
+    set(SDL2_IMAGE_INCLUDE_DIRS "/usr/local/include")
 endif()
 include_directories(${SDL2_INCLUDE_DIRS})
+include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
 
 # Add SDLWrapper library
 add_library(sdlwrapper_lib SDLWrapper.cpp)
-target_link_libraries(sdlwrapper_lib ${SDL2_LIBRARIES})
+target_link_libraries(sdlwrapper_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # TypeRight Library
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib ${SDL2_LIBRARIES})
+target_link_libraries(TypeRight_lib sdlwrapper_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # main
 add_executable(main main.cpp)
-target_link_libraries(main ${SDL2_LIBRARIES} sdlwrapper_lib TypeRight_lib)
+target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} sdlwrapper_lib TypeRight_lib)
 
 ###########
 # Testing #
