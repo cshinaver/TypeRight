@@ -2,6 +2,8 @@
 TypeRight CSE 20212 Final Project
 
 ## How to setup
+In order to build the files, you will need to install both SDL2 and CMake on
+your local machine. The engineering machines alreaedy have them both.
 To build the files, change into the build directory and run:
 `$ cmake ..`
 
@@ -17,6 +19,18 @@ This will create the executables in that build directory. Git has been set up
 to ignore the build directory completely, so don't worry about adding binaries. 
 `make clean` will clean up the binaries. This shouldn't be necessary unless you
 are changing header files. 
+
+### Cygwin
+In order to use Cygwin on Windows, make sure that you have the cmake package
+installed (as well as gcc, g++, make, etc). You can install it by rerunning the
+Cygwin installer and checking the cmake package (your other packages will not
+be removed, Cygwin lets you run the installer multiple times to install new
+packages). 
+Once you have cmake and the other tools installed, cd into the build directory
+and run `$ cmake ..`. This will generate a windows specific Makefile. Run `$
+make` to make the executable. A `main.exe` and `main_unittests.exe` should be
+created. `main.exe` can be opened like any other executable (using `./main.exe`
+notation).
 
 ## Adding new executables
 To add a new executable, open the CMakeLists.txt file in the root directory.
@@ -39,7 +53,7 @@ executable.
 - [ ] Get Repo on local machine using git (Everybody)
 - [ ] Install Cmake (everybody)
 - [ ] Install sdl2  on local machines (everybody)
-- [ ] Figure out how to compile on windows machine (Charles)
+- [x] Figure out how to compile on windows machine (Charles)
 - [x] Figure out how to compile on engineering machines (Charles)
 
 - [x] Setup Automated testing (TravisCI)

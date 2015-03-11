@@ -11,9 +11,14 @@ project(${PROJECT_NAME})
 ##################################
 
 # Find SDL
+## Engineering Machine
 if (EXISTS "/afs/nd.edu/user14/csesoft/new/lib")
     set(SDL2_LIBRARIES -L"/afs/nd.edu/user14/csesoft/new/lib" -lSDL2 -Wl,-rpath=/afs/nd.edu/user14/csesoft/new/lib)
     set(SDL2_INCLUDE_DIRS "/afs/nd.edu/user14/csesoft/new/include")
+# Cygwin
+elseif(CYGWIN)
+    set(SDL2_LIBRARIES -L"/usr/local/lib" -lSDL2 -Wl,-rpath=/usr/local/lib)
+    set(SDL2_INCLUDE_DIRS "/usr/local/include")
 else()
     include(FindPkgConfig)
     pkg_search_module(SDL2 REQUIRED sdl2)
