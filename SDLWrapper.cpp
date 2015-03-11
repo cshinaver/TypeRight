@@ -6,6 +6,7 @@
 
 #include "SDLWrapper.h"
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -96,6 +97,7 @@ SDL_Surface * SDLWrapper::loadBmpImg(string imgName)
     if (img == NULL)
     {
         cout << "Unable to load image " << fullImgPath << "! SDL Error: " << SDL_GetError() << endl;
+        throw runtime_error("Unable to load image");
     }
     else
     {
@@ -104,6 +106,7 @@ SDL_Surface * SDLWrapper::loadBmpImg(string imgName)
         if (optimizedSurface == NULL)
         {
             cout << "Unable to optimize image " << imgName << "! SDL Error: " << SDL_GetError() << endl;
+            throw runtime_error("Unable to optimize image");
         }
 
         SDL_FreeSurface(img);
