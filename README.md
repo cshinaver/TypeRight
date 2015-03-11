@@ -2,8 +2,18 @@
 TypeRight CSE 20212 Final Project
 
 ## How to setup
-In order to build the files, you will need to install both SDL2 and CMake on
+In order to build the files, you will need to install both SDL2, sdl_image and CMake on
 your local machine. The engineering machines alreaedy have them both.
+
+### Mac OS X
+Install [homebrew](http://coolestguidesontheplanet.com/installing-homebrew-os-x-yosemite-10-10-package-manager-unix-apps/).
+Install SDL2, cmake, and sdl2_image
+
+```
+brew install sdl2
+brew install sdl2_image
+brew install cmake
+```
 To build the files, change into the build directory and run:
 `$ cmake ..`
 
@@ -21,6 +31,17 @@ to ignore the build directory completely, so don't worry about adding binaries.
 are changing header files. 
 
 ### Cygwin
+To install sdl2, and sdl_image, you must compile them from source. Download
+[sdl2](https://www.libsdl.org/release/SDL2-2.0.3.tar.gz) and
+[sdl_image](https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz).
+Extract them, cd into their respective directories, and run 
+```
+./configure
+make
+make install
+```
+
+This will install the two libraries into cygwin.
 In order to use Cygwin on Windows, make sure that you have the cmake package
 installed (as well as gcc, g++, make, etc). You can install it by rerunning the
 Cygwin installer and checking the cmake package (your other packages will not
