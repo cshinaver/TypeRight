@@ -52,32 +52,29 @@ bool SDLWrapper::init()
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
         cout << "SDL could not initialize! SDL_Error: " <<  SDL_GetError() << endl;;
-        success = false;
+        success = false; 
+        return success;
     }
-    else
+    //Create window
+    window = SDL_CreateWindow( "TypeWrite", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    if( window == NULL )
     {
-        //Create window
-        window = SDL_CreateWindow( "TypeWrite", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-        if( window == NULL )
-        {
-            cout << "Window could not be created! SDL_Error: " << SDL_GetError();
-            success = false;
-        }
-        else
-        {
-            // Init SDL_image
-            int imgFlags = IMG_INIT_PNG;
-            if (!(IMG_Init(imgFlags) &imgFlags))
-            {
-                cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
-            }
-            else
-            {
-                //Get window surface
-                screenSurface = SDL_GetWindowSurface( window );
-            }
-        }
+        cout << "Window could not be created! SDL_Error: " << SDL_GetError();
+        success = false; 
+        return success;
     }
+
+    // Init SDL_image
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) &imgFlags))
+    {
+        cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
+        success = false; 
+        return success;
+    }
+
+    //Get window surface
+    screenSurface = SDL_GetWindowSurface( window );
 
     return success;
 }

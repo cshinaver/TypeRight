@@ -21,11 +21,11 @@ class SDLWrapper
         bool init(); // Inits SDL window and initial surface
         void quit(); // Deallocs SDL window and surface
         void updateWindow(); // Updates window surface
-        SDL_Window *window;
-        SDL_Surface *screenSurface;
         SDL_Surface * loadImg(string);
         SDL_Surface * scaleToScreenSize(SDL_Surface *);
         void scaleToScreenAndBlit(SDL_Surface *);
+        SDL_Window *window;
+        SDL_Surface *screenSurface;
     private:
         const int SCREEN_HEIGHT;
         const int SCREEN_WIDTH;
