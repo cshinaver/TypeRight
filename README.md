@@ -10,6 +10,7 @@ Install [homebrew](http://coolestguidesontheplanet.com/installing-homebrew-os-x-
 Install SDL2, cmake, and sdl2_image
 
 ```
+brew install pkgconfig
 brew install sdl2
 brew install sdl2_image
 brew install cmake
