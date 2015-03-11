@@ -28,8 +28,14 @@ void TypeRight::startGame()
     //##################
     //# Main Game Loop #
     //##################
+
+    // For demo
+    SDL_Surface *hello_world = sw.loadBmpImg("hello_world.bmp");
     while (!quit)
     {
+        // Fill surface white
+        SDL_BlitSurface(hello_world, NULL, sw.screenSurface, NULL);
+        sw.updateWindow();
         checkForEvents();
     }
 }
