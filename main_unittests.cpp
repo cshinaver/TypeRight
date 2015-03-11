@@ -19,7 +19,7 @@ TEST(SDLTest, IsWindowCreated) {
 TEST(SDLTest, IsBmpImageLoaded) {
     SDLWrapper sw;
     sw.init();
-    SDL_Surface *img = sw.loadBmpImg("hello_world.bmp");
+    SDL_Surface *img = sw.loadImg("hello_world.bmp");
     ASSERT_TRUE( img != NULL);
 }
 
@@ -30,7 +30,7 @@ TEST(SDLTest, IsBmpImageNotLoaded) {
     int imgProperlyFailed = 0;
     try
     {
-        sw.loadBmpImg("non_existent_image.bmp");
+        sw.loadImg("non_existent_image.bmp");
     }
     catch (const std::runtime_error& e)
     {

@@ -30,7 +30,7 @@ void TypeRight::startGame()
     //##################
 
     // For demo
-    SDL_Surface *hello_world = sw.loadBmpImg("hello_world.bmp");
+    SDL_Surface *hello_world = sw.loadImg("hello_world.bmp");
     while (!quit)
     {
         // Fill surface white
