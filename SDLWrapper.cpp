@@ -93,7 +93,7 @@ bool SDLWrapper::init()
     screenSurface = SDL_GetWindowSurface( window );
 
     // Set render draw color
-   SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
     return success;
 }
@@ -145,21 +145,6 @@ SDL_Surface * SDLWrapper::loadImg(string imgName)
     }
 
     return img;
-}
-
-void SDLWrapper::scaleToScreenAndBlit(SDL_Surface * img)
-{
-    /*
-     * Scales image to screen size
-    */
-    //Apply the image stretched
-    SDL_Rect stretchRect;
-    stretchRect.x = 0;
-    stretchRect.y = 0;
-    stretchRect.w = SCREEN_WIDTH;
-    stretchRect.h = SCREEN_HEIGHT;
-    SDL_BlitScaled(img, NULL, screenSurface, &stretchRect );
-
 }
 
 void SDLWrapper::updateWindow()

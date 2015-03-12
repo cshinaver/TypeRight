@@ -6,6 +6,8 @@
 
 #include "TypeRight.h"
 
+void demoFunction(SDLWrapper &sw);
+
 TypeRight::TypeRight()
 {
     /*
@@ -30,20 +32,19 @@ void TypeRight::startGame()
     //##################
 
     // For demo
-    SDL_Texture *hello_world = sw.loadTexture("texture.png");
     while (!quit)
     {
         checkForEvents();
+
         // Clear screen
+        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
-        // Render texture to screen
-        sw.renderTextureToWindow(hello_world, NULL, NULL); // Renders texture to window
+        demoFunction(sw);
 
         // Update screen
         sw.updateWindow();
     }
-    SDL_DestroyTexture(hello_world);
 }
 
 void TypeRight::checkForEvents()
@@ -64,5 +65,32 @@ void TypeRight::checkForEvents()
         {
             quit = true;
         }
+    }
+}
+
+void demoFunction(SDLWrapper &sw)
+{
+    /*
+     * For demo purproses
+    */
+    // Render rectangle
+    SDL_Rect fillRect = {sw.SCREEN_WIDTH/4, sw.SCREEN_HEIGHT/4, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT/2,};
+    SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0x00, 0x00, 0xFF );        
+    SDL_RenderFillRect(sw.renderer, &fillRect);
+
+    // Render green outlined quad
+    SDL_Rect outlineRect = { sw.SCREEN_WIDTH  / 6, sw.SCREEN_HEIGHT  / 6, sw.SCREEN_WIDTH  * 2 / 3, sw.SCREEN_HEIGHT  * 2 / 3 };
+    SDL_SetRenderDrawColor( sw.renderer, 0x00, 0xFF, 0x00, 0xFF );        
+    SDL_RenderDrawRect( sw.renderer, &outlineRect );
+
+    // Draw blue horizontal line
+    SDL_SetRenderDrawColor(sw.renderer, 0x00, 0x00, 0xFF, 0xFF);
+    SDL_RenderDrawLine(sw.renderer, 0, sw.SCREEN_HEIGHT / 2, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT /2);
+
+    // Draw vertical line of yellow dots
+    SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0x00, 0xFF);
+    for (int i = 0; i < sw.SCREEN_HEIGHT; i += 4)
+    {
+        SDL_RenderDrawPoint(sw.renderer, sw.SCREEN_WIDTH /2, i);
     }
 }

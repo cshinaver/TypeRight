@@ -11,8 +11,7 @@
 // Test if window is instantiated
 TEST(SDLTest, IsWindowCreated) {
     SDLWrapper sw;
-    sw.init();
-    ASSERT_TRUE(sw.window != NULL);
+    ASSERT_TRUE(sw.init() == true);
 }
 
 // Test if bmp image loaded
