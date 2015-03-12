@@ -2,6 +2,7 @@
  * SDLWrapper.h
  * Charles Shinaver
  * Wrapper for SDL engine
+ * This wrapper uses SDL Rendering to display images
 */
 
 #ifndef SDLWRAPPER_H
@@ -21,11 +22,15 @@ class SDLWrapper
         bool init(); // Inits SDL window and initial surface
         void quit(); // Deallocs SDL window and surface
         void updateWindow(); // Updates window surface
+        void clearWindow(); // Clears window
+        void renderTextureToWindow(SDL_Texture*, SDL_Rect*, SDL_Rect*); // Renders texture to window
         SDL_Surface * loadImg(string);
+        SDL_Texture *loadTexture(string);
         SDL_Surface * scaleToScreenSize(SDL_Surface *);
         void scaleToScreenAndBlit(SDL_Surface *);
         SDL_Window *window;
         SDL_Surface *screenSurface;
+        SDL_Renderer *renderer;
     private:
         const int SCREEN_HEIGHT;
         const int SCREEN_WIDTH;

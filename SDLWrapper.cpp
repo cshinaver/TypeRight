@@ -39,6 +39,8 @@ void SDLWrapper::quit()
     // Destroy Surface 
     SDL_FreeSurface(screenSurface);
 
+    // Free Renderer
+    SDL_DestroyRenderer(renderer);
 
     //Destroy window
     SDL_DestroyWindow( window );
@@ -69,7 +71,14 @@ bool SDLWrapper::init()
         return success;
     }
 
-    // Init SDL_image
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (renderer == NULL)
+    {
+        cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << endl;
+        success = false; 
+        return success;
+    }
+    
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) &imgFlags))
     {
@@ -78,19 +87,43 @@ bool SDLWrapper::init()
         return success;
     }
 
+
+
     //Get window surface
     screenSurface = SDL_GetWindowSurface( window );
+
+    // Set render draw color
+   SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
     return success;
 }
 
-void SDLWrapper::updateWindow()
+SDL_Texture * SDLWrapper::loadTexture(string imgPath)
 {
     /*
-     * Updates main window
-     */
+     * Loads image as surface and converts surface to texture
+    */
 
-    SDL_UpdateWindowSurface( window);
+    // Texture
+    SDL_Texture *newTexture = NULL;
+
+    SDL_Surface *loadedSurface = loadImg(imgPath);
+    if (loadedSurface == NULL)
+    {
+        cout << "Unable to load image " << imgPath << "! SDL_image Error: " << IMG_GetError() << endl;
+    }
+
+    // Create texture from Surface
+    newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+    if (newTexture == NULL)
+    {
+        cout << "Unable to create texture from " << imgPath << "! SDL Error: " << SDL_GetError() << endl;
+    }
+
+    // Free loaded surface
+    SDL_FreeSurface(loadedSurface);
+
+    return newTexture;
 }
 
 SDL_Surface * SDLWrapper::loadImg(string imgName)
@@ -127,4 +160,31 @@ void SDLWrapper::scaleToScreenAndBlit(SDL_Surface * img)
     stretchRect.h = SCREEN_HEIGHT;
     SDL_BlitScaled(img, NULL, screenSurface, &stretchRect );
 
+}
+
+void SDLWrapper::updateWindow()
+{
+    /*
+     *  Updates window surface
+    */
+    
+    SDL_RenderPresent(renderer);
+}
+
+void SDLWrapper::clearWindow()
+{
+    /*
+     * Clears window
+    */
+
+    SDL_RenderClear(renderer);
+}
+
+void SDLWrapper::renderTextureToWindow(SDL_Texture *texture, SDL_Rect *srcRect, SDL_Rect *destRect)
+{
+    /*
+     * Renders texture to window
+    */
+
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
 }
