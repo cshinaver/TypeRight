@@ -30,14 +30,20 @@ void TypeRight::startGame()
     //##################
 
     // For demo
-    SDL_Surface *hello_world = sw.loadImg("hello_world.bmp");
+    SDL_Texture *hello_world = sw.loadTexture("texture.png");
     while (!quit)
     {
-        // Fill surface white
-        SDL_BlitSurface(hello_world, NULL, sw.screenSurface, NULL);
-        sw.updateWindow();
         checkForEvents();
+        // Clear screen
+        sw.clearWindow();
+
+        // Render texture to screen
+        sw.renderTextureToWindow(hello_world, NULL, NULL); // Renders texture to window
+
+        // Update screen
+        sw.updateWindow();
     }
+    SDL_DestroyTexture(hello_world);
 }
 
 void TypeRight::checkForEvents()
