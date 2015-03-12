@@ -105,21 +105,8 @@ SDL_Surface * SDLWrapper::loadImg(string imgName)
         cout << "Unable to load image " << fullImgPath << "! SDL Error: " << SDL_GetError() << endl;
         throw runtime_error("Unable to load image");
     }
-    else
-    {
-        // Convert image surface to screen format
-        optimizedSurface = SDL_ConvertSurface(img, screenSurface->format, 0);
-        if (optimizedSurface == NULL)
-        {
-            cout << "Unable to optimize image " << imgName << "! SDL Error: " << SDL_GetError() << endl;
-            throw runtime_error("Unable to optimize image");
-        }
 
-        SDL_FreeSurface(img);
-
-    }
-
-    return optimizedSurface;
+    return img;
 }
 
 void SDLWrapper::scaleToScreenAndBlit(SDL_Surface * img)
