@@ -26,11 +26,11 @@ class SDLWrapper
         void renderTextureToWindow(SDL_Texture*, SDL_Rect*, SDL_Rect*); // Renders texture to window
         SDL_Surface * loadImg(string);
         SDL_Texture *loadTexture(string);
-        SDL_Window *window;
-        SDL_Surface *screenSurface;
-        SDL_Renderer *renderer;
     private:
         const int SCREEN_HEIGHT;
         const int SCREEN_WIDTH;
+        SDL_Window *window;
+        SDL_Surface *screenSurface;
+        SDL_Renderer *renderer;
 };
 #endif

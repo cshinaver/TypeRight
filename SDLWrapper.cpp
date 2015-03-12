@@ -93,7 +93,7 @@ bool SDLWrapper::init()
     screenSurface = SDL_GetWindowSurface( window );
 
     // Set render draw color
-   SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
     return success;
 }
