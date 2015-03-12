@@ -36,10 +36,15 @@ void SDLWrapper::quit()
      * Deallocates all stored things
     */
 
+    // Destroy Surface 
+    SDL_FreeSurface(screenSurface);
+
+
     //Destroy window
     SDL_DestroyWindow( window );
 
     //Quit SDL subsystems
+    IMG_Quit();
     SDL_Quit();
 }
 
