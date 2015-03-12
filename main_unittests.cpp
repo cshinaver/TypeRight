@@ -21,6 +21,7 @@ TEST(SDLTest, IsBmpImageLoaded) {
     sw.init();
     SDL_Surface *img = sw.loadImg("hello_world.bmp");
     ASSERT_TRUE( img != NULL);
+    SDL_FreeSurface(img);
 }
 
 // Test exception if image not loaded
@@ -37,4 +38,13 @@ TEST(SDLTest, IsBmpImageNotLoaded) {
         imgProperlyFailed = 1;
     }
     ASSERT_TRUE(imgProperlyFailed == 1);
+}
+
+// Load Texture Test
+TEST(SDLTest, IsTextureLoaded) {
+    SDLWrapper sw;
+    sw.init();
+    SDL_Texture *img = sw.loadTexture("hello_world.bmp");
+    ASSERT_TRUE( img != NULL);
+    SDL_DestroyTexture(img);
 }
