@@ -178,5 +178,5 @@ void SDLWrapper::renderTextureToWindow(TRTexture _texture, SDL_Rect *srcRect, SD
      * Renders texture to window
     */
 
-    SDL_RenderCopy(renderer, _texture.texture, NULL, NULL);
+    SDL_RenderCopy(renderer, _texture.texture, srcRect, destRect);
 }
