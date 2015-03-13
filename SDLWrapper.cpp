@@ -98,10 +98,13 @@ bool SDLWrapper::init()
     return success;
 }
 
-TRTexture SDLWrapper::loadTexture(string imgPath)
+TRTexture SDLWrapper::loadTexture(string imgPath, int shouldChroma, uint8_t r, uint8_t g, uint8_t b)
 {
     /*
      * Loads image as surface and converts surface to texture
+     * If you want to chroma key a color (eg remove background), pass 1 to
+     * shouldChroma, and then pass the r, g, and b values as ints. They can be
+     * decimal or Hexadecimal. Anything accepted by SDL.
     */
 
     // Texture
@@ -111,6 +114,12 @@ TRTexture SDLWrapper::loadTexture(string imgPath)
     if (loadedSurface == NULL)
     {
         cout << "Unable to load image " << imgPath << "! SDL_image Error: " << IMG_GetError() << endl;
+    }
+
+    // Chroma key surface if value passed
+    if (shouldChroma)
+    {
+        SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, r, g, b));
     }
 
     // Create texture from Surface
