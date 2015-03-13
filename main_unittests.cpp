@@ -43,7 +43,7 @@ TEST(SDLTest, IsBmpImageNotLoaded) {
 TEST(SDLTest, IsTextureLoaded) {
     SDLWrapper sw;
     sw.init();
-    SDL_Texture *img = sw.loadTexture("hello_world.bmp");
-    ASSERT_TRUE( img != NULL);
-    SDL_DestroyTexture(img);
+    TRTexture img = sw.loadTexture("hello_world.bmp");
+    ASSERT_TRUE( img.isTextureLoaded() == 1);
+    img.freeTexture();
 }

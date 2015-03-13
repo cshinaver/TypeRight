@@ -98,10 +98,13 @@ bool SDLWrapper::init()
     return success;
 }
 
-SDL_Texture * SDLWrapper::loadTexture(string imgPath)
+TRTexture SDLWrapper::loadTexture(string imgPath, int shouldChroma, uint8_t r, uint8_t g, uint8_t b)
 {
     /*
      * Loads image as surface and converts surface to texture
+     * If you want to chroma key a color (eg remove background), pass 1 to
+     * shouldChroma, and then pass the r, g, and b values as ints. They can be
+     * decimal or Hexadecimal. Anything accepted by SDL.
     */
 
     // Texture
@@ -113,6 +116,12 @@ SDL_Texture * SDLWrapper::loadTexture(string imgPath)
         cout << "Unable to load image " << imgPath << "! SDL_image Error: " << IMG_GetError() << endl;
     }
 
+    // Chroma key surface if value passed
+    if (shouldChroma)
+    {
+        SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, r, g, b));
+    }
+
     // Create texture from Surface
     newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     if (newTexture == NULL)
@@ -120,10 +129,8 @@ SDL_Texture * SDLWrapper::loadTexture(string imgPath)
         cout << "Unable to create texture from " << imgPath << "! SDL Error: " << SDL_GetError() << endl;
     }
 
-    // Free loaded surface
-    SDL_FreeSurface(loadedSurface);
-
-    return newTexture;
+    TRTexture newTR = TRTexture(newTexture, loadedSurface);
+    return newTR;
 }
 
 SDL_Surface * SDLWrapper::loadImg(string imgName)
@@ -165,11 +172,11 @@ void SDLWrapper::clearWindow()
     SDL_RenderClear(renderer);
 }
 
-void SDLWrapper::renderTextureToWindow(SDL_Texture *texture, SDL_Rect *srcRect, SDL_Rect *destRect)
+void SDLWrapper::renderTextureToWindow(TRTexture _texture, SDL_Rect *srcRect, SDL_Rect *destRect)
 {
     /*
      * Renders texture to window
     */
 
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderCopy(renderer, _texture.texture, srcRect, destRect);
 }

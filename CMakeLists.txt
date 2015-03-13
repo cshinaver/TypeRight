@@ -30,9 +30,13 @@ endif()
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
 
-# Add SDLWrapper library
+# TRTexture library
+add_library(TRTexture_lib TRTexture.cpp)
+target_link_libraries(TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
+# SDLWrapper library
 add_library(sdlwrapper_lib SDLWrapper.cpp)
-target_link_libraries(sdlwrapper_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # TypeRight Library
 add_library(TypeRight_lib TypeRight.cpp)

@@ -11,6 +11,7 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "TRTexture.h"
 
 using namespace std;
 
@@ -23,9 +24,9 @@ class SDLWrapper
         void quit(); // Deallocs SDL window and surface
         void updateWindow(); // Updates window surface
         void clearWindow(); // Clears window
-        void renderTextureToWindow(SDL_Texture*, SDL_Rect*, SDL_Rect*); // Renders texture to window
+        void renderTextureToWindow(TRTexture, SDL_Rect* = NULL, SDL_Rect* = NULL); // Renders texture to window
         SDL_Surface * loadImg(string);
-        SDL_Texture *loadTexture(string);
+        TRTexture loadTexture(string imgPath, int shouldChroma = 0, uint8_t r = -1, uint8_t g = 0, uint8_t b = 0); // Pass pixel to chroma key, empty for none
         SDL_Window *window;
         SDL_Surface *screenSurface;
         SDL_Renderer *renderer;
