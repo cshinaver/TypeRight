@@ -98,7 +98,7 @@ bool SDLWrapper::init()
     return success;
 }
 
-SDL_Texture * SDLWrapper::loadTexture(string imgPath)
+TRTexture SDLWrapper::loadTexture(string imgPath)
 {
     /*
      * Loads image as surface and converts surface to texture
@@ -120,10 +120,8 @@ SDL_Texture * SDLWrapper::loadTexture(string imgPath)
         cout << "Unable to create texture from " << imgPath << "! SDL Error: " << SDL_GetError() << endl;
     }
 
-    // Free loaded surface
-    SDL_FreeSurface(loadedSurface);
-
-    return newTexture;
+    TRTexture newTR = TRTexture(newTexture, loadedSurface);
+    return newTR;
 }
 
 SDL_Surface * SDLWrapper::loadImg(string imgName)
@@ -165,11 +163,11 @@ void SDLWrapper::clearWindow()
     SDL_RenderClear(renderer);
 }
 
-void SDLWrapper::renderTextureToWindow(SDL_Texture *texture, SDL_Rect *srcRect, SDL_Rect *destRect)
+void SDLWrapper::renderTextureToWindow(TRTexture _texture, SDL_Rect *srcRect, SDL_Rect *destRect)
 {
     /*
      * Renders texture to window
     */
 
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderCopy(renderer, _texture.texture, NULL, NULL);
 }
