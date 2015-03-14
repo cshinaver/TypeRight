@@ -32,3 +32,6 @@ build/
 
 # Vim files
 *.vim
+
+# Logging stuff
+.name
