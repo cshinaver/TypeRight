@@ -71,7 +71,8 @@ bool SDLWrapper::init()
         return success;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    // Create renderer 
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == NULL)
     {
         cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << endl;
@@ -172,21 +173,11 @@ void SDLWrapper::clearWindow()
     SDL_RenderClear(renderer);
 }
 
-void SDLWrapper::renderTextureToWindow(TRTexture _texture, int x, int y, SDL_Rect *clip)
+void SDLWrapper::renderTextureToWindow(TRTexture _texture, SDL_Rect *clip, SDL_Rect *dest)
 {
     /*
      * Renders texture to window
     */
 
-    // Set render rect
-    SDL_Rect renderQuad = { x, y, _texture.getWidth(), _texture.getHeight()};
-
-    // Set clip rendering
-    if ( clip != NULL )
-    {
-        renderQuad.w = clip->w;
-        renderQuad.h = clip->h;
-    }
-
-    SDL_RenderCopy(renderer, _texture.texture, clip, &renderQuad);
+    SDL_RenderCopy(renderer, _texture.texture, clip, dest);
 }
