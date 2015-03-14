@@ -63,7 +63,7 @@ bool SDLWrapper::init()
         return success;
     }
     //Create window
-    window = SDL_CreateWindow( "TypeWrite", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    window = SDL_CreateWindow( "TypeRight", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
     if( window == NULL )
     {
         cout << "Window could not be created! SDL_Error: " << SDL_GetError();
@@ -71,7 +71,8 @@ bool SDLWrapper::init()
         return success;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    // Create renderer 
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == NULL)
     {
         cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << endl;
@@ -172,11 +173,11 @@ void SDLWrapper::clearWindow()
     SDL_RenderClear(renderer);
 }
 
-void SDLWrapper::renderTextureToWindow(TRTexture _texture, SDL_Rect *srcRect, SDL_Rect *destRect)
+void SDLWrapper::renderTextureToWindow(TRTexture _texture, SDL_Rect *clip, SDL_Rect *dest)
 {
     /*
      * Renders texture to window
     */
 
-    SDL_RenderCopy(renderer, _texture.texture, srcRect, destRect);
+    SDL_RenderCopy(renderer, _texture.texture, clip, dest);
 }
