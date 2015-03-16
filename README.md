@@ -86,3 +86,4 @@ executable.
 - [ ] Jared (enemies, hero, boxes, etc..)
 - [ ] Elliot (collision detection, basic death)
 - [ ] Charles (motion, dt, response to death)
+- [ ] Charles ( write command sheet for git )
