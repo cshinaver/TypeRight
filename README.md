@@ -72,11 +72,17 @@ executable.
 
 ## Todos
 ### Week of March 9th
-- [ ] Get Repo on local machine using git (Everybody)
-- [ ] Install Cmake (everybody)
+- [x] Get Repo on local machine using git (Everybody)
+- [x] Install Cmake (everybody)
 - [ ] Install sdl2  on local machines (everybody)
 - [x] Figure out how to compile on windows machine (Charles)
 - [x] Figure out how to compile on engineering machines (Charles)
 
 - [x] Setup Automated testing (TravisCI)
 - [x] Make basic makefile for sdl
+
+### Week of March 16th
+- [ ] Scrolling background (madelyn)
+- [ ] Jared (enemies, hero, boxes, etc..)
+- [ ] Elliot (collision detection, basic death)
+- [ ] Charles (motion, dt, response to death)
