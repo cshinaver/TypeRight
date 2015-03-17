@@ -45,6 +45,9 @@ void TypeRight::startGame()
         // Update screen
         sw.updateWindow();
     }
+
+    // Quit SDL
+    sw.quit();
 }
 
 void TypeRight::checkForEvents()

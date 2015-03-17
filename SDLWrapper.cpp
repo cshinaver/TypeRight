@@ -27,7 +27,6 @@ SDLWrapper::~SDLWrapper()
     /*
      * Deallocates all stored variables
     */
-    quit();
 }
 
 void SDLWrapper::quit()
