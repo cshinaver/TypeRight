@@ -9,29 +9,33 @@
 #include <SDL2/SDL.h>
 #include "TRTexture.h"
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
 class Sprite 
 {
+    friend class SDLWrapper;
     public:
         virtual void move() = 0;
         int getPosX() { return posX; };
         int getPosY() { return posY; };
-        void setPos(int x, int y) : posX(x), posY(y);
+        void setPos(int x, int y);
         double getVelX() { return velX; };
         double getVelY() { return velY; };
-        void setVel(double _velX, double _velY) : velX(_velX), velY(_velY);
-        int getWidth() { return width; };
-        void setWidth(int w) : width(w);
-        int getHeight() { return height; };
-        void setHeight(int h) : height(h);
-        void setTexture(TRTexture *tex) : textureSrc(tex);
-        void setTextureClips(vector<SDL_Rect> texClips) : textureClips(texClips);
+        void setVel(double _velX, double _velY);
+        double getWidth() { return width; };
+        void setWidth(int w);
+        double getHeight() { return height; };
+        void setHeight(int h);
+        void setTexture(TRTexture tex);
+        void setTextureClips(vector<SDL_Rect> texClips);
+        void setTexturePath(string path) { texturePath = path; };
         bool isAnimated;
-    private:
-        TRTexture *textureSrc;
+        TRTexture textureSrc;
         vector<SDL_Rect> textureClips;
+    private:
+        string texturePath;
         int posX;
         int posY;
         double velX;
@@ -40,4 +44,5 @@ class Sprite
         int height;
 
 };
+
 #endif
