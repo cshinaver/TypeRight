@@ -40,6 +40,7 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
+    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
     // For demo
     int count=0;
     while (!quit)
@@ -57,6 +58,8 @@ void TypeRight::startGame()
 
         //Scroll Background is somewhere near here???????
         scrollBackground();
+        sw.loadSprite(&b);
+        b.move();
 
         // Update screen
         sw.updateWindow();
@@ -134,5 +137,4 @@ void backgroundDemoFunction(SDLWrapper &sw)
     SDL_Rect renderQuad = {sw.SCREEN_WIDTH / 2, sw.SCREEN_HEIGHT / 2, foo.getWidth(), foo.getHeight()};
     sw.renderTextureToWindow(foo, NULL, &renderQuad);
 }
-
 

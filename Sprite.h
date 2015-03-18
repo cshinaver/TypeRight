@@ -31,6 +31,10 @@ class Sprite
         void setTexture(TRTexture tex);
         void setTextureClips(vector<SDL_Rect> texClips);
         void setTexturePath(string path) { texturePath = path; };
+        int getCurrentFrame() { return currentFrame; };
+        void setCurrentFrame(int x) { currentFrame = x; };
+        int getTotalFrames() { return totalFrames; };
+        void setTotalFrames(int x) { totalFrames = x; };
         bool isAnimated;
         TRTexture textureSrc;
         vector<SDL_Rect> textureClips;
@@ -42,6 +46,8 @@ class Sprite
         double velY;
         int width;
         int height;
+        int currentFrame;
+        int totalFrames;
 
 };
 
