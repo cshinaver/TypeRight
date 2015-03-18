@@ -23,6 +23,10 @@ class TypeRight
         SDLWrapper sw;
         bool quit;
         void checkForEvents(); // Checks for events and responds to them
+	void scrollBackground(); // scrolls through the background
+	int bgX; // Scrolling background, x coord offset, eventually
+		// should be in terms of dt
+	int bgY;
 };
 
 #endif
