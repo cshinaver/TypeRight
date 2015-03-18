@@ -27,6 +27,7 @@ class TypeRight
 	int bgX; // Scrolling background, x coord offset, eventually
 		// should be in terms of dt
 	int bgY;
+	TRTexture backgroundTex;
 };
 
 #endif

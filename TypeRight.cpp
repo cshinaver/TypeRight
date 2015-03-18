@@ -15,15 +15,15 @@ TypeRight::TypeRight()
 	/*
 	 * Default constructor
 	 */
-	bgX=0; // background starts at beginning, leftmost x coordinate of texture
-	bgY=0;
-	
-	//initializes textures
-	TRTexture back = sw.loadTexture("typeRightBackground1.png"); // new background
-	sw.renderTextureToWindow(back);
 
-	TRTexture background = sw.loadTexture("typeRightBackground1.png", 0, 0, 0xFF, 0xFF);
-//	TRTexture foo = sw.loadTexture("foo.png", 1, 0, 0xFF, 0xFF);
+	bgX=0; // background starts at beginning, leftmost x coordinate of texture
+	bgY=0; // doesn't change
+	
+	// Init window and initial surface
+	sw.init();
+
+	//initializes textures
+	backgroundTex = sw.loadTexture("typeRightBackground1Double.png", 0, 0, 0xFF, 0xFF);
 }
 
 void TypeRight::startGame()
@@ -32,8 +32,6 @@ void TypeRight::startGame()
 	 * Starts game
 	 */
 
-	// Init window and initial surface
-	sw.init();
 
 	// Set quit status
 	quit = false;
@@ -66,27 +64,29 @@ void TypeRight::startGame()
 
 	// Quit SDL
 	sw.quit();
+	
+	// Free textures
+	backgroundTex.freeTexture();
 }
 
 void TypeRight::scrollBackground()
 {
+	double backFract = .5;
 	// Offset of the background
-	bgX+=10; 
-	if (bgX >= 900 ) // background1 is 951 x 521 pixels, shouldn't hard code this. FIX LATER!!
+	bgX+=4;
+	if (bgX >= backgroundTex.getWidth()*(1-backFract) ) // background1 is 951 x 521 pixels, shouldn't hard code this. FIX LATER!!
+	
+//if (bgX >= backgroundTex.getWidth()*(1-backFract) ) // background1 is 951 x 521 pixels, shouldn't hard code this. FIX LATER!!
 	{
 		bgX=0; // reset to the beginning of the background
 	}	
-	cout << "bgX=" << bgX << endl;
+	//cout << "bgX=" << bgX << endl;
+	
 
 // destination rectangle
-	SDL_Rect src = {bgX, bgY, background.getWidth(), background.getHeight()};
+	SDL_Rect src = {bgX, bgY, backgroundTex.getWidth()*backFract, backgroundTex.getHeight()};
 	SDL_Rect dest = {0, 0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT};
-//	SDL_Rect renderQuad2 = {sw.SCREEN_WIDTH / 2, sw.SCREEN_HEIGHT / 2, foo.getWidth(), foo.getHeight()};
-	//apply_surface(bgX, bgY, back, screen);
-
-//	sw.renderTextureToWindow(foo, NULL, &renderQuad2);
-	sw.renderTextureToWindow(background, &src, &dest);
-
+	sw.renderTextureToWindow(backgroundTex, &src, &dest);
 }
 
 
