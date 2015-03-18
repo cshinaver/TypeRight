@@ -32,6 +32,7 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
+    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
     // For demo
     while (!quit)
     {
@@ -41,7 +42,10 @@ void TypeRight::startGame()
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
-        demoFunction(sw);
+        //b.setWidth(300);
+        //b.setHeight(400);
+        sw.loadSprite(&b);
+        b.move();
 
         // Update screen
         sw.updateWindow();
@@ -70,14 +74,4 @@ void TypeRight::checkForEvents()
             quit = true;
         }
     }
-}
-
-void demoFunction(SDLWrapper &sw)
-{
-    /*
-     * For demo purproses
-    */
-
-    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
-    sw.loadSprite(&b);
 }

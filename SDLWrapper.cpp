@@ -187,7 +187,7 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
     */
 
     // Src clip
-    SDL_Rect src = _sprite->textureClips[0];
+    SDL_Rect src = _sprite->textureClips[_sprite->getCurrentFrame()];
 
     // Dest rect
     SDL_Rect dest;

@@ -5,6 +5,8 @@ Bruh::Bruh(TRTexture tex)
 {
     setTexture(tex);
     vector<SDL_Rect> clips;
+    setCurrentFrame(0);
+    setTotalFrames(0);
 
     /* Spritesheet is 4x3, so calculate height and width of each clip */
     int rows = 4;
@@ -32,4 +34,17 @@ Bruh::Bruh(TRTexture tex)
 
 void Bruh::move()
 {
+    int tFrames = getTotalFrames();
+    int speedConst = 8; // Modify this to make sprite animation faster or slower
+    setCurrentFrame(tFrames / speedConst);
+    tFrames++;
+    setTotalFrames(tFrames);
+
+
+    if (tFrames / speedConst >= (int)textureClips.size())
+    {
+        tFrames = 0;
+        setTotalFrames(tFrames);
+    }
+
 }
