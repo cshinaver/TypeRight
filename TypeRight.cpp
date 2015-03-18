@@ -42,8 +42,6 @@ void TypeRight::startGame()
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
-        //b.setWidth(300);
-        //b.setHeight(400);
         sw.loadSprite(&b);
         b.move();
 
