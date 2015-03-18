@@ -5,6 +5,7 @@
 */
 
 #include "TypeRight.h"
+#include "Bruh.h"
 
 void demoFunction(SDLWrapper &sw);
 
@@ -77,9 +78,6 @@ void demoFunction(SDLWrapper &sw)
      * For demo purproses
     */
 
-    TRTexture back = sw.loadTexture("background.png");
-    sw.renderTextureToWindow(back);
-    TRTexture foo = sw.loadTexture("foo.png", 1, 0, 0xFF, 0xFF);
-    SDL_Rect renderQuad = {sw.SCREEN_WIDTH / 2, sw.SCREEN_HEIGHT / 2, foo.getWidth(), foo.getHeight()};
-    sw.renderTextureToWindow(foo, NULL, &renderQuad);
+    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
+    sw.loadSprite(&b);
 }
