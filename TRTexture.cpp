@@ -9,6 +9,12 @@
 
 using namespace std;
 
+TRTexture::TRTexture()
+{
+    /*
+     * Default constructor
+    */
+}
 
 TRTexture::TRTexture(SDL_Texture *_texture, SDL_Surface *_surface)
 {
