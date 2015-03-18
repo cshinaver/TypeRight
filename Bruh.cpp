@@ -9,8 +9,8 @@ Bruh::Bruh(TRTexture tex)
     /* Spritesheet is 4x3, so calculate height and width of each clip */
     int rows = 4;
     int cols = 3;
-    double unitRow = tex.getWidth() / cols;
-    double unitCol = tex.getHeight() / rows;
+    double unitCol = tex.getWidth() / cols;
+    double unitRow = tex.getHeight() / rows;
 
     for (int i = 0; i < rows; i++)
     {
@@ -18,7 +18,7 @@ Bruh::Bruh(TRTexture tex)
         SDL_Rect frame;
         frame.w = unitCol;
         frame.h = unitRow;
-        frame.x = unitCol * i;
+        frame.x = unitCol;
         frame.y = unitRow * i;
 
         clips.push_back(frame);
