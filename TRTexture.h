@@ -15,6 +15,7 @@ class TRTexture
 {
     friend class SDLWrapper;
     public:
+        TRTexture();
         TRTexture(SDL_Texture *, SDL_Surface *); // Texture for storing, surface for dimensions
         int isTextureLoaded();
         void freeTexture();

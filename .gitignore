@@ -32,6 +32,7 @@ build/
 
 # Vim files
 *.vim
+.ycm*
 
 # Logging stuff
 .name

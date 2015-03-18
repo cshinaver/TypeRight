@@ -5,6 +5,7 @@
  */
 
 #include "TypeRight.h"
+#include "Bruh.h"
 
 void demoFunction(SDLWrapper &sw);
 void backgroundDemoFunction(SDLWrapper &sw);
@@ -62,6 +63,9 @@ void TypeRight::startGame()
 		// Update screen
 		sw.updateWindow();
 	}
+
+	// Quit SDL
+	sw.quit();
 }
 
 void TypeRight::scrollBackground()
@@ -82,6 +86,7 @@ void TypeRight::scrollBackground()
 
 //	sw.renderTextureToWindow(foo, NULL, &renderQuad2);
 	sw.renderTextureToWindow(background, &src, &dest);
+
 }
 
 
@@ -109,15 +114,12 @@ void TypeRight::checkForEvents()
 
 void demoFunction(SDLWrapper &sw)
 {
-	/*
-	 * For demo purproses
-	 */
+    /*
+     * For demo purproses
+    */
 
-	TRTexture back = sw.loadTexture("background.png");
-	sw.renderTextureToWindow(back);
-	TRTexture foo = sw.loadTexture("foo.png", 1, 0, 0xFF, 0xFF);
-	SDL_Rect renderQuad = {sw.SCREEN_WIDTH / 2, sw.SCREEN_HEIGHT / 2, foo.getWidth(), foo.getHeight()};
-	sw.renderTextureToWindow(foo, NULL, &renderQuad);
+    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
+    sw.loadSprite(&b);
 }
 
 void backgroundDemoFunction(SDLWrapper &sw)
