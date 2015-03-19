@@ -6,6 +6,7 @@
 
 #include "TypeRight.h"
 #include "Bruh.h"
+#include "Soldier.h"
 
 void demoFunction(SDLWrapper &sw);
 
@@ -33,6 +34,7 @@ void TypeRight::startGame()
     //##################
 
     Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
+    Soldier S(sw.loadTexture("soldier.png", 1, 0x4D, 0x4B, 0x76));
     // For demo
     while (!quit)
     {
@@ -44,6 +46,8 @@ void TypeRight::startGame()
 
         sw.loadSprite(&b);
         b.move();
+        sw.loadSprite(&S);
+        S.move();
 
         // Update screen
         sw.updateWindow();
