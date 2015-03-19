@@ -42,14 +42,18 @@ target_link_libraries(Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} 
 add_library(sdlwrapper_lib SDLWrapper.cpp)
 target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
-# TypeRight Class
-add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
-
-
 # Bruh Class
 add_library(Bruh_lib Bruh.cpp)
 target_link_libraries(Bruh_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
+# Soldier Class
+add_library(Soldier_lib Soldier.cpp)
+target_link_libraries(Soldier_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
+# TypeRight Class
+add_library(TypeRight_lib TypeRight.cpp)
+target_link_libraries(TypeRight_lib sdlwrapper_lib Soldier_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
 
 # main
 add_executable(main main.cpp)
