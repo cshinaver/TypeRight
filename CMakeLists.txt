@@ -72,3 +72,5 @@ add_executable(main_unittests main_unittests.cpp)
 target_link_libraries(main_unittests sdlwrapper_lib gtest gtest_main)
 
 add_test(main_unittests main_unittests)
+
+set(CMAKE_BUILD_TYPE Debug)
