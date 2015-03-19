@@ -16,7 +16,7 @@ Skeleton::Skeleton(TRTexture tex)
 
     for (int i = 0; i < cols; i++)
     {
-        // Set Skeleton equal to second column sprites
+        // Set Skeleton equal to first row sprites
         SDL_Rect frame;
         frame.w = unitCol;
         frame.h = unitRow;
@@ -26,7 +26,7 @@ Skeleton::Skeleton(TRTexture tex)
         clips.push_back(frame);
     }
 
-    setPos(150, 150);
+    setPos(50, 50);
     setTextureClips(clips);
     setWidth(unitCol);
     setHeight(unitRow);

@@ -1,7 +1,7 @@
 /*
- * Bruh.h
- * Charles Shinaver
- * Example concrete sprite class
+ * Skeleton.h
+ * Jared Rodgers
+ * Concrete sprite class
 */
 
 #ifndef SKELETON_H

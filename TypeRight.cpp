@@ -6,6 +6,7 @@
 
 #include "TypeRight.h"
 #include "Bruh.h"
+#include "Skeleton.h"
 
 void demoFunction(SDLWrapper &sw);
 
@@ -33,6 +34,8 @@ void TypeRight::startGame()
     //##################
 
     Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
+    //Bruh s(sw.loadTexture("skeleton.png", 1, 0x20, 0xB5, 0x62));
+    Skeleton s(sw.loadTexture("skeleton.png", 1, 0xF1, 0x8F, 0xFF));
     // For demo
     while (!quit)
     {
@@ -43,7 +46,9 @@ void TypeRight::startGame()
         sw.clearWindow();
 
         sw.loadSprite(&b);
+        sw.loadSprite(&s);
         b.move();
+        s.move();
 
         // Update screen
         sw.updateWindow();
