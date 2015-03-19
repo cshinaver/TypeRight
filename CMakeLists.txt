@@ -42,18 +42,22 @@ target_link_libraries(Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} 
 add_library(sdlwrapper_lib SDLWrapper.cpp)
 target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
+# Bruh Class
+add_library(Bruh_lib Bruh.cpp)
+target_link_libraries(Bruh_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
+# Skeleton Class
+add_library(Skeleton_lib Skeleton.cpp)
+target_link_libraries(Skeleton_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
 target_link_libraries(TypeRight_lib sdlwrapper_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 
-# Bruh Class
-add_library(Bruh_lib Bruh.cpp)
-target_link_libraries(Bruh_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
-
 # main
 add_executable(main main.cpp)
-target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} sdlwrapper_lib TypeRight_lib Bruh_lib)
+target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} sdlwrapper_lib TypeRight_lib Bruh_lib Skeleton_lib)
 
 ###########
 # Testing #
