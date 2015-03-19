@@ -21,7 +21,7 @@ Skeleton::Skeleton(TRTexture tex)
         frame.w = unitCol;
         frame.h = unitRow;
         frame.x = unitCol * i;
-        frame.y = unitRow;
+        frame.y = 0;
 
         clips.push_back(frame);
     }
