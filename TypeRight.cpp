@@ -35,7 +35,7 @@ void TypeRight::startGame()
 
     Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
     //Bruh s(sw.loadTexture("skeleton.png", 1, 0x20, 0xB5, 0x62));
-    Skeleton s(sw.loadTexture("skeleton.png", 1, 0xF1, 0x8F, 0xFF));
+    Skeleton s(sw.loadTexture("skeleton.png", 1, 0x9D, 0x8E, 0x87));
     // For demo
     while (!quit)
     {
