@@ -44,12 +44,15 @@ target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib ${SDL2_LIBRARIES} 
 
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
-
+target_link_libraries(TypeRight_lib sdlwrapper_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} Background_lib)
 
 # Bruh Class
 add_library(Bruh_lib Bruh.cpp)
 target_link_libraries(Bruh_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
+# Background Class
+add_library(Background_lib Background.cpp)
+target_link_libraries(Background_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # main
 add_executable(main main.cpp)
