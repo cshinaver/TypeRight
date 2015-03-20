@@ -16,7 +16,7 @@ Soldier::Soldier(TRTexture tex)
 
     for (int i = 0; i < cols; i++)
     {
-        // Set bruh equal to second row sprites
+        // Set Soldier equal to second row sprites
         SDL_Rect frame;
         frame.w = unitCol;
         frame.h = unitRow;

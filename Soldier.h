@@ -1,7 +1,7 @@
 /*
  * Soldier.h
- * Charles Shinaver
- * Example concrete sprite class
+ * Jared Rodgers
+ * Concrete sprite class
 */
 
 #ifndef SOLDIER_H
@@ -11,7 +11,6 @@
 #include "SDLWrapper.h"
 #include "TRTexture.h"
 
-/*############## FOR DEMO PURPOSES ONLY ############## */
 /*############## Header ############################## */
 
 class Soldier : public Sprite
