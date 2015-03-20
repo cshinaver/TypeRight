@@ -16,7 +16,9 @@
 class Soldier : public Sprite
 {
     public:
+        Soldier();
         Soldier(TRTexture tex);
+        void setTexture(TRTexture tex);
         virtual void move();
 };
 

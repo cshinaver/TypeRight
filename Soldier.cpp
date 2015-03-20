@@ -1,8 +1,22 @@
 /*############## .cpp ############################### */
 #include "Soldier.h"
 
+Soldier::Soldier() : Sprite()
+{
+    /*
+     * Default constructor. 
+    */
+
+    setTexturePath("soldier.png");
+    setChromaColor(0x20, 0xB5, 0x62);
+}
+
 Soldier::Soldier(TRTexture tex)
 {
+    /*
+     * Loads texture and sets settings.
+    */
+
     setTexture(tex);
     vector<SDL_Rect> clips;
     setCurrentFrame(0);
