@@ -41,33 +41,43 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
-    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
 //    Background backk(sw.loadTexture("background3.png")); // mysterious blue+purple
 //   Background backk(sw.loadTexture("typeRightBackground1Double.png")); // original, field and sky
 //   Background backk(sw.loadTexture("background4.png")); // morris inn
 //   Background backk(sw.loadTexture("background5.png")); // city at night
 //   Background backk(sw.loadTexture("background6.png")); // purple forrest
-    Background backk(sw.loadTexture("background2.png")); // gross USA map
+//    Background backk(sw.loadTexture("background2.png")); // gross USA map
+    
+    Bruh *b = new Bruh;
+    sprites.push_back(b);
+    // For demo
     while (!quit)
     {
+        // Check for keyboard events
         checkForEvents();
 
         // Clear screen
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
-        // Load the sprites
-        sw.loadSprite(&backk);
-        sw.loadSprite(&b);
-        
-        // Move the sprites
-        b.move();
-        backk.move();
+        // Load and move every sprite
+        for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
+        {
+            sw.loadSprite(*i);
+            (*i)->move();
+        }
 
         // Update screen
         sw.updateWindow();
     }
 
+    // Free all textures
+    for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
+    {
+        (*i)->destroySprite();
+        delete (*i);
+    }
+    
     // Quit SDL
     sw.quit();
 
