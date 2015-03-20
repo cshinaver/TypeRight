@@ -8,7 +8,6 @@
 #include "Bruh.h"
 #include "Background.h"
 
-void demoFunction(SDLWrapper &sw);
 void backgroundDemoFunction(SDLWrapper &sw);
 
 TypeRight::TypeRight()
@@ -120,16 +119,6 @@ void TypeRight::checkForEvents()
             quit = true;
         }
     }
-}
-
-void demoFunction(SDLWrapper &sw)
-{
-    /*
-     * For demo purproses
-    */
-
-    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
-    sw.loadSprite(&b);
 }
 
 void backgroundDemoFunction(SDLWrapper &sw)
