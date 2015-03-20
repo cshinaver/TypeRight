@@ -17,6 +17,7 @@ class Sprite
 {
     friend class SDLWrapper;
     public:
+        Sprite();
         virtual void move() = 0;
         int getPosX() { return posX; };
         int getPosY() { return posY; };
@@ -35,6 +36,10 @@ class Sprite
         void setCurrentFrame(int x) { currentFrame = x; };
         int getTotalFrames() { return totalFrames; };
         void setTotalFrames(int x) { totalFrames = x; };
+        double getDt() { return dt; };
+        int getIsTextureLoaded() { return isTextureLoaded; };
+        void setDt(double _dt) { dt = _dt; };
+        void destroySprite();
         bool isAnimated;
         TRTexture textureSrc;
         vector<SDL_Rect> textureClips;
@@ -48,6 +53,8 @@ class Sprite
         int height;
         int currentFrame;
         int totalFrames;
+        int isTextureLoaded;
+        double dt;
 
 };
 

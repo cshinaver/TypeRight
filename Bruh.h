@@ -17,7 +17,9 @@
 class Bruh : public Sprite
 {
     public:
+        Bruh();
         Bruh(TRTexture tex);
+        void setTexture(TRTexture tex);
         virtual void move();
 };
 
