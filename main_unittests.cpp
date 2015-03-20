@@ -8,6 +8,7 @@
 #include "gtest/include/gtest/gtest.h"
 #include <stdexcept>
 #include "Bruh.h"
+#include "SpriteFactory.h"
 
 // Test if window is instantiated
 TEST(SDLTest, IsWindowCreated) {
@@ -83,3 +84,15 @@ TEST(SpriteTest, SDLWrapperDoesNotLoadSpriteIfNoTextureLoaded)
     }
     ASSERT_TRUE(SDLWrapperTextureLoadProperlyFailed == 1);
 }
+
+// Check that loadSprite can load a sprite from the spriteFactory
+TEST(SpriteTest, LoadSpriteLoadsSpriteFromSpriteFactory)
+{
+    SDLWrapper sw;
+    sw.init();
+    SpriteFactory sf;
+    Sprite *s = sf.getSprite(0);
+    sw.loadSprite(s);
+    ASSERT_TRUE(s->getIsTextureLoaded() == 1);
+}
+
