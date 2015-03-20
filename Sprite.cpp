@@ -46,3 +46,13 @@ void Sprite::setTextureClips(vector<SDL_Rect> texClips)
 {
     textureClips = texClips;
 }
+
+void Sprite::destroySprite()
+{
+    /*
+     * Destroys texture to free memory
+    */
+
+    textureSrc.freeTexture();
+    isTextureLoaded = 0;
+}

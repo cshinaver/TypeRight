@@ -39,6 +39,7 @@ class Sprite
         double getDt() { return dt; };
         int getIsTextureLoaded() { return isTextureLoaded; };
         void setDt(double _dt) { dt = _dt; };
+        void destroySprite();
         bool isAnimated;
         TRTexture textureSrc;
         vector<SDL_Rect> textureClips;
