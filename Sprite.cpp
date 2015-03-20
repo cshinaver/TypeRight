@@ -6,6 +6,14 @@
 
 #include "Sprite.h"
 
+Sprite::Sprite()
+{
+    /*
+     * Default constructor
+    */
+    isTextureLoaded = 0;
+}
+
 void Sprite::setPos(int x, int y)
 {
     posX = x;
@@ -31,6 +39,7 @@ void Sprite::setHeight(int h)
 void Sprite::setTexture(TRTexture tex)
 {
     textureSrc = tex;
+    isTextureLoaded = 1;
 }
 
 void Sprite::setTextureClips(vector<SDL_Rect> texClips)

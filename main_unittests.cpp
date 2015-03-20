@@ -7,6 +7,7 @@
 #include "SDLWrapper.h"
 #include "gtest/include/gtest/gtest.h"
 #include <stdexcept>
+#include "Bruh.h"
 
 // Test if window is instantiated
 TEST(SDLTest, IsWindowCreated) {
@@ -46,4 +47,21 @@ TEST(SDLTest, IsTextureLoaded) {
     TRTexture img = sw.loadTexture("hello_world.bmp");
     ASSERT_TRUE( img.isTextureLoaded() == 1);
     img.freeTexture();
+}
+
+// Test texture not loaded returns zero when not loaded
+TEST(SpriteTest, IsSpriteNotLoaded) {
+    Bruh b;
+    int ans = b.getIsTextureLoaded();
+    ASSERT_TRUE(ans == 0);
+}
+
+// Test loaded texture in sprite says loaded
+TEST(SpriteTest, IsSpriteLoaded) {
+    SDLWrapper sw;
+    sw.init();
+    Bruh b;
+    b.setTexture(sw.loadTexture("pirate.png"));
+    int ans = b.getIsTextureLoaded();
+    ASSERT_TRUE(ans == 1);
 }

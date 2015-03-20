@@ -32,7 +32,8 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
-    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
+    Bruh b;
+    b.setTexture(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
     sprites.push_back(&b);
     // For demo
     while (!quit)
