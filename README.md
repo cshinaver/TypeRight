@@ -74,7 +74,7 @@ executable.
 ### Week of March 9th
 - [x] Get Repo on local machine using git (Everybody)
 - [x] Install Cmake (everybody)
-- [ ] Install sdl2  on local machines (everybody)
+- [x] Install sdl2  on local machines (everybody)
 - [x] Figure out how to compile on windows machine (Charles)
 - [x] Figure out how to compile on engineering machines (Charles)
 
@@ -88,6 +88,7 @@ executable.
 - [ ] Elliot (collision detection, basic death)
 - [x] Write loadSprite method that loads sprites and write 
      example Bruh Sprite class (Charles)
-- [ ] Add dt to sprite class and get working motion (Charles)
+- [x] Add dt to sprite class
+- [ ] Get working motion (Charles)
 - [ ] Create Level class (charles)
 - [ ] Charles ( write command sheet for git )
