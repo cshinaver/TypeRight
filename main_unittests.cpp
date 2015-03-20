@@ -65,3 +65,21 @@ TEST(SpriteTest, IsSpriteLoaded) {
     int ans = b.getIsTextureLoaded();
     ASSERT_TRUE(ans == 1);
 }
+
+// SDLWrapper doesn't load texture if sprite doesn't have a loaded texture
+TEST(SpriteTest, SDLWrapperDoesNotLoadSpriteIfNoTextureLoaded)
+{
+    SDLWrapper sw;
+    sw.init();
+    Bruh b;
+    int SDLWrapperTextureLoadProperlyFailed = 0;
+    try
+    {
+        sw.loadSprite(&b);
+    }
+    catch (const std::logic_error& e)
+    {
+        SDLWrapperTextureLoadProperlyFailed = 1;
+    }
+    ASSERT_TRUE(SDLWrapperTextureLoadProperlyFailed == 1);
+}
