@@ -10,6 +10,8 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include "SDLWrapper.h"
+#include <vector>
+#include "Sprite.h"
 #include <iostream>
 
 using namespace std;
@@ -23,6 +25,8 @@ class TypeRight
         SDLWrapper sw;
         bool quit;
         void checkForEvents(); // Checks for events and responds to them
+        vector<Sprite *> sprites;
+
 };
 
 #endif

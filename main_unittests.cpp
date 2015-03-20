@@ -7,6 +7,8 @@
 #include "SDLWrapper.h"
 #include "gtest/include/gtest/gtest.h"
 #include <stdexcept>
+#include "Bruh.h"
+#include "SpriteFactory.h"
 
 // Test if window is instantiated
 TEST(SDLTest, IsWindowCreated) {
@@ -47,3 +49,50 @@ TEST(SDLTest, IsTextureLoaded) {
     ASSERT_TRUE( img.isTextureLoaded() == 1);
     img.freeTexture();
 }
+
+// Test texture not loaded returns zero when not loaded
+TEST(SpriteTest, IsSpriteNotLoaded) {
+    Bruh b;
+    int ans = b.getIsTextureLoaded();
+    ASSERT_TRUE(ans == 0);
+}
+
+// Test loaded texture in sprite says loaded
+TEST(SpriteTest, IsSpriteLoaded) {
+    SDLWrapper sw;
+    sw.init();
+    Bruh b;
+    b.setTexture(sw.loadTexture("pirate.png"));
+    int ans = b.getIsTextureLoaded();
+    ASSERT_TRUE(ans == 1);
+}
+
+// SDLWrapper doesn't load texture if sprite doesn't have a loaded texture
+TEST(SpriteTest, SDLWrapperDoesNotLoadSpriteIfNoTextureLoaded)
+{
+    SDLWrapper sw;
+    sw.init();
+    Bruh b;
+    int SDLWrapperTextureLoadProperlyFailed = 0;
+    try
+    {
+        sw.loadSprite(&b);
+    }
+    catch (const std::logic_error& e)
+    {
+        SDLWrapperTextureLoadProperlyFailed = 1;
+    }
+    ASSERT_TRUE(SDLWrapperTextureLoadProperlyFailed == 1);
+}
+
+// Check that loadSprite can load a sprite from the spriteFactory
+TEST(SpriteTest, LoadSpriteLoadsSpriteFromSpriteFactory)
+{
+    SDLWrapper sw;
+    sw.init();
+    SpriteFactory sf;
+    Sprite *s = sf.getSprite(0);
+    sw.loadSprite(s);
+    ASSERT_TRUE(s->getIsTextureLoaded() == 1);
+}
+
