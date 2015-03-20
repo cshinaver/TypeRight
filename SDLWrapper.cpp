@@ -186,6 +186,13 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
      * Loads given sprite
     */
 
+    // Check if sprite has a loaded texture
+    if (!(_sprite->getIsTextureLoaded()))
+    {
+
+        throw logic_error("Cannot load sprite. Does not have a loaded texture.");
+    }
+
     // Src clip
     SDL_Rect src = _sprite->textureClips[_sprite->getCurrentFrame()];
 
