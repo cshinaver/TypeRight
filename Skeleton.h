@@ -17,7 +17,9 @@
 class Skeleton : public Sprite
 {
     public:
+        Skeleton();
         Skeleton(TRTexture tex);
+        void setTexture(TRTexture tex);
         virtual void move();
 };
 

@@ -1,6 +1,6 @@
 /*
  * TypeRight.cpp
- * Charles Shinaver
+ * Charles Shinaver + Jared Rodgers
  * Main game implementation
 */
 
@@ -34,9 +34,9 @@ void TypeRight::startGame()
     //##################
 
     Bruh *b = new Bruh;
-    Skeleton *S = new Skeleton;
+    Skeleton *skel = new Skeleton;
     sprites.push_back(b);
-    sprites.push_back(S);
+    sprites.push_back(skel);
     // For demo
     while (!quit)
     {

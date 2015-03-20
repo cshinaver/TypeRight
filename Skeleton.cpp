@@ -1,9 +1,22 @@
 /*############## .cpp ############################### */
 #include "Skeleton.h"
 
-Skeleton::Skeleton(TRTexture tex)
+Skeleton::Skeleton() : Sprite()
 {
-    setTexture(tex);
+    /*
+     * Default constructor. 
+    */
+
+    setTexturePath("skeleton.png");
+    setChromaColor(0x9D, 0x8E, 0x87);
+}
+
+void Skeleton::setTexture(TRTexture tex)
+{
+    /*
+     * Loads texture and sets settings.
+    */
+    Sprite::setTexture(tex);
     vector<SDL_Rect> clips;
     setCurrentFrame(0);
     setTotalFrames(0);
