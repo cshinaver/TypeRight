@@ -50,9 +50,13 @@ target_link_libraries(Bruh_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LI
 add_library(Soldier_lib Soldier.cpp)
 target_link_libraries(Soldier_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
+# Skeleton Class
+add_library(Skeleton_lib Skeleton.cpp)
+target_link_libraries(Skeleton_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib Soldier_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(TypeRight_lib sdlwrapper_lib Bruh_lib Soldier_lib Skeleton_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # SpriteFactory Class
 add_library(SpriteFactory_lib SpriteFactory.cpp)
@@ -60,7 +64,7 @@ target_link_libraries(SpriteFactory_lib sdlwrapper_lib)
 
 # main
 add_executable(main main.cpp)
-target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} sdlwrapper_lib TypeRight_lib Bruh_lib)
+target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} sdlwrapper_lib TypeRight_lib)
 
 ###########
 # Testing #

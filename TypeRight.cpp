@@ -1,12 +1,13 @@
 /*
  * TypeRight.cpp
- * Charles Shinaver
+ * Charles Shinaver + Jared Rodgers
  * Main game implementation
 */
 
 #include "TypeRight.h"
 #include "Bruh.h"
 #include "Soldier.h"
+#include "Skeleton.h"
 
 void demoFunction(SDLWrapper &sw);
 
@@ -34,9 +35,11 @@ void TypeRight::startGame()
     //##################
 
     Bruh *b = new Bruh;
-    Soldier *s = new Soldier;
+    Soldier *sol = new Soldier;
+    Skeleton *skel = new Skeleton;
     sprites.push_back(b);
-    sprites.push_back(s);
+    sprites.push_back(sol);
+    sprites.push_back(skel);
 
     // For demo
     while (!quit)

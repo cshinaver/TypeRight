@@ -1,52 +1,51 @@
 /*############## .cpp ############################### */
-#include "Soldier.h"
+#include "Skeleton.h"
 
-Soldier::Soldier() : Sprite()
+Skeleton::Skeleton() : Sprite()
 {
     /*
      * Default constructor. 
     */
 
-    setTexturePath("soldier.png");
-    setChromaColor(0x4D, 0x4B, 0x76);
+    setTexturePath("skeleton.png");
+    setChromaColor(0x9D, 0x8E, 0x87);
 }
 
-void Soldier::setTexture(TRTexture tex)
+void Skeleton::setTexture(TRTexture tex)
 {
     /*
      * Loads texture and sets settings.
     */
-
     Sprite::setTexture(tex);
     vector<SDL_Rect> clips;
     setCurrentFrame(0);
     setTotalFrames(0);
 
-    /* Spritesheet is 2x8, so calculate height and width of each clip */
-    int rows = 2;
-    int cols = 8;
+    /* Spritesheet is 1x6, so calculate height and width of each clip */
+    int rows = 1;
+    int cols = 6;
     double unitCol = tex.getWidth() / cols;
     double unitRow = tex.getHeight() / rows;
 
     for (int i = 0; i < cols; i++)
     {
-        // Set Soldier equal to second row sprites
+        // Set Skeleton equal to first row sprites
         SDL_Rect frame;
         frame.w = unitCol;
         frame.h = unitRow;
         frame.x = unitCol * i;
-        frame.y = unitRow; 
+        frame.y = 0;
 
         clips.push_back(frame);
     }
 
-    setPos(200, 180);
+    setPos(300, 60);
     setTextureClips(clips);
-    setWidth(unitCol);
-    setHeight(unitRow);
+    setWidth(50);
+    setHeight(50);
 }
 
-void Soldier::move()
+void Skeleton::move()
 {
     int tFrames = getTotalFrames();
     int speedConst = 8; // Modify this to make sprite animation faster or slower
