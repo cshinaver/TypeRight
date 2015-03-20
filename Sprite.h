@@ -35,6 +35,8 @@ class Sprite
         void setCurrentFrame(int x) { currentFrame = x; };
         int getTotalFrames() { return totalFrames; };
         void setTotalFrames(int x) { totalFrames = x; };
+        double getDt() { return dt; };
+        void setDt(double _dt) { dt = _dt; };
         bool isAnimated;
         TRTexture textureSrc;
         vector<SDL_Rect> textureClips;
@@ -48,6 +50,7 @@ class Sprite
         int height;
         int currentFrame;
         int totalFrames;
+        double dt;
 
 };
 
