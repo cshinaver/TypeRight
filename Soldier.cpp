@@ -8,7 +8,7 @@ Soldier::Soldier() : Sprite()
     */
 
     setTexturePath("soldier.png");
-    setChromaColor(0x20, 0xB5, 0x62);
+    setChromaColor(0x4D, 0x4B, 0x76);
 }
 
 Soldier::Soldier(TRTexture tex)

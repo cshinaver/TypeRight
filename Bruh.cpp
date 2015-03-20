@@ -16,6 +16,7 @@ void Bruh::setTexture(TRTexture tex)
     /*
      * Loads texture and sets settings.
     */
+
     Sprite::setTexture(tex);
     vector<SDL_Rect> clips;
     setCurrentFrame(0);
