@@ -24,6 +24,7 @@ class Sprite
     friend class SDLWrapper;
     public:
         Sprite();
+        ~Sprite();
         virtual void move() = 0;
         int getPosX() { return posX; };
         int getPosY() { return posY; };

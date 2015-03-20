@@ -15,6 +15,13 @@ Sprite::Sprite()
     shouldChroma = 0;
 }
 
+Sprite::~Sprite()
+{
+    /*
+     * Destructor
+    */
+}
+
 void Sprite::setPos(int x, int y)
 {
     posX = x;

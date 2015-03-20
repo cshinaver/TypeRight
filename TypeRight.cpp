@@ -33,7 +33,6 @@ void TypeRight::startGame()
     //##################
 
     Bruh b;
-    b.setTexture(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
     sprites.push_back(&b);
     // For demo
     while (!quit)
@@ -60,6 +59,7 @@ void TypeRight::startGame()
     for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
     {
         (*i)->destroySprite();
+        delete (*i);
     }
     
     // Quit SDL
