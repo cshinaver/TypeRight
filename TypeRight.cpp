@@ -34,7 +34,9 @@ void TypeRight::startGame()
     //##################
 
     Bruh *b = new Bruh;
+    Soldier *s = new Soldier;
     sprites.push_back(b);
+    sprites.push_back(s);
 
     // For demo
     while (!quit)

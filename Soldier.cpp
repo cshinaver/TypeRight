@@ -11,13 +11,13 @@ Soldier::Soldier() : Sprite()
     setChromaColor(0x4D, 0x4B, 0x76);
 }
 
-Soldier::Soldier(TRTexture tex)
+void Soldier::setTexture(TRTexture tex)
 {
     /*
      * Loads texture and sets settings.
     */
 
-    setTexture(tex);
+    Sprite::setTexture(tex);
     vector<SDL_Rect> clips;
     setCurrentFrame(0);
     setTotalFrames(0);
