@@ -6,6 +6,22 @@
 
 #include "Sprite.h"
 
+Sprite::Sprite()
+{
+    /*
+     * Default constructor
+    */
+    isTextureLoaded = 0;
+    shouldChroma = 0;
+}
+
+Sprite::~Sprite()
+{
+    /*
+     * Destructor
+    */
+}
+
 void Sprite::setPos(int x, int y)
 {
     posX = x;
@@ -31,9 +47,28 @@ void Sprite::setHeight(int h)
 void Sprite::setTexture(TRTexture tex)
 {
     textureSrc = tex;
+    isTextureLoaded = 1;
 }
 
 void Sprite::setTextureClips(vector<SDL_Rect> texClips)
 {
     textureClips = texClips;
+}
+
+void Sprite::destroySprite()
+{
+    /*
+     * Destroys texture to free memory
+    */
+
+    textureSrc.freeTexture();
+    isTextureLoaded = 0;
+}
+
+void Sprite::setChromaColor(uint8_t r, uint8_t g, uint8_t b)
+{
+    chromaColor.r = r;
+    chromaColor.g = g;
+    chromaColor.b = b;
+    shouldChroma = 1;
 }

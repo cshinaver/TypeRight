@@ -33,28 +33,41 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
-    Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
-    Skeleton s(sw.loadTexture("skeleton.png", 1, 0x9D, 0x8E, 0x87));
+    Bruh *b = new Bruh;
+    Skeleton *S = new Skeleton;
+    sprites.push_back(b);
+    sprites.push_back(S);
     // For demo
     while (!quit)
     {
+        // Check for keyboard events
         checkForEvents();
 
         // Clear screen
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
-        sw.loadSprite(&b);
-        sw.loadSprite(&s);
-        b.move();
-        s.move();
+        // Load and move every sprite
+        for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
+        {
+            sw.loadSprite(*i);
+            (*i)->move();
+        }
 
         // Update screen
         sw.updateWindow();
     }
 
+    // Free all textures
+    for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
+    {
+        (*i)->destroySprite();
+        delete (*i);
+    }
+    
     // Quit SDL
     sw.quit();
+
 }
 
 void TypeRight::checkForEvents()
