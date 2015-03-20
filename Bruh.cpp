@@ -3,6 +3,12 @@
 
 Bruh::Bruh() : Sprite()
 {
+    /*
+     * Default constructor. 
+    */
+
+    setTexturePath("pirate.png");
+    setChromaColor(0x20, 0xB5, 0x62);
 }
 
 void Bruh::setTexture(TRTexture tex)

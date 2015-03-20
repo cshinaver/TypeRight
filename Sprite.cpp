@@ -12,6 +12,7 @@ Sprite::Sprite()
      * Default constructor
     */
     isTextureLoaded = 0;
+    shouldChroma = 0;
 }
 
 void Sprite::setPos(int x, int y)
@@ -55,4 +56,12 @@ void Sprite::destroySprite()
 
     textureSrc.freeTexture();
     isTextureLoaded = 0;
+}
+
+void Sprite::setChromaColor(uint8_t r, uint8_t g, uint8_t b)
+{
+    chromaColor.r = r;
+    chromaColor.g = g;
+    chromaColor.b = b;
+    shouldChroma = 1;
 }

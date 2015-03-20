@@ -13,6 +13,12 @@
 
 using namespace std;
 
+struct Color {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+};
+
 class Sprite 
 {
     friend class SDLWrapper;
@@ -29,9 +35,10 @@ class Sprite
         void setWidth(int w);
         double getHeight() { return height; };
         void setHeight(int h);
-        void setTexture(TRTexture tex);
+        virtual void setTexture(TRTexture tex);
         void setTextureClips(vector<SDL_Rect> texClips);
         void setTexturePath(string path) { texturePath = path; };
+        string getTexturePath() { return texturePath; };
         int getCurrentFrame() { return currentFrame; };
         void setCurrentFrame(int x) { currentFrame = x; };
         int getTotalFrames() { return totalFrames; };
@@ -39,6 +46,9 @@ class Sprite
         double getDt() { return dt; };
         int getIsTextureLoaded() { return isTextureLoaded; };
         void setDt(double _dt) { dt = _dt; };
+        void setChromaColor(uint8_t r, uint8_t g, uint8_t b);
+        Color getChromaColor() { return chromaColor; };
+        int getShouldChroma() { return shouldChroma; };
         void destroySprite();
         bool isAnimated;
         TRTexture textureSrc;
@@ -55,6 +65,8 @@ class Sprite
         int totalFrames;
         int isTextureLoaded;
         double dt;
+        Color chromaColor;
+        int shouldChroma;
 
 };
 

@@ -189,8 +189,15 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
     // Check if sprite has a loaded texture
     if (!(_sprite->getIsTextureLoaded()))
     {
-
-        throw logic_error("Cannot load sprite. Does not have a loaded texture.");
+        Color chromaColor = _sprite->getChromaColor();
+        int shouldChroma = _sprite->getShouldChroma();
+        _sprite->setTexture(loadTexture(
+                    _sprite->getTexturePath(),
+                    shouldChroma,
+                    chromaColor.r,
+                    chromaColor.g,
+                    chromaColor.b
+                    ));
     }
 
     // Src clip
