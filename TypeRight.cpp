@@ -6,6 +6,7 @@
 
 #include "TypeRight.h"
 #include "Bruh.h"
+#include "SpriteFactory.h"
 
 void demoFunction(SDLWrapper &sw);
 
@@ -32,13 +33,21 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
-    Bruh *b = new Bruh;
-    sprites.push_back(b);
+    SpriteFactory sf;
+    sprites.push_back(sf.getSprite(5));
+    int frameCount = 0;
     // For demo
     while (!quit)
     {
         // Check for keyboard events
         checkForEvents();
+
+        // Load new sprite every so often
+        //if (!(frameCount % 40))
+        //{
+        //    sprites.push_back(sf.getSprite(5));
+        //}
+            
 
         // Clear screen
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
@@ -53,6 +62,7 @@ void TypeRight::startGame()
 
         // Update screen
         sw.updateWindow();
+        frameCount++;
     }
 
     // Free all textures
