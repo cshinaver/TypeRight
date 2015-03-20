@@ -90,5 +90,6 @@ executable.
      example Bruh Sprite class (Charles)
 - [x] Add dt to sprite class
 - [ ] Get working motion (Charles)
+- [ ] Create Sprite Factory
 - [ ] Create Level class (charles)
 - [ ] Charles ( write command sheet for git )
