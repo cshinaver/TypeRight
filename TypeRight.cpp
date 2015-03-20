@@ -6,6 +6,7 @@
 
 #include "TypeRight.h"
 #include "Bruh.h"
+#include "Background.h"
 
 void demoFunction(SDLWrapper &sw);
 void backgroundDemoFunction(SDLWrapper &sw);
@@ -41,8 +42,12 @@ void TypeRight::startGame()
     //##################
 
     Bruh b(sw.loadTexture("pirate.png", 1, 0x20, 0xB5, 0x62));
-    // For demo
-    int count=0;
+//    Background backk(sw.loadTexture("background3.png")); // mysterious blue+purple
+//   Background backk(sw.loadTexture("typeRightBackground1Double.png")); // original, field and sky
+//   Background backk(sw.loadTexture("background4.png")); // morris inn
+//   Background backk(sw.loadTexture("background5.png")); // city at night
+//   Background backk(sw.loadTexture("background6.png")); // purple forrest
+    Background backk(sw.loadTexture("background2.png")); // gross USA map
     while (!quit)
     {
         checkForEvents();
@@ -51,15 +56,13 @@ void TypeRight::startGame()
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
-        //demoFunction(sw);
-        //backgroundDemoFunction(sw); // tests the new background
-        cout << "count=" << count << endl; // counts while loop iterations
-        count++;
-
-        //Scroll Background is somewhere near here???????
-        scrollBackground();
+        // Load the sprites
+        sw.loadSprite(&backk);
         sw.loadSprite(&b);
+        
+        // Move the sprites
         b.move();
+        backk.move();
 
         // Update screen
         sw.updateWindow();
@@ -74,25 +77,19 @@ void TypeRight::startGame()
 
 void TypeRight::scrollBackground()
 {
-    double backFract = .5;
-    // Offset of the background
-    bgX+=4;
-    if (bgX >= backgroundTex.getWidth()*(1-backFract) ) // background1 is 951 x 521 pixels, shouldn't hard code this. FIX LATER!!
-
-        //if (bgX >= backgroundTex.getWidth()*(1-backFract) ) // background1 is 951 x 521 pixels, shouldn't hard code this. FIX LATER!!
-    {
-        bgX=0; // reset to the beginning of the background
-    }	
-    //cout << "bgX=" << bgX << endl;
-
-
-    // destination rectangle
-    SDL_Rect src = {bgX, bgY, backgroundTex.getWidth()*backFract, backgroundTex.getHeight()};
-    SDL_Rect dest = {0, 0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT};
-    sw.renderTextureToWindow(backgroundTex, &src, &dest);
+//    double backFract = .5;
+//    // Offset of the background
+//    bgX+=4;
+//    if (bgX >= backgroundTex.getWidth()*(1-backFract) ) // background1 is 951 x 521 pixels, shouldn't hard code this. FIX LATER!!
+//    {
+//        bgX=0; // reset to the beginning of the background
+//    }	
+//
+//    // destination rectangle
+//    SDL_Rect src = {bgX, bgY, backgroundTex.getWidth()*backFract, backgroundTex.getHeight()};
+//    SDL_Rect dest = {0, 0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT};
+//    sw.renderTextureToWindow(backgroundTex, &src, &dest);
 }
-
-
 
 void TypeRight::checkForEvents()
 {
@@ -130,11 +127,12 @@ void backgroundDemoFunction(SDLWrapper &sw)
     /*
      * Similar to demoFunction above, except with background1 this time
     */
-
+/*
     TRTexture back = sw.loadTexture("typeRightBackground1.png"); // new background
     sw.renderTextureToWindow(back);
     TRTexture foo = sw.loadTexture("foo.png", 1, 0, 0xFF, 0xFF);
     SDL_Rect renderQuad = {sw.SCREEN_WIDTH / 2, sw.SCREEN_HEIGHT / 2, foo.getWidth(), foo.getHeight()};
     sw.renderTextureToWindow(foo, NULL, &renderQuad);
+*/
 }
 
