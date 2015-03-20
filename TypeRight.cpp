@@ -32,8 +32,8 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
-    Bruh b;
-    sprites.push_back(&b);
+    Bruh *b = new Bruh;
+    sprites.push_back(b);
     // For demo
     while (!quit)
     {
