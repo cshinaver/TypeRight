@@ -42,8 +42,8 @@ void Soldier::setTexture(TRTexture tex)
 
     setPos(200, 180);
     setTextureClips(clips);
-    setWidth(unitCol);
-    setHeight(unitRow);
+    setWidth(100);
+    setHeight(100);
 }
 
 void Soldier::move()
