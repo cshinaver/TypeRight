@@ -89,7 +89,7 @@ executable.
 - [x] Write loadSprite method that loads sprites and write 
      example Bruh Sprite class (Charles)
 - [x] Add dt to sprite class
-- [ ] Create Sprite Factory
+- [x] Create Sprite Factory
 - [ ] Create Level class (charles)
 - [ ] Image library (charles)
 
