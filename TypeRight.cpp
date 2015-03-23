@@ -7,6 +7,7 @@
 #include "TypeRight.h"
 #include "Bruh.h"
 #include "Background.h"
+#include "SpriteFactory.h"
 
 void backgroundDemoFunction(SDLWrapper &sw);
 
@@ -53,10 +54,26 @@ void TypeRight::startGame()
     Bruh *b = new Bruh;
     sprites.push_back(b);
     // For demo
+    SpriteFactory sf;
+    
+    /* Demo purposes */
+    int demoSpriteGenerated = 0;
+    /* ############# */
     while (!quit)
     {
         // Check for keyboard events
         checkForEvents();
+
+        // Generate sprites
+        if (!demoSpriteGenerated)
+        {
+            Sprite *s1 = sf.getSprite(0); // Make enums
+            Sprite *s2 = sf.getSprite(1);
+            s2->setPos(300, 50);
+            sprites.push_back(s1);
+            sprites.push_back(s2);
+            demoSpriteGenerated = 1;
+        }
 
         // Clear screen
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
