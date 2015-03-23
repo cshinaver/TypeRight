@@ -5,7 +5,8 @@ Background::Background()
 {
  /* Default constructor*/
 
-//    setTexturePath("background1.png"); // country field
+    setTexturePath("typeRightBackground1Double.png"); // country field
+    db = .3;
 
 //    setTexturePath("background2.png"); // ugly usa map
 
@@ -16,8 +17,8 @@ Background::Background()
 //    setTexturePath("Combinedbackground5.png"); // night city, db=2
 //    db = 2;
 
-    setTexturePath("Combinedbackground6.png"); // mysterious purple moon
-    db = .14;
+//    setTexturePath("Combinedbackground6.png"); // mysterious purple moon
+//    db = .14;
 
 //    setTexturePath("background7.png"); // world map 
 
