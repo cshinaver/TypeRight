@@ -54,9 +54,13 @@ target_link_libraries(Soldier_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2
 add_library(Skeleton_lib Skeleton.cpp)
 target_link_libraries(Skeleton_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
+# Snail Class
+add_library(Snail_lib Snail.cpp)
+target_link_libraries(Snail_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib Bruh_lib Soldier_lib Skeleton_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(TypeRight_lib sdlwrapper_lib Bruh_lib Soldier_lib Skeleton_lib Snail_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # SpriteFactory Class
 add_library(SpriteFactory_lib SpriteFactory.cpp)

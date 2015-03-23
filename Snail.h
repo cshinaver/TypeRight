@@ -1,0 +1,25 @@
+/*
+ * Snail.h
+ * Jared Rodgers
+ * Concrete sprite class
+*/
+
+#ifndef SNAIL_H
+#define SNAIL_H
+
+#include "Sprite.h"
+#include "SDLWrapper.h"
+#include "TRTexture.h"
+
+/*############## Header ############################## */
+
+class Snail : public Sprite
+{
+    public:
+        Snail();
+        Snail(TRTexture tex);
+        void setTexture(TRTexture tex);
+        virtual void move();
+};
+
+#endif

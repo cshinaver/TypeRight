@@ -6,12 +6,10 @@
 
 #include "TypeRight.h"
 #include "Bruh.h"
-<<<<<<< HEAD
 #include "Soldier.h"
 #include "Skeleton.h"
-=======
+#include "Snail.h"
 #include "SpriteFactory.h"
->>>>>>> master
 
 void demoFunction(SDLWrapper &sw);
 
@@ -41,9 +39,11 @@ void TypeRight::startGame()
     Bruh *b = new Bruh;
     Soldier *sol = new Soldier;
     Skeleton *skel = new Skeleton;
+    Snail *sna = new Snail;
     sprites.push_back(b);
     sprites.push_back(sol);
     sprites.push_back(skel);
+    sprites.push_back(sna);
 
     // For demo
     SpriteFactory sf;
