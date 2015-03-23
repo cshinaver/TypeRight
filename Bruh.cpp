@@ -40,7 +40,6 @@ void Bruh::setTexture(TRTexture tex)
         clips.push_back(frame);
     }
 
-    setPos(100, 100);
     setTextureClips(clips);
     setWidth(unitCol);
     setHeight(unitRow);

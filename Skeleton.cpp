@@ -1,4 +1,3 @@
-/*############## .cpp ############################### */
 #include "Skeleton.h"
 
 Skeleton::Skeleton() : Sprite()
@@ -39,7 +38,6 @@ void Skeleton::setTexture(TRTexture tex)
         clips.push_back(frame);
     }
 
-    setPos(300, 60);
     setTextureClips(clips);
     setWidth(50);
     setHeight(50);

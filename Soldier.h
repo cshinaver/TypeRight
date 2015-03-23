@@ -10,8 +10,6 @@
 #include "Sprite.h"
 #include "TRTexture.h"
 
-/*############## Header ############################## */
-
 class Soldier : public Sprite
 {
     public:

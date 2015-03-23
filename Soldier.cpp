@@ -1,4 +1,3 @@
-/*############## .cpp ############################### */
 #include "Soldier.h"
 
 Soldier::Soldier() : Sprite()
@@ -40,7 +39,6 @@ void Soldier::setTexture(TRTexture tex)
         clips.push_back(frame);
     }
 
-    setPos(200, 180);
     setTextureClips(clips);
     setWidth(100);
     setHeight(100);

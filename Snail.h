@@ -10,8 +10,6 @@
 #include "Sprite.h"
 #include "TRTexture.h"
 
-/*############## Header ############################## */
-
 class Snail : public Sprite
 {
     public:
