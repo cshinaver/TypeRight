@@ -8,7 +8,6 @@
 #define BRUH_H
 
 #include "Sprite.h"
-#include "SDLWrapper.h"
 #include "TRTexture.h"
 
 /*############## FOR DEMO PURPOSES ONLY ############## */
