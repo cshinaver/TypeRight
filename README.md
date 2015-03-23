@@ -72,11 +72,24 @@ executable.
 
 ## Todos
 ### Week of March 9th
-- [ ] Get Repo on local machine using git (Everybody)
-- [ ] Install Cmake (everybody)
-- [ ] Install sdl2  on local machines (everybody)
+- [x] Get Repo on local machine using git (Everybody)
+- [x] Install Cmake (everybody)
+- [x] Install sdl2  on local machines (everybody)
 - [x] Figure out how to compile on windows machine (Charles)
 - [x] Figure out how to compile on engineering machines (Charles)
 
 - [x] Setup Automated testing (TravisCI)
 - [x] Make basic makefile for sdl
+
+### Week of March 16th
+- [x] Scrolling background (madelyn)
+- [ ] Refactor scrolling background into Background class (subclass of sprite) (madelyn)
+- [ ] Jared (enemies, hero, boxes, etc..)
+- [ ] Elliot (collision detection, basic death)
+- [x] Write loadSprite method that loads sprites and write 
+     example Bruh Sprite class (Charles)
+- [x] Add dt to sprite class
+- [ ] Get working motion (Charles)
+- [ ] Create Sprite Factory
+- [ ] Create Level class (charles)
+- [ ] Charles ( write command sheet for git )

@@ -5,6 +5,7 @@
 */
 
 #include "TypeRight.h"
+#include "Bruh.h"
 
 void demoFunction(SDLWrapper &sw);
 
@@ -31,20 +32,39 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
+    Bruh *b = new Bruh;
+    sprites.push_back(b);
     // For demo
     while (!quit)
     {
+        // Check for keyboard events
         checkForEvents();
 
         // Clear screen
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
-        demoFunction(sw);
+        // Load and move every sprite
+        for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
+        {
+            sw.loadSprite(*i);
+            (*i)->move();
+        }
 
         // Update screen
         sw.updateWindow();
     }
+
+    // Free all textures
+    for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
+    {
+        (*i)->destroySprite();
+        delete (*i);
+    }
+    
+    // Quit SDL
+    sw.quit();
+
 }
 
 void TypeRight::checkForEvents()
@@ -66,17 +86,4 @@ void TypeRight::checkForEvents()
             quit = true;
         }
     }
-}
-
-void demoFunction(SDLWrapper &sw)
-{
-    /*
-     * For demo purproses
-    */
-
-    TRTexture back = sw.loadTexture("background.png");
-    sw.renderTextureToWindow(back);
-    TRTexture foo = sw.loadTexture("foo.png", 1, 0, 0xFF, 0xFF);
-    SDL_Rect renderQuad = {sw.SCREEN_WIDTH / 2, sw.SCREEN_HEIGHT / 2, foo.getWidth(), foo.getHeight()};
-    sw.renderTextureToWindow(foo, NULL, &renderQuad);
 }

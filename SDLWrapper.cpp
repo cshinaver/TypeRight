@@ -11,7 +11,7 @@
 
 using namespace std;
 
-SDLWrapper::SDLWrapper(int h, int w) : SCREEN_WIDTH(w), SCREEN_HEIGHT(h)
+SDLWrapper::SDLWrapper(int h, int w) : SCREEN_HEIGHT(h), SCREEN_WIDTH(w)
 {
     /*
      * Initializes window and gets surface. Stores in variables
@@ -27,7 +27,6 @@ SDLWrapper::~SDLWrapper()
     /*
      * Deallocates all stored variables
     */
-    quit();
 }
 
 void SDLWrapper::quit()
@@ -142,7 +141,6 @@ SDL_Surface * SDLWrapper::loadImg(string imgName)
 
     string fullImgPath = "../imgs/" + imgName;
     SDL_Surface *img = NULL;
-    SDL_Surface *optimizedSurface = NULL;
 
     // Image surface
     img = IMG_Load(fullImgPath.c_str());
@@ -181,3 +179,37 @@ void SDLWrapper::renderTextureToWindow(TRTexture _texture, SDL_Rect *clip, SDL_R
 
     SDL_RenderCopy(renderer, _texture.texture, clip, dest);
 }
+
+void SDLWrapper::loadSprite( Sprite * _sprite)
+{
+    /*
+     * Loads given sprite
+    */
+
+    // Check if sprite has a loaded texture
+    if (!(_sprite->getIsTextureLoaded()))
+    {
+        Color chromaColor = _sprite->getChromaColor();
+        int shouldChroma = _sprite->getShouldChroma();
+        _sprite->setTexture(loadTexture(
+                    _sprite->getTexturePath(),
+                    shouldChroma,
+                    chromaColor.r,
+                    chromaColor.g,
+                    chromaColor.b
+                    ));
+    }
+
+    // Src clip
+    SDL_Rect src = _sprite->textureClips[_sprite->getCurrentFrame()];
+
+    // Dest rect
+    SDL_Rect dest;
+    dest.x = _sprite->getPosX();
+    dest.y = _sprite->getPosY();
+    dest.w = _sprite->getWidth();
+    dest.h = _sprite->getHeight();
+
+    renderTextureToWindow(_sprite->textureSrc, &src, &dest);
+}
+
