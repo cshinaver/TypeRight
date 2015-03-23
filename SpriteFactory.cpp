@@ -18,7 +18,7 @@ Sprite * SpriteFactory::getSprite(int typeDesired)
     /*
      * Returns sprite pointer based on input
     */
-
+    
     Sprite *s = new Bruh;
     return s;
 }
