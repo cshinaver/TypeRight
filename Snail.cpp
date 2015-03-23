@@ -1,4 +1,3 @@
-/*############## .cpp ############################### */
 #include "Snail.h"
 
 Snail::Snail() : Sprite()
@@ -40,7 +39,6 @@ void Snail::setTexture(TRTexture tex)
         clips.push_back(frame);
     }
 
-    setPos(200, 280);
     setTextureClips(clips);
     setWidth(100);
     setHeight(100);

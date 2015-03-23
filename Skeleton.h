@@ -11,9 +11,6 @@
 #include "SDLWrapper.h"
 #include "TRTexture.h"
 
-/*############## FOR DEMO PURPOSES ONLY ############## */
-/*############## Header ############################## */
-
 class Skeleton : public Sprite
 {
     public:

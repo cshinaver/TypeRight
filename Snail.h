@@ -11,8 +11,6 @@
 #include "SDLWrapper.h"
 #include "TRTexture.h"
 
-/*############## Header ############################## */
-
 class Snail : public Sprite
 {
     public:
