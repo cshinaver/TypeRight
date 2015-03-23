@@ -47,6 +47,9 @@ void TypeRight::startGame()
 //   Background backk(sw.loadTexture("background6.png")); // purple forrest
 //    Background backk(sw.loadTexture("background2.png")); // gross USA map
     
+    Background *back = new Background;
+    sprites.push_back(back);
+    
     Bruh *b = new Bruh;
     sprites.push_back(b);
     // For demo
@@ -82,22 +85,6 @@ void TypeRight::startGame()
 
     // Free textures
     backgroundTex.freeTexture();
-}
-
-void TypeRight::scrollBackground()
-{
-//    double backFract = .5;
-//    // Offset of the background
-//    bgX+=4;
-//    if (bgX >= backgroundTex.getWidth()*(1-backFract) ) // background1 is 951 x 521 pixels, shouldn't hard code this. FIX LATER!!
-//    {
-//        bgX=0; // reset to the beginning of the background
-//    }	
-//
-//    // destination rectangle
-//    SDL_Rect src = {bgX, bgY, backgroundTex.getWidth()*backFract, backgroundTex.getHeight()};
-//    SDL_Rect dest = {0, 0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT};
-//    sw.renderTextureToWindow(backgroundTex, &src, &dest);
 }
 
 void TypeRight::checkForEvents()
