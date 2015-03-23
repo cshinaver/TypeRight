@@ -1,17 +1,16 @@
-/*############## .cpp ############################### */
-#include "Bruh.h"
+#include "Soldier.h"
 
-Bruh::Bruh() : Sprite()
+Soldier::Soldier() : Sprite()
 {
     /*
      * Default constructor. 
     */
 
-    setTexturePath("pirate.png");
-    setChromaColor(0x20, 0xB5, 0x62);
+    setTexturePath("soldier.png");
+    setChromaColor(0x4D, 0x4B, 0x76);
 }
 
-void Bruh::setTexture(TRTexture tex)
+void Soldier::setTexture(TRTexture tex)
 {
     /*
      * Loads texture and sets settings.
@@ -22,30 +21,30 @@ void Bruh::setTexture(TRTexture tex)
     setCurrentFrame(0);
     setTotalFrames(0);
 
-    /* Spritesheet is 4x3, so calculate height and width of each clip */
-    int rows = 4;
-    int cols = 3;
+    /* Spritesheet is 2x8, so calculate height and width of each clip */
+    int rows = 2;
+    int cols = 8;
     double unitCol = tex.getWidth() / cols;
     double unitRow = tex.getHeight() / rows;
 
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < cols; i++)
     {
-        // Set bruh equal to second column sprites
+        // Set Soldier equal to second row sprites
         SDL_Rect frame;
         frame.w = unitCol;
         frame.h = unitRow;
-        frame.x = unitCol;
-        frame.y = unitRow * i;
+        frame.x = unitCol * i;
+        frame.y = unitRow; 
 
         clips.push_back(frame);
     }
 
     setTextureClips(clips);
-    setWidth(unitCol);
-    setHeight(unitRow);
+    setWidth(100);
+    setHeight(100);
 }
 
-void Bruh::move()
+void Soldier::move()
 {
     int tFrames = getTotalFrames();
     int speedConst = 8; // Modify this to make sprite animation faster or slower
