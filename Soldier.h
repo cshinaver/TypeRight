@@ -8,7 +8,6 @@
 #define SOLDIER_H
 
 #include "Sprite.h"
-#include "SDLWrapper.h"
 #include "TRTexture.h"
 
 /*############## Header ############################## */
