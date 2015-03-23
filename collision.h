@@ -6,7 +6,12 @@
 class Collision() {
 	public:
 		Collision();
-		int checkCollision(Sprite * a, Sprite * b);
+		Collision(Sprite * hero, vector < Sprite * > sprites);
+		int checkCollision();
+        int isDead();
+	private:
+		vector< Sprite * > spr;
+        Sprite * hero;
 };
 
 #endif
