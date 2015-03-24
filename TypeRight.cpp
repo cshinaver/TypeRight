@@ -12,8 +12,6 @@
 #include "Snail.h"
 #include "SpriteFactory.h"
 
-void backgroundDemoFunction(SDLWrapper &sw);
-
 TypeRight::TypeRight()
 {
     /*
@@ -44,13 +42,6 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
-//    Background backk(sw.loadTexture("background3.png")); // mysterious blue+purple
-//   Background backk(sw.loadTexture("typeRightBackground1Double.png")); // original, field and sky
-//   Background backk(sw.loadTexture("background4.png")); // morris inn
-//   Background backk(sw.loadTexture("background5.png")); // city at night
-//   Background backk(sw.loadTexture("background6.png")); // purple forrest
-//    Background backk(sw.loadTexture("background2.png")); // gross USA map
-    
     Background *back = new Background;
     sprites.push_back(back);
     
@@ -138,18 +129,3 @@ void TypeRight::checkForEvents()
         }
     }
 }
-
-void backgroundDemoFunction(SDLWrapper &sw)
-{
-    /*
-     * Similar to demoFunction above, except with background1 this time
-    */
-/*
-    TRTexture back = sw.loadTexture("typeRightBackground1.png"); // new background
-    sw.renderTextureToWindow(back);
-    TRTexture foo = sw.loadTexture("foo.png", 1, 0, 0xFF, 0xFF);
-    SDL_Rect renderQuad = {sw.SCREEN_WIDTH / 2, sw.SCREEN_HEIGHT / 2, foo.getWidth(), foo.getHeight()};
-    sw.renderTextureToWindow(foo, NULL, &renderQuad);
-*/
-}
-

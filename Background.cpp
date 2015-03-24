@@ -35,8 +35,6 @@ void Background::setTexture(TRTexture tex)
     
     setTextureClips(clips); 
 
-//    setWidth(tex.getWidth()*backFract);
-//    setHeight(tex.getHeight());
     SDLWrapper sw;
     setWidth(sw.SCREEN_WIDTH);
     setHeight(sw.SCREEN_HEIGHT);
