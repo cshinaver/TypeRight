@@ -15,7 +15,6 @@ void Background::setTexture(TRTexture tex)
     setCurrentFrame(0);
     setTotalFrames(0);
 
-//    int dt = 10; // used to be 3
     double backFract = .5; // fraction of whole background that is shown at any given moment
     // times 1-(fraction shown) times .5 times total background
 
@@ -35,8 +34,6 @@ void Background::setTexture(TRTexture tex)
     
     setTextureClips(clips); 
 
-//    setWidth(tex.getWidth()*backFract);
-//    setHeight(tex.getHeight());
     SDLWrapper sw;
     setWidth(sw.SCREEN_WIDTH);
     setHeight(sw.SCREEN_HEIGHT);
