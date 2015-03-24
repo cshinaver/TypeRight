@@ -34,9 +34,10 @@ void Background::setTexture(TRTexture tex)
     
     setTextureClips(clips); 
 
-    SDLWrapper sw;
-    setWidth(sw.SCREEN_WIDTH);
-    setHeight(sw.SCREEN_HEIGHT);
+//    setWidth(tex.getWidth()*backFract);
+//    setHeight(tex.getHeight());
+    setWidth(640);
+    setHeight(480);
 }
 
 void Background::move()
