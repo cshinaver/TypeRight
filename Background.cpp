@@ -5,6 +5,7 @@ Background::Background()
 {
     /* Default constructor*/
 
+    setPos(0,0); // All backgrounds start at beginning
 }
 
 void Background::setTexture(TRTexture tex)
@@ -32,7 +33,6 @@ void Background::setTexture(TRTexture tex)
         clips.push_back(frame);
     }
     
-    setPos(0,0); // takes up whole screen, so this starts in top left corner
     setTextureClips(clips); 
 
 //    setWidth(tex.getWidth()*backFract);
