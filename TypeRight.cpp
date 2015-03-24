@@ -18,14 +18,9 @@ TypeRight::TypeRight()
      * Default constructor
     */
 
-    bgX=0; // background starts at beginning, leftmost x coordinate of texture
-    bgY=0; // doesn't change
-
     // Init window and initial surface
     sw.init();
 
-    //initializes textures
-    backgroundTex = sw.loadTexture("typeRightBackground1Double.png", 0, 0, 0xFF, 0xFF);
 }
 
 void TypeRight::startGame()
@@ -33,7 +28,6 @@ void TypeRight::startGame()
     /*
      * Starts game
     */
-
 
     // Set quit status
     quit = false;

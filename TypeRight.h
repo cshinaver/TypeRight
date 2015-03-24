@@ -25,10 +25,6 @@ class TypeRight
         SDLWrapper sw;
         bool quit;
         void checkForEvents(); // Checks for events and responds to them
-        int bgX; // Scrolling background, x coord offset, eventually
-        // should be in terms of dt
-        int bgY;
-        TRTexture backgroundTex;
         vector<Sprite *> sprites;
 };
 
