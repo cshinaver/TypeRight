@@ -7,6 +7,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 #include <SDL2/SDL.h>
+#include "SDLWrapper.h"
 #include "TRTexture.h"
 #include <vector>
 #include <iostream>
