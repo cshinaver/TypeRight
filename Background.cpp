@@ -42,8 +42,6 @@ void Background::setTexture(TRTexture tex)
     
     setTextureClips(clips); 
 
-//    setWidth(tex.getWidth()*backFract);
-//    setHeight(tex.getHeight());
     setWidth(640);
     setHeight(480);
 }
