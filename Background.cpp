@@ -6,6 +6,9 @@ Background::Background()
     /* Default constructor*/
 
     setPos(0,0); // All backgrounds start at beginning
+
+    /* TEMPORARY UNTIL LEVEL CLASS DONE */
+    db = .35; 
 }
 
 void Background::setTexturePath(string path)

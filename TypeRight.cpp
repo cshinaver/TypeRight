@@ -37,6 +37,7 @@ void TypeRight::startGame()
     //##################
 
     Background *back = new Background;
+    back->setTexturePath("Combinedbackground9-9.png"); // Temporary. Will be set in level class
     sprites.push_back(back);
     
     Bruh *b = new Bruh;
