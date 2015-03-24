@@ -9,6 +9,7 @@
 #include "Background.h"
 #include "Soldier.h"
 #include "Skeleton.h"
+#include "Cat.h"
 #include "Snail.h"
 #include "SpriteFactory.h"
 
@@ -62,6 +63,9 @@ void TypeRight::startGame()
     skel->setPos(300, 100);
     Snail *sna = new Snail;
     sna->setPos(400, 100);
+    Cat *c = new Cat;
+    c->setPos(250,250);
+    sprites.push_back(c);
     sprites.push_back(b);
     sprites.push_back(sol);
     sprites.push_back(skel);
