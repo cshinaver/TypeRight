@@ -16,7 +16,6 @@ void Background::setTexture(TRTexture tex)
 
 //    int dt = 10; // used to be 3
     double backFract = .5; // fraction of whole background that is shown at any given moment
-    int numFrames = tex.getWidth()*(1-backFract)*.5; // width of background
     // times 1-(fraction shown) times .5 times total background
 
     // Set background equal to second column sprites
