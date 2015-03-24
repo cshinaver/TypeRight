@@ -5,16 +5,27 @@
 
 Collision::Collision() {}
 
-Collision::Collision(Sprite * h, vector< Sprite * > a)
+Collision::Collision(vector< Sprite * > a)
 {
-    hero = h;
-    spr = a;
+	hero = NULL;
+	spr = a;
+	findHero();
+}
+
+void findHero() 
+{
+	vector< Sprite * >::iterator n = spr.begin();
+	while ( hero == NULL ) {
+		if ( (*spr[n]).getIsHero() == true )
+			hero = spr[n];
+		n++;
+	}
 }
 
 int Collision::isDead() {
     for ( int i = 0; i < a.size(); i++ ) {
-        if ( checkCollision(hero, spr[i]) )
-            return 1;
+        if ( spr[i] != hero && checkCollision(hero, spr[i]) )
+    		return 1;
     }
     return 0;
 }
