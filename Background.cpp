@@ -3,30 +3,8 @@
 
 Background::Background()
 {
- /* Default constructor*/
+    /* Default constructor*/
 
-//    setTexturePath("typeRightBackground1Double.png"); // country field
-//    db = .3;
-
-//    setTexturePath("background2.png"); // ugly usa map
-
-//    setTexturePath("Combinedbackground3.png"); // mysterious purple moon
-//    db = 1;
-
-//    setTexturePath("background4.png"); // morris inn
-
-//    setTexturePath("Combinedbackground5-4.png"); // night city, db=2
-//    db = .5;
-
-//    setTexturePath("Combinedbackground6.png"); // mysterious purple moon
-//    db = .14;
-
-//    setTexturePath("background7.png"); // world map 
-
-//    setTexturePath("background8.png"); // castle
-
-    setTexturePath("Combinedbackground9-9.png"); // mysterious purple moon
-    db = .35;
 }
 
 void Background::setTexture(TRTexture tex)
