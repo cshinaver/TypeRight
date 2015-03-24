@@ -8,6 +8,14 @@ Background::Background()
     setPos(0,0); // All backgrounds start at beginning
 }
 
+void Background::setTexturePath(string path)
+{
+    /*
+     * Sets texture path
+    */
+    Sprite::setTexturePath(path);
+}
+
 void Background::setTexture(TRTexture tex)
 {
     Sprite::setTexture(tex);
