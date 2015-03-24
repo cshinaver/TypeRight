@@ -6,18 +6,21 @@
 
 #include "TypeRight.h"
 #include "Bruh.h"
+#include "Background.h"
 #include "Soldier.h"
 #include "Skeleton.h"
 #include "Snail.h"
 #include "SpriteFactory.h"
-
-void demoFunction(SDLWrapper &sw);
 
 TypeRight::TypeRight()
 {
     /*
      * Default constructor
     */
+
+    // Init window and initial surface
+    sw.init();
+
 }
 
 void TypeRight::startGame()
@@ -26,9 +29,6 @@ void TypeRight::startGame()
      * Starts game
     */
 
-    // Init window and initial surface
-    sw.init();
-
     // Set quit status
     quit = false;
 
@@ -36,6 +36,10 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
+    Background *back = new Background;
+    back->setTexturePath("Combinedbackground9-9.png"); // Temporary. Will be set in level class
+    sprites.push_back(back);
+    
     Bruh *b = new Bruh;
     b->setPos(100, 100);
     Soldier *sol = new Soldier;
