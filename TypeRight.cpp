@@ -99,8 +99,6 @@ void TypeRight::startGame()
     // Quit SDL
     sw.quit();
 
-    // Free textures
-    backgroundTex.freeTexture();
 }
 
 void TypeRight::checkForEvents()
