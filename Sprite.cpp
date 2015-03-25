@@ -76,3 +76,9 @@ void Sprite::setChromaColor(uint8_t r, uint8_t g, uint8_t b)
     chromaColor.b = b;
     shouldChroma = 1;
 }
+
+void Sprite::setSize(int w, int h)
+{
+    setWidth(w);
+    setHeight(h);
+}

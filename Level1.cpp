@@ -55,6 +55,8 @@ void Level1::generateSprites()
 
         b->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
         s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
+        b->setSize(100, 100);
+        s->setSize(100, 100);
         addSprite(b);
         addSprite(s);
     }

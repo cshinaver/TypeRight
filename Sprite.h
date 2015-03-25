@@ -36,6 +36,7 @@ class Sprite
         void setWidth(int w);
         double getHeight() { return height; };
         void setHeight(int h);
+        void setSize(int w, int h);
         virtual void setTexture(TRTexture tex);
         void setTextureClips(vector<SDL_Rect> texClips);
         void setTexturePath(string path) { texturePath = path; };
