@@ -69,24 +69,3 @@ void TypeRight::startGame()
     sw.quit();
 
 }
-
-void TypeRight::checkForEvents()
-{
-    /*
-     * Checks for any events in queue and responds if any
-     * Put responses to events here
-    */
-
-    // Event handler
-    SDL_Event e;
-
-    // Event handler loop
-    while (SDL_PollEvent( &e ) != 0)
-    {
-        // User quits
-        if (e.type == SDL_QUIT)
-        {
-            quit = true;
-        }
-    }
-}

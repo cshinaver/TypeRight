@@ -23,8 +23,22 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
 void Level1::handleKeyboardEvents()
 {
     /*
-     * Handles keyboard input
+     * Checks for any events in queue and responds if any
+     * Put responses to events here
     */
+
+    // Event handler
+    SDL_Event e;
+
+    // Event handler loop
+    while (SDL_PollEvent( &e ) != 0)
+    {
+        // User quits
+        if (e.type == SDL_QUIT)
+        {
+            endLevel();
+        }
+    }
 }
 
 void Level1::generateSprites()
