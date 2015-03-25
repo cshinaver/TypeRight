@@ -11,6 +11,7 @@
 #include "Skeleton.h"
 #include "Snail.h"
 #include "SpriteFactory.h"
+#include "Level1.h"
 
 TypeRight::TypeRight()
 {
@@ -56,47 +57,14 @@ void TypeRight::startGame()
     // For demo
     SpriteFactory sf;
     
-    /* Demo purposes */
-    int demoSpriteGenerated = 0;
-    /* ############# */
     while (!quit)
     {
-        // Check for keyboard events
-        checkForEvents();
 
-        // Generate sprites
-        if (!demoSpriteGenerated)
-        {
-            Sprite *s1 = sf.getSprite(0); // Make enums
-            Sprite *s2 = sf.getSprite(1);
-            s2->setPos(300, 50);
-            sprites.push_back(s1);
-            sprites.push_back(s2);
-            demoSpriteGenerated = 1;
-        }
+        Level1 l1(sw);
+        l1.startLevel();
 
-        // Clear screen
-        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
-        sw.clearWindow();
-
-        // Load and move every sprite
-        for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
-        {
-            sw.loadSprite(*i);
-            (*i)->move();
-        }
-
-        // Update screen
-        sw.updateWindow();
     }
 
-    // Free all textures
-    for (vector<Sprite *>::iterator i = sprites.begin(); i != sprites.end(); i++)
-    {
-        (*i)->destroySprite();
-        delete (*i);
-    }
-    
     // Quit SDL
     sw.quit();
 
