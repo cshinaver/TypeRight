@@ -17,14 +17,14 @@ Level::Level(SDLWrapper &_sw) : sw(_sw)
     levelBackground = NULL;
 }
 
-void Level::startLevel(SDLWrapper &sw)
+void Level::startLevel()
 {
     /*
      * Main level loop
     */
 
     // Load background into vector first
-    if (levelBackground != NULL)
+    if (levelBackground == NULL)
     {
         throw logic_error("Level background not set.");
     }
@@ -92,4 +92,3 @@ void Level::setBackground(Background *_back)
 {
     levelBackground = _back;
 }
-

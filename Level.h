@@ -15,7 +15,7 @@ class Level
 {
     public:
         Level(SDLWrapper &_sw);
-        void startLevel(SDLWrapper &sw);
+        void startLevel();
         void setBackground(Background *_back);
         void endLevel();
         void addSprite(Sprite *);
