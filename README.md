@@ -83,19 +83,20 @@ executable.
 
 ### Week of March 16th
 - [x] Scrolling background (madelyn)
-- [ ] Refactor scrolling background into Background class (subclass of sprite) (madelyn)
-- [ ] 4 Sprites (Jared)
-- [ ] Elliot (collision detection)
+- [x] Refactor scrolling background into Background class (subclass of sprite) (madelyn)
+- [x] 4 Sprites (Jared)
 - [x] Write loadSprite method that loads sprites and write 
      example Bruh Sprite class (Charles)
 - [x] Add dt to sprite class
 - [x] Create Sprite Factory
-- [ ] Create Level class (charles)
-- [ ] Image library (charles)
+- [x] Create Level class (charles)
 
 ### Week of March 23rd
 - [ ] Get working motion (Elliot)
+- [ ] Elliot (collision detection)
+- [ ] Text library (charles) 
 - [ ] Make background size not hard coded (Charles)
 - [ ] Clean up images folder
+
 
 
