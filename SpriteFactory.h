@@ -9,6 +9,9 @@
 
 #include "Sprite.h"
 #include "Bruh.h"
+#include "Skeleton.h"
+#include "Snail.h"
+#include "Soldier.h"
 class SpriteFactory
 {
     public:

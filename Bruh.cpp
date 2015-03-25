@@ -41,8 +41,16 @@ void Bruh::setTexture(TRTexture tex)
     }
 
     setTextureClips(clips);
-    setWidth(unitCol);
-    setHeight(unitRow);
+
+    // If height or width already set, don't reset
+    if (!getWidth())
+    {
+        setWidth(unitCol);
+    }
+    if (!getHeight())
+    {
+        setHeight(unitRow);
+    }
 }
 
 void Bruh::move()

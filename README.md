@@ -96,4 +96,6 @@ executable.
 ### Week of March 23rd
 - [ ] Get working motion (Elliot)
 - [ ] Make background size not hard coded (Charles)
+- [ ] Clean up images folder
+
 
