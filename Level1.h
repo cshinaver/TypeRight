@@ -11,8 +11,13 @@
 class Level1 : public Level
 {
     public:
-        Level1();
-        virtual void startLevel(SDLWrapper &sw);
+        Level1(SDLWrapper &sw);
+        void startLevel(SDLWrapper &sw);
+    private:
+        void handleKeyboardEvents();
+        void generateSprites();
+
+
 };
 
 #endif
