@@ -40,8 +40,16 @@ void Snail::setTexture(TRTexture tex)
     }
 
     setTextureClips(clips);
-    setWidth(100);
-    setHeight(100);
+
+    // If height or width already set, don't reset
+    if (!getWidth())
+    {
+        setWidth(unitCol);
+    }
+    if (!getHeight())
+    {
+        setHeight(unitRow);
+    }
 }
 
 void Snail::move()

@@ -24,7 +24,6 @@ class TypeRight
     private:
         SDLWrapper sw;
         bool quit;
-        void checkForEvents(); // Checks for events and responds to them
         vector<Sprite *> sprites;
 };
 
