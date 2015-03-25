@@ -15,6 +15,8 @@ Sprite::Sprite()
     dt = 10;
     isTextureLoaded = 0;
     shouldChroma = 0;
+    setWidth(0);
+    setHeight(0);
 }
 
 Sprite::~Sprite()
