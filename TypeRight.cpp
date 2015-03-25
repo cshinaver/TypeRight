@@ -57,13 +57,8 @@ void TypeRight::startGame()
     // For demo
     SpriteFactory sf;
     
-    while (!quit)
-    {
-
-        Level1 l1(sw);
-        l1.startLevel();
-
-    }
+    Level1 l1(sw);
+    l1.startLevel();
 
     // Quit SDL
     sw.quit();
