@@ -80,23 +80,24 @@ executable.
 
 - [x] Setup Automated testing (TravisCI)
 - [x] Make basic makefile for sdl
+- [x] Write loadSprite method that loads sprites and write 
+    example Bruh Sprite class (Charles)
+- [x] Add dt to sprite class
+- [x] Create Sprite Factory
 
 ### Week of March 16th
+- [x] Create Level class (charles)
 - [x] Scrolling background (madelyn)
 - [x] Refactor scrolling background into Background class (subclass of sprite) (madelyn)
 - [x] 4 Sprites (Jared)
-- [x] Write loadSprite method that loads sprites and write 
-     example Bruh Sprite class (Charles)
-- [x] Add dt to sprite class
-- [x] Create Sprite Factory
-- [x] Create Level class (charles)
 
 ### Week of March 23rd
 - [ ] Get working motion (Elliot)
 - [ ] Elliot (collision detection)
 - [ ] Text library (charles) 
 - [ ] Make background size not hard coded (Charles)
-- [ ] Clean up images folder
+- [ ] Clean up images folder (madelyn)
+
 
 
 
