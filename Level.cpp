@@ -7,7 +7,7 @@
 #include "Level.h"
 #include <stdexcept>
 
-Level::Level(SDLWrapper &_sw) : sw(_sw)
+Level::Level(SDLWrapper &_sw) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_sw.SCREEN_HEIGHT), sw(_sw) 
 {
     /*
      * Default base constructor
@@ -91,4 +91,9 @@ void Level::loadAndMoveSprites()
 void Level::setBackground(Background *_back)
 {
     levelBackground = _back;
+}
+
+int Level::numSprites()
+{
+    return (levelSprites.size() - 1);
 }

@@ -5,6 +5,7 @@
 */
 
 #include "Level1.h"
+#include "SpriteFactory.h"
 
 Level1::Level1(SDLWrapper &sw) : Level(sw)
 {
@@ -46,6 +47,18 @@ void Level1::generateSprites()
     /*
      * Handles sprite generation
     */
+
+    if (numSprites() != 2)
+    {
+        Bruh *b = new Bruh();
+        Skeleton *s = new Skeleton();
+
+        b->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
+        s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
+        addSprite(b);
+        addSprite(s);
+    }
+
 }
 
 void Level1::startLevel()

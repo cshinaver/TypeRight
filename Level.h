@@ -19,6 +19,9 @@ class Level
         void setBackground(Background *_back);
         void endLevel();
         void addSprite(Sprite *);
+        int numSprites();
+        const int SCREEN_WIDTH;
+        const int SCREEN_HEIGHT;
     private:
         Background *levelBackground;
         vector<Sprite *> levelSprites;
@@ -28,7 +31,6 @@ class Level
         virtual void generateSprites() = 0;
         int levelEnded;
         SDLWrapper &sw;
-
 };
 
 #endif
