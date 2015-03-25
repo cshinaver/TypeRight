@@ -34,10 +34,10 @@ void Level1::generateSprites()
     */
 }
 
-void Level1::startLevel(SDLWrapper &sw)
+void Level1::startLevel()
 {
     /*
      * Starts level
      */
-    Level::startLevel(sw);
+    Level::startLevel();
 }
