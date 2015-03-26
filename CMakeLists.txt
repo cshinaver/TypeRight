@@ -21,14 +21,18 @@ elseif(CYGWIN)
     set(SDL2_INCLUDE_DIRS "/usr/local/include")
     set(SDL2_IMAGE_LIBRARIES -L"/usr/local/lib" -lSDL2_image)
     set(SDL2_IMAGE_INCLUDE_DIRS "/usr/local/include")
+    set(SDL2_TTF_LIBRARIES -L"/usr/local/lib" -lSDL2_ttf)
+    set(SDL2_TTF_INCLUDE_DIRS "/usr/local/lib")
 else()
     include(FindPkgConfig)
     pkg_search_module(SDL2 REQUIRED sdl2)
     set(SDL2_IMAGE_LIBRARIES -L"/usr/local/lib" -lSDL2_image)
     set(SDL2_IMAGE_INCLUDE_DIRS "/usr/local/include")
+    pkg_search_module(SDL2_image REQUIRED SDL2_ttf)
 endif()
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
+include_directories(${SDL2_TTF_INCLUDE_DIRS})
 
 # TRTexture Class
 add_library(TRTexture_lib TRTexture.cpp)
@@ -40,7 +44,7 @@ target_link_libraries(Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} 
 
 # SDLWrapper Class
 add_library(sdlwrapper_lib SDLWrapper.cpp)
-target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib SpriteFactory_lib)
+target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib SpriteFactory_lib ${SDL2_TTF_LIBRARIES})
 
 # Bruh Class
 add_library(Bruh_lib Bruh.cpp)
