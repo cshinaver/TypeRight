@@ -11,12 +11,12 @@
 class Collision {
 	public:
 		Collision();
-		Collision(vector < Sprite * > sprites);
+		Collision(vector < Sprite * > * sprites);
 		int checkCollision(Sprite *, Sprite *);
         	int isDead();
 		void findHero();
 	private:
-		vector< Sprite * > spr;
+		vector< Sprite * > * spr;
 		Sprite * hero;
 };
 

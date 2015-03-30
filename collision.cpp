@@ -11,7 +11,7 @@ Collision::Collision() {
 	hero = NULL;
 }
 
-Collision::Collision(vector< Sprite * > a)
+Collision::Collision(vector< Sprite * > * a)
 {
 	// Constructor initializing hero sprite as well as vector of sprites
 	hero = NULL;
@@ -22,11 +22,11 @@ Collision::Collision(vector< Sprite * > a)
 void Collision::findHero() 
 {
 	// Searches through the sprites, finds the one that is the hero
-	vector< Sprite * >::iterator n = spr.begin();
+	vector< Sprite * >::iterator n = spr->begin();
 	int i=0;
 	while ( hero == NULL ) {
-		if ( (spr[i])->getIsHero() == true )
-			hero = spr[i];
+		if ( ((*spr)[i])->getIsHero() == true )
+			hero = (*spr)[i];
 		n++;
 		i++;
 	}
@@ -35,8 +35,8 @@ void Collision::findHero()
 int Collision::isDead() {
     
     // Finds out if the character is dead or not
-    for ( int i = 0; i < spr.size(); i++ ) {
-        if ( spr[i] != hero && checkCollision(hero, spr[i]) )
+    for ( int i = 0; i < (*spr).size(); i++ ) {
+        if ( (*spr)[i] != hero && checkCollision(hero, (*spr)[i]) )
     		return 1;
     }
     return 0;
