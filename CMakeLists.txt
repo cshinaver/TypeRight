@@ -28,7 +28,8 @@ else()
     pkg_search_module(SDL2 REQUIRED sdl2)
     set(SDL2_IMAGE_LIBRARIES -L"/usr/local/lib" -lSDL2_image)
     set(SDL2_IMAGE_INCLUDE_DIRS "/usr/local/include")
-    pkg_search_module(SDL2_ttf REQUIRED SDL2_ttf)
+    set(SDL2_TTF_LIBRARIES -L"/usr/local/lib" -lSDL2_ttf)
+    set(SDL2_TTF_INCLUDE_DIRS "/usr/local/include")
 endif()
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
@@ -84,7 +85,7 @@ target_link_libraries(Level1_lib Level_lib)
 
 # main
 add_executable(main main.cpp)
-target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} sdlwrapper_lib TypeRight_lib)
+target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} sdlwrapper_lib TypeRight_lib)
 
 ###########
 # Testing #
