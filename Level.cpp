@@ -43,6 +43,12 @@ void Level::startLevel()
         sw.clearWindow();
 
         loadAndMoveSprites();
+        
+
+        // Testing
+        TRTexture text = sw.loadText("test");
+        sw.renderTextureToWindow(text);
+        /*#######*/
 
         // Update screen
         sw.updateWindow();
