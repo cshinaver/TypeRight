@@ -6,7 +6,6 @@
 
 #include "SDLWrapper.h"
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <stdexcept>
 
@@ -214,3 +213,22 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
     renderTextureToWindow(_sprite->textureSrc, &src, &dest);
 }
 
+TRTexture SDLWrapper::loadText(string text, SDL_Color textColor)
+{
+    /*
+     * Loads text to screen at given position
+    */
+
+    // Create surface from text
+    SDL_Surface *textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
+    if (textSurface == NULL)
+    {
+        cout << "Unable to render text surface! SDL_ttf Error: " << TTF_GetError() << endl;
+    }
+
+    // Create texture from surface
+    SDL_Texture *texSrc = SDL_CreateTextureFromSurface(renderer, textSurface);
+    TRTexture textTexture = TRTexture(texSrc, textSurface);
+
+    return textTexture;
+}
