@@ -1,3 +1,7 @@
+// Elliott Runburg
+// Collision header
+// collision.h
+
 #ifndef COLLISION_H
 #define COLLISION_H
 
