@@ -39,8 +39,17 @@ void Skeleton::setTexture(TRTexture tex)
     }
 
     setTextureClips(clips);
-    setWidth(50);
-    setHeight(50);
+
+
+    // If height or width already set, don't reset
+    if (!getWidth())
+    {
+        setWidth(unitCol);
+    }
+    if (!getHeight())
+    {
+        setHeight(unitRow);
+    }
 }
 
 void Skeleton::move()

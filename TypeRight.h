@@ -2,7 +2,7 @@
  * TypeRight.h
  * Charles Shinaver
  * Main game header
-*/
+ */
 
 #ifndef TYPERIGHT_H
 #define TYPERIGHT_H
@@ -24,9 +24,7 @@ class TypeRight
     private:
         SDLWrapper sw;
         bool quit;
-        void checkForEvents(); // Checks for events and responds to them
         vector<Sprite *> sprites;
-
 };
 
 #endif
