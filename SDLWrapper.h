@@ -12,10 +12,17 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
+#include <map>
 #include "TRTexture.h"
 #include "Sprite.h"
 
 using namespace std;
+
+struct TRFont
+{
+    TTF_Font *fontPtr;
+    int fontSize;
+};
 
 class SDLWrapper
 {
@@ -28,8 +35,21 @@ class SDLWrapper
         void clearWindow(); // Clears window
         void renderTextureToWindow(TRTexture, SDL_Rect* = NULL, SDL_Rect* = NULL); // Renders texture to window
         SDL_Surface * loadImg(string);
-        TRTexture loadTexture(string imgPath, int shouldChroma = 0, uint8_t r = -1, uint8_t g = 0, uint8_t b = 0); // Pass pixel to chroma key, empty for none
-        TRTexture loadText(string text, SDL_Color textColor);
+        TRTexture loadTexture(string imgPath,
+                int shouldChroma = 0,
+                uint8_t r = -1,
+                uint8_t g = 0,
+                uint8_t b = 0
+                ); // Pass pixel to chroma key, empty for none
+        TRTexture loadText(
+                string text,
+                int fontSize = 28,
+                uint8_t r = 0,
+                uint8_t g = 0,
+                uint8_t b = 0,
+                string fontStr = "OpenSans-Regular.ttf"
+                ); // TTF_Text
+        TRFont getFont(string fontStr,int fontSize);
         void loadSprite(Sprite *);
         const int SCREEN_HEIGHT;
         const int SCREEN_WIDTH;
@@ -37,6 +57,7 @@ class SDLWrapper
         SDL_Surface *screenSurface;
         SDL_Renderer *renderer;
     private:
-        TTF_Font *font; // Global font
+        map<string, TRFont> fonts;
 };
+
 #endif

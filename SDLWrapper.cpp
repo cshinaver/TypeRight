@@ -20,6 +20,7 @@ SDLWrapper::SDLWrapper(int h, int w) : SCREEN_HEIGHT(h), SCREEN_WIDTH(w)
     // Initialize pointers to null
     window = NULL;
     screenSurface = NULL;
+
 }
 
 SDLWrapper::~SDLWrapper()
@@ -59,6 +60,7 @@ bool SDLWrapper::init()
         return success;
     }
     
+    // Init SDL_image
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) &imgFlags))
     {
@@ -67,7 +69,13 @@ bool SDLWrapper::init()
         return success;
     }
 
-
+    // Init SDL_ttf
+    if (TTF_Init() == -1)
+    {
+        cout << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << endl;
+        success = false;
+        return success;
+    }
 
     //Get window surface
     screenSurface = SDL_GetWindowSurface( window );
@@ -87,6 +95,14 @@ void SDLWrapper::quit()
     // Destroy Surface 
     SDL_FreeSurface(screenSurface);
 
+    // Free fonts
+    for (map<string, TRFont>::iterator i = fonts.begin(); i != fonts.end(); i++)
+    {
+        TTF_Font *font = i->second.fontPtr;
+        TTF_CloseFont(font);
+        i->second.fontPtr = NULL;
+    }
+
     // Free Renderer
     SDL_DestroyRenderer(renderer);
 
@@ -95,6 +111,7 @@ void SDLWrapper::quit()
 
 
     //Quit SDL subsystems
+    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 }
@@ -214,14 +231,24 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
     renderTextureToWindow(_sprite->textureSrc, &src, &dest);
 }
 
-TRTexture SDLWrapper::loadText(string text, SDL_Color textColor)
+TRTexture SDLWrapper::loadText(
+        string text,
+        int fontSize,
+        uint8_t r,
+        uint8_t g,
+        uint8_t b,
+        string fontStr
+        )
 {
     /*
      * Loads text to screen at given position
     */
 
+    SDL_Color textColor = {r, g, b, 0xFF};
+
+    TRFont font = getFont(fontStr, fontSize);
     // Create surface from text
-    SDL_Surface *textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
+    SDL_Surface *textSurface = TTF_RenderText_Solid(font.fontPtr, text.c_str(), textColor);
     if (textSurface == NULL)
     {
         cout << "Unable to render text surface! SDL_ttf Error: " << TTF_GetError() << endl;
@@ -232,4 +259,33 @@ TRTexture SDLWrapper::loadText(string text, SDL_Color textColor)
     TRTexture textTexture = TRTexture(texSrc, textSurface);
 
     return textTexture;
+}
+
+TRFont SDLWrapper::getFont(string fontStr, int fontSize)
+{
+    /*
+     * Returns desired font if exists
+     * Checks if font already exists. If so, uses that font.
+     * Else, loads new font and adds to font map
+    */
+
+    string fontFullname = "fonts/" + fontStr;
+
+    // Check if font in map
+    if (fonts.count(fontStr))
+    {
+        TRFont font = fonts[fontStr];
+        // Check if font size same
+        if (fontSize == font.fontSize)
+        {
+            return font;
+        }
+    }
+
+    // If not in map, make font
+    TRFont newFont;
+    newFont.fontSize = fontSize;
+    newFont.fontPtr = TTF_OpenFont(fontFullname.c_str(), fontSize);
+
+    return newFont;
 }
