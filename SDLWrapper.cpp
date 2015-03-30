@@ -269,7 +269,7 @@ TRFont SDLWrapper::getFont(string fontStr, int fontSize)
      * Else, loads new font and adds to font map
     */
 
-    string fontFullname = "fonts/" + fontStr;
+    string fontFullname = "../fonts/" + fontStr;
 
     // Check if font in map
     if (fonts.count(fontStr))
@@ -286,6 +286,6 @@ TRFont SDLWrapper::getFont(string fontStr, int fontSize)
     TRFont newFont;
     newFont.fontSize = fontSize;
     newFont.fontPtr = TTF_OpenFont(fontFullname.c_str(), fontSize);
-
+    fonts.insert (pair<string, TRFont>(fontStr, newFont));
     return newFont;
 }
