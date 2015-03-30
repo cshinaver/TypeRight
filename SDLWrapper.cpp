@@ -29,26 +29,6 @@ SDLWrapper::~SDLWrapper()
     */
 }
 
-void SDLWrapper::quit()
-{
-    /*
-     * Deallocates all stored things
-    */
-
-    // Destroy Surface 
-    SDL_FreeSurface(screenSurface);
-
-    // Free Renderer
-    SDL_DestroyRenderer(renderer);
-
-    //Destroy window
-    SDL_DestroyWindow( window );
-
-    //Quit SDL subsystems
-    IMG_Quit();
-    SDL_Quit();
-}
-
 bool SDLWrapper::init()
 {
     // init flag
@@ -96,6 +76,27 @@ bool SDLWrapper::init()
     SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
     return success;
+}
+
+void SDLWrapper::quit()
+{
+    /*
+     * Deallocates all stored things
+     */
+
+    // Destroy Surface 
+    SDL_FreeSurface(screenSurface);
+
+    // Free Renderer
+    SDL_DestroyRenderer(renderer);
+
+    //Destroy window
+    SDL_DestroyWindow( window );
+
+
+    //Quit SDL subsystems
+    IMG_Quit();
+    SDL_Quit();
 }
 
 TRTexture SDLWrapper::loadTexture(string imgPath, int shouldChroma, uint8_t r, uint8_t g, uint8_t b)
