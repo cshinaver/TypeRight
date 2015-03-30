@@ -5,9 +5,11 @@
 #ifndef COLLISION_CPP
 #define COLLISION_CPP
 
-#include “collision.h”
+#include "collision.h"
 
-Collision::Collision() {}
+Collision::Collision() {
+	hero = NULL;
+}
 
 Collision::Collision(vector< Sprite * > a)
 {
@@ -17,21 +19,23 @@ Collision::Collision(vector< Sprite * > a)
 	findHero();
 }
 
-void findHero() 
+void Collision::findHero() 
 {
 	// Searches through the sprites, finds the one that is the hero
 	vector< Sprite * >::iterator n = spr.begin();
+	int i=0;
 	while ( hero == NULL ) {
-		if ( (*spr[n]).getIsHero() == true )
-			hero = spr[n];
+		if ( (spr[i])->getIsHero() == true )
+			hero = spr[i];
 		n++;
+		i++;
 	}
 }
 
 int Collision::isDead() {
     
     // Finds out if the character is dead or not
-    for ( int i = 0; i < a.size(); i++ ) {
+    for ( int i = 0; i < spr.size(); i++ ) {
         if ( spr[i] != hero && checkCollision(hero, spr[i]) )
     		return 1;
     }

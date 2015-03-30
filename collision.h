@@ -5,14 +5,16 @@
 #ifndef COLLISION_H
 #define COLLISION_H
 
-#include “Sprite.h”
+#include "Sprite.h"
+#include <vector>
 
-class Collision() {
+class Collision {
 	public:
 		Collision();
 		Collision(vector < Sprite * > sprites);
-		int checkCollision();
+		int checkCollision(Sprite *, Sprite *);
         	int isDead();
+		void findHero();
 	private:
 		vector< Sprite * > spr;
 		Sprite * hero;
