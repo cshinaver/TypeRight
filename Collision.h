@@ -14,7 +14,6 @@ class Collision {
 		Collision(vector < Sprite * > * sprites);
 		int checkCollision(Sprite *, Sprite *);
         	int isDead();
-		void findHero();
 	private:
 		vector< Sprite * > * spr;
 		Sprite * hero;

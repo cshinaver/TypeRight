@@ -6,6 +6,7 @@
 #define COLLISION_CPP
 
 #include "Collision.h"
+#include <stdexcept>
 
 Collision::Collision() {
 	hero = NULL;
@@ -14,28 +15,18 @@ Collision::Collision() {
 Collision::Collision(vector< Sprite * > * a)
 {
 	// Constructor initializing hero sprite as well as vector of sprites
-	hero = NULL;
 	spr = a;
-	findHero();
-}
 
-void Collision::findHero() 
-{
-	// Searches through the sprites, finds the one that is the hero
-	vector< Sprite * >::iterator n = spr->begin();
-	int i=0;
-	while ( hero == NULL ) {
-		if ( ((*spr)[i])->getIsHero() == true )
-			hero = (*spr)[i];
-		n++;
-		i++;
-	}
+	if (!(*spr)[1]->isHero())
+    		throw runtime_error("Hero is not in second vector slot");
+	else
+    		hero = (*spr)[1];
 }
 
 int Collision::isDead() {
     
     // Finds out if the character is dead or not
-    for ( int i = 0; i < (int)(*spr).size(); i++ ) {
+    for ( int i = 2; i < (int)spr->size(); i++ ) {
         if ( (*spr)[i] != hero && checkCollision(hero, (*spr)[i]) )
     		return 1;
     }
