@@ -5,7 +5,7 @@
 #ifndef COLLISION_CPP
 #define COLLISION_CPP
 
-#include "collision.h"
+#include "Collision.h"
 
 Collision::Collision() {
 	hero = NULL;
@@ -35,7 +35,7 @@ void Collision::findHero()
 int Collision::isDead() {
     
     // Finds out if the character is dead or not
-    for ( int i = 0; i < (*spr).size(); i++ ) {
+    for ( int i = 0; i < (int)(*spr).size(); i++ ) {
         if ( (*spr)[i] != hero && checkCollision(hero, (*spr)[i]) )
     		return 1;
     }
