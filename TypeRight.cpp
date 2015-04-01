@@ -9,6 +9,7 @@
 #include "Background.h"
 #include "Soldier.h"
 #include "Skeleton.h"
+#include "Cat.h"
 #include "Snail.h"
 #include "SpriteFactory.h"
 #include "Level1.h"
