@@ -1,6 +1,6 @@
 /*
  * TypeRight.cpp
- * Charles Shinaver + Jared Rodgers
+ * Charles Shinaver + Jared Rodgers + Madelyn Nelson + Elliott Runburg
  * Main game implementation
 */
 
@@ -12,6 +12,8 @@
 #include "Snail.h"
 #include "SpriteFactory.h"
 #include "Level1.h"
+#include "Level2.h"
+#include "Level3.h"
 
 TypeRight::TypeRight()
 {
@@ -39,9 +41,15 @@ void TypeRight::startGame()
 
     // For demo
     SpriteFactory sf;
-    
-    Level1 l1(sw);
-    l1.startLevel();
+  
+    Level3 l3(sw);
+    l3.startLevel();
+
+//    Level2 l2(sw);
+//    l2.startLevel();
+
+//    Level1 l1(sw);
+//    l1.startLevel();
 
     // Quit SDL
     sw.quit();

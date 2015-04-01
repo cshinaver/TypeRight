@@ -64,7 +64,7 @@ target_link_libraries(Background_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${S
 
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Background_lib Bruh_lib Soldier_lib Skeleton_lib Snail_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_lib  Background_lib Bruh_lib Soldier_lib Skeleton_lib Snail_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # SpriteFactory Class
 add_library(SpriteFactory_lib SpriteFactory.cpp)
@@ -77,6 +77,14 @@ target_link_libraries(Level_lib Background_lib sdlwrapper_lib Sprite_lib)
 # Level 1 Class
 add_library(Level1_lib Level1.cpp)
 target_link_libraries(Level1_lib Level_lib)
+
+# Level 2 Class
+add_library(Level2_lib Level2.cpp)
+target_link_libraries(Level2_lib Level_lib)
+
+# Level 3 Class
+add_library(Level3_lib Level3.cpp)
+target_link_libraries(Level3_lib Level_lib)
 
 # main
 add_executable(main main.cpp)
