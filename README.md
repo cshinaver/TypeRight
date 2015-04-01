@@ -91,13 +91,16 @@ executable.
 - [x] Refactor scrolling background into Background class (subclass of sprite) (madelyn)
 - [x] 4 Sprites (Jared)
 
+
 ### Week of March 23rd
-- [ ] Get working motion (Elliot)
-- [ ] Elliot (collision detection)
-- [ ] Text library (charles) 
+
+### Week of March 30th
+- [ ] Get working motion (Jared)
+- [ ] Fix background breaks (Jared)
+- [ ] collision detection (Elliott)
+- [ ] Hero death (Elliott)
+- [ ] Text library (Charles) 
 - [ ] Make background size not hard coded (Charles)
-- [ ] Clean up images folder (madelyn)
-
-
-
-
+- [ ] Clean up images folder (Madelyn)
+- [ ] 3 levels with backgrounds (Madelyn)
+- [ ] Send sprite list to Jared that correspond with backgrounds (Madelyn)
