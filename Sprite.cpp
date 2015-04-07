@@ -82,3 +82,14 @@ void Sprite::setSize(int w, int h)
     setWidth(w);
     setHeight(h);
 }
+
+int Sprite::getDirection()
+{
+    return direction;
+}
+
+void Sprite::setDirection(int d)
+{
+    direction = d;
+}
+

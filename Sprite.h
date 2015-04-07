@@ -55,6 +55,8 @@ class Sprite
         bool isAnimated;
         TRTexture textureSrc;
         vector<SDL_Rect> textureClips;
+        int getDirection();
+        void setDirection(int);
     private:
         string texturePath;
         int posX;
@@ -69,6 +71,7 @@ class Sprite
         double dt;
         Color chromaColor;
         int shouldChroma;
+        int direction;
 
 };
 
