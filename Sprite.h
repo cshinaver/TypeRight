@@ -57,6 +57,8 @@ class Sprite
         vector<SDL_Rect> textureClips;
         int getDirection();
         void setDirection(int);
+        void setIsHero() { hero = 0; };
+        int isHero() { return hero; };
     private:
         string texturePath;
         int posX;
@@ -72,7 +74,7 @@ class Sprite
         Color chromaColor;
         int shouldChroma;
         int direction;
-
+        int hero;
 };
 
 #endif
