@@ -51,14 +51,18 @@ void Level1::generateSprites()
     if (numSprites() != 2)
     {
         Bruh *b = new Bruh();
-        Skeleton *s = new Skeleton();
+        //Skeleton *s = new Skeleton();
+        Cat *c = new Cat();
 
+        c->setPos(SCREEN_WIDTH * .175, SCREEN_HEIGHT * .65);
         b->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
-        s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
+        //s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
+        c->setSize(160, 120);
         b->setSize(100, 100);
-        s->setSize(100, 100);
+        //s->setSize(100, 100);
+        addSprite(c);
         addSprite(b);
-        addSprite(s);
+        //addSprite(s);
     }
 
 }

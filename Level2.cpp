@@ -16,7 +16,7 @@ Level2::Level2(SDLWrapper &sw) : Level(sw)
     /* ####################SETUP BACKGROUND ################ */ 
     Background *background = new Background();
     background->setTexturePath("Combinedbackground5-4.png"); // scary city night
-    background->setDb(.5); // Background speed
+    background->setDb(.4); // Background speed
 
     setBackground(background);
 }
@@ -54,8 +54,8 @@ void Level2::generateSprites()
         Cat *c = new Cat();
         Skeleton *s = new Skeleton();
 
-        b->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
-        s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
+        b->setPos(SCREEN_WIDTH * .175, SCREEN_HEIGHT * .75);
+        s->setPos(SCREEN_WIDTH * .325, SCREEN_HEIGHT * .75);
         c->setPos(SCREEN_WIDTH * .7, SCREEN_HEIGHT * .6);
         b->setSize(100, 100);
         s->setSize(100, 100);
