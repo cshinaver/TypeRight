@@ -48,16 +48,20 @@ void Level1::generateSprites()
      * Handles sprite generation
     */
 
-    if (numSprites() != 2)
+    if (numSprites() != 3)
     {
-        Bruh *b = new Bruh();
+        Bruh *b0 = new Bruh();
+        Bruh *b1 = new Bruh();
         Skeleton *s = new Skeleton();
 
-        b->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
+        b0->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
+        b1->setPos(SCREEN_WIDTH * .3, SCREEN_HEIGHT * .3);
         s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
-        b->setSize(100, 100);
+        b0->setSize(100, 100);
+        b1->setSize(100, 100);
         s->setSize(100, 100);
-        addSprite(b);
+        addSprite(b0);
+        addSprite(b1);
         addSprite(s);
     }
 
