@@ -2,7 +2,7 @@
 TypeRight CSE 20212 Final Project
 
 ## How to setup
-In order to build the files, you will need to install both SDL2, sdl2_image, sdl2_ttf and CMake on
+In order to build the files, you will need to install SDL2, sdl2_image, sdl2_ttf and CMake on
 your local machine. The engineering machines alreaedy have them both.
 
 ### Mac OS X
