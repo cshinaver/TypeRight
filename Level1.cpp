@@ -48,6 +48,17 @@ void Level1::generateSprites()
      * Handles sprite generation
     */
 
+    static int count = 0;
+
+    if (count == 500)
+    {
+        endLevel();
+    }
+    else
+    {
+        count++;
+    }
+
     if (numSprites() != 2)
     {
         Bruh *b = new Bruh();
