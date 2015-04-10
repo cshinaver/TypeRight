@@ -51,6 +51,8 @@ class Sprite
         void setChromaColor(uint8_t r, uint8_t g, uint8_t b);
         Color getChromaColor() { return chromaColor; };
         int getShouldChroma() { return shouldChroma; };
+        string getText() { return text; };
+        void setText(string _text) { text = _text; };
         void destroySprite();
         bool isAnimated;
         TRTexture textureSrc;
@@ -61,6 +63,7 @@ class Sprite
         int isHero() { return hero; };
     private:
         string texturePath;
+        string text;
         int posX;
         int posY;
         double velX;

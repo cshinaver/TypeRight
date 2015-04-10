@@ -20,6 +20,7 @@ SDLWrapper::SDLWrapper(int h, int w) : SCREEN_HEIGHT(h), SCREEN_WIDTH(w)
     // Initialize pointers to null
     window = NULL;
     screenSurface = NULL;
+
 }
 
 SDLWrapper::~SDLWrapper()
@@ -27,26 +28,6 @@ SDLWrapper::~SDLWrapper()
     /*
      * Deallocates all stored variables
     */
-}
-
-void SDLWrapper::quit()
-{
-    /*
-     * Deallocates all stored things
-    */
-
-    // Destroy Surface 
-    SDL_FreeSurface(screenSurface);
-
-    // Free Renderer
-    SDL_DestroyRenderer(renderer);
-
-    //Destroy window
-    SDL_DestroyWindow( window );
-
-    //Quit SDL subsystems
-    IMG_Quit();
-    SDL_Quit();
 }
 
 bool SDLWrapper::init()
@@ -79,6 +60,7 @@ bool SDLWrapper::init()
         return success;
     }
     
+    // Init SDL_image
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) &imgFlags))
     {
@@ -87,7 +69,13 @@ bool SDLWrapper::init()
         return success;
     }
 
-
+    // Init SDL_ttf
+    if (TTF_Init() == -1)
+    {
+        cout << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << endl;
+        success = false;
+        return success;
+    }
 
     //Get window surface
     screenSurface = SDL_GetWindowSurface( window );
@@ -96,6 +84,36 @@ bool SDLWrapper::init()
     SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
     return success;
+}
+
+void SDLWrapper::quit()
+{
+    /*
+     * Deallocates all stored things
+     */
+
+    // Destroy Surface 
+    SDL_FreeSurface(screenSurface);
+
+    // Free fonts
+    for (map<string, TRFont>::iterator i = fonts.begin(); i != fonts.end(); i++)
+    {
+        TTF_Font *font = i->second.fontPtr;
+        TTF_CloseFont(font);
+        i->second.fontPtr = NULL;
+    }
+
+    // Free Renderer
+    SDL_DestroyRenderer(renderer);
+
+    //Destroy window
+    SDL_DestroyWindow( window );
+
+
+    //Quit SDL subsystems
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
 }
 
 TRTexture SDLWrapper::loadTexture(string imgPath, int shouldChroma, uint8_t r, uint8_t g, uint8_t b)
@@ -211,5 +229,93 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
     dest.h = _sprite->getHeight();
 
     renderTextureToWindow(_sprite->textureSrc, &src, &dest);
+
+    // Load sprite text
+    // dh and dx between text and sprite
+    int dh = 30;
+    int dx = 15;
+    if (_sprite->getText() != "")
+    {
+        displayText(_sprite->getText(), _sprite->getPosX() + dx, _sprite->getPosY() - dh);
+    }
+}
+
+TRTexture SDLWrapper::loadTextIntoTexture(
+        string text,
+        int fontSize,
+        uint8_t r,
+        uint8_t g,
+        uint8_t b,
+        string fontStr
+        )
+{
+    /*
+     * Loads text to screen at given position
+    */
+
+    SDL_Color textColor = {r, g, b, 0xFF};
+
+    TRFont font = getFont(fontStr, fontSize);
+    // Create surface from text
+    SDL_Surface *textSurface = TTF_RenderText_Solid(font.fontPtr, text.c_str(), textColor);
+    if (textSurface == NULL)
+    {
+        cout << "Unable to render text surface! SDL_ttf Error: " << TTF_GetError() << endl;
+    }
+
+    // Create texture from surface
+    SDL_Texture *texSrc = SDL_CreateTextureFromSurface(renderer, textSurface);
+    TRTexture textTexture = TRTexture(texSrc, textSurface);
+
+    return textTexture;
+}
+
+TRFont SDLWrapper::getFont(string fontStr, int fontSize)
+{
+    /*
+     * Returns desired font if exists
+     * Checks if font already exists. If so, uses that font.
+     * Else, loads new font and adds to font map
+    */
+
+    string fontFullname = "../fonts/" + fontStr;
+
+    // Check if font in map
+    if (fonts.count(fontStr))
+    {
+        TRFont font = fonts[fontStr];
+        // Check if font size same
+        if (fontSize == font.fontSize)
+        {
+            return font;
+        }
+    }
+
+    // If not in map, make font
+    TRFont newFont;
+    newFont.fontSize = fontSize;
+    newFont.fontPtr = TTF_OpenFont(fontFullname.c_str(), fontSize);
+    fonts.insert (pair<string, TRFont>(fontStr, newFont));
+    return newFont;
+}
+
+void SDLWrapper::displayText(string text, int x, int y, int fontSize)
+{
+    /*
+     * Displays text at given position
+    */
+
+    // Get text texture
+    TRTexture textTex = loadTextIntoTexture(text, fontSize);
+
+    // Set dimensions for display
+    SDL_Rect dest;
+    dest.x = x;
+    dest.y = y;
+    dest.w = textTex.getWidth();
+    dest.h = textTex.getHeight();
+
+    // Render to screen
+    renderTextureToWindow(textTex, NULL, &dest);
 }
 

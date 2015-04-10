@@ -43,7 +43,7 @@ void Level::startLevel()
         sw.clearWindow();
 
         loadAndMoveSprites();
-
+        
         // Update screen
         sw.updateWindow();
     }

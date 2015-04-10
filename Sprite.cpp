@@ -17,6 +17,7 @@ Sprite::Sprite()
     shouldChroma = 0;
     setWidth(0);
     setHeight(0);
+    text = "";
 }
 
 Sprite::~Sprite()

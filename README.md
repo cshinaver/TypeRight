@@ -2,17 +2,18 @@
 TypeRight CSE 20212 Final Project
 
 ## How to setup
-In order to build the files, you will need to install both SDL2, sdl_image and CMake on
+In order to build the files, you will need to install SDL2, sdl2_image, sdl2_ttf and CMake on
 your local machine. The engineering machines alreaedy have them both.
 
 ### Mac OS X
 Install [homebrew](http://coolestguidesontheplanet.com/installing-homebrew-os-x-yosemite-10-10-package-manager-unix-apps/).
-Install SDL2, cmake, and sdl2_image
+Install required libraries
 
 ```
 brew install pkgconfig
 brew install sdl2
 brew install sdl2_image
+brew install sdl2_ttf
 brew install cmake
 ```
 To build the files, change into the build directory and run:
@@ -31,10 +32,13 @@ to ignore the build directory completely, so don't worry about adding binaries.
 `make clean` will clean up the binaries. This shouldn't be necessary unless you
 are changing header files. 
 
+
+
 ### Cygwin
-To install sdl2, and sdl_image, you must compile them from source. Download
+To install the required libraries, you must compile them from source. Download
 [sdl2](https://www.libsdl.org/release/SDL2-2.0.3.tar.gz) and
-[sdl_image](https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz).
+[sdl2_image](https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz).
+[sdl2_ttf](http://www.libsdl.org/projects/SDL_ttf/)
 Extract them, cd into their respective directories, and run 
 ```
 ./configure
@@ -53,6 +57,8 @@ and run `$ cmake ..`. This will generate a windows specific Makefile. Run `$
 make` to make the executable. A `main.exe` and `main_unittests.exe` should be
 created. `main.exe` can be opened like any other executable (using `./main.exe`
 notation).
+
+
 
 ## Adding new executables
 To add a new executable, open the CMakeLists.txt file in the root directory.
@@ -99,7 +105,7 @@ executable.
 - [ ] Fix background breaks (Jared)
 - [ ] collision detection (Elliott)
 - [ ] Hero death (Elliott)
-- [ ] Text library (Charles) 
+- [x] Text library (Charles) 
 - [ ] Make background size not hard coded (Charles)
 - [ ] Clean up images folder (Madelyn)
 - [ ] 3 levels with backgrounds (Madelyn)

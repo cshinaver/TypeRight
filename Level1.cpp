@@ -53,6 +53,8 @@ void Level1::generateSprites()
         Bruh *b0 = new Bruh();
         Bruh *b1 = new Bruh();
         Skeleton *s = new Skeleton();
+        b->setText("Hello");
+        s->setText("Hello");
 
         b0->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
         b1->setPos(SCREEN_WIDTH * .3, SCREEN_HEIGHT * .3);
