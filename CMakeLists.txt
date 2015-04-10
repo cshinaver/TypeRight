@@ -83,9 +83,13 @@ target_link_libraries(Level_lib Background_lib sdlwrapper_lib Sprite_lib)
 add_library(Level1_lib Level1.cpp)
 target_link_libraries(Level1_lib Level_lib)
 
+# Collision Class
+add_library(Collision_lib collision.cpp)
+target_link_libraries(Collision_lib Sprite_lib)
+
 # main
 add_executable(main main.cpp)
-target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} sdlwrapper_lib TypeRight_lib)
+target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} sdlwrapper_lib TypeRight_lib Collision_lib)
 
 ###########
 # Testing #

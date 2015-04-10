@@ -57,6 +57,8 @@ class Sprite
         bool isAnimated;
         TRTexture textureSrc;
         vector<SDL_Rect> textureClips;
+	void setIsHero() { hero = 0; };
+	int isHero() { return hero; };
     private:
         string texturePath;
         string text;
@@ -72,6 +74,7 @@ class Sprite
         double dt;
         Color chromaColor;
         int shouldChroma;
+	int hero;
 };
 
 #endif
