@@ -41,15 +41,6 @@ class SDLWrapper
                 uint8_t g = 0,
                 uint8_t b = 0
                 ); // Pass pixel to chroma key, empty for none
-        TRTexture loadText(
-                string text,
-                int fontSize = 28,
-                uint8_t r = 0,
-                uint8_t g = 0,
-                uint8_t b = 0,
-                string fontStr = "OpenSans-Regular.ttf"
-                ); // TTF_Text
-        TRFont getFont(string fontStr,int fontSize);
         void loadSprite(Sprite *);
         const int SCREEN_HEIGHT;
         const int SCREEN_WIDTH;
@@ -57,6 +48,15 @@ class SDLWrapper
         SDL_Surface *screenSurface;
         SDL_Renderer *renderer;
     private:
+        TRFont getFont(string fontStr,int fontSize);
+        TRTexture loadTextIntoTexture(
+                string text,
+                int fontSize,
+                uint8_t r = 0,
+                uint8_t g = 0,
+                uint8_t b = 0,
+                string fontStr = "OpenSans-Regular.ttf"
+                ); // TTF_Text
         map<string, TRFont> fonts;
 };
 

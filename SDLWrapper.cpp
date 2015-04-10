@@ -231,7 +231,7 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
     renderTextureToWindow(_sprite->textureSrc, &src, &dest);
 }
 
-TRTexture SDLWrapper::loadText(
+TRTexture SDLWrapper::loadTextIntoTexture(
         string text,
         int fontSize,
         uint8_t r,
