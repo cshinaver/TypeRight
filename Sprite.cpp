@@ -17,6 +17,7 @@ Sprite::Sprite()
     shouldChroma = 0;
     setWidth(0);
     setHeight(0);
+    text = "";
 }
 
 Sprite::~Sprite()
@@ -82,3 +83,14 @@ void Sprite::setSize(int w, int h)
     setWidth(w);
     setHeight(h);
 }
+
+int Sprite::getDirection()
+{
+    return direction;
+}
+
+void Sprite::setDirection(int d)
+{
+    direction = d;
+}
+

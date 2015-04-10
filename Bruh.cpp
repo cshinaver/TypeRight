@@ -9,6 +9,7 @@ Bruh::Bruh() : Sprite()
 
     setTexturePath("pirate.png");
     setChromaColor(0x20, 0xB5, 0x62);
+    setDirection(0);
 }
 
 void Bruh::setTexture(TRTexture tex)
@@ -61,11 +62,22 @@ void Bruh::move()
     tFrames++;
     setTotalFrames(tFrames);
 
-
     if (tFrames / speedConst >= (int)textureClips.size())
     {
         tFrames = 0;
         setTotalFrames(tFrames);
     }
+
+    // 0 = right; 1 = left
+    if (getPosX() < 0 && getDirection() == 1)
+        setDirection(0);
+    else if (getPosX() > 640 && getDirection() == 0)
+        setDirection(1);
+
+    if (getDirection() == 0)
+        setPos(getPosX() + 1, getPosY());
+    else
+        setPos(getPosX() - 1, getPosY());
+
 
 }
