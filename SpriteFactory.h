@@ -9,6 +9,7 @@
 
 #include "Sprite.h"
 #include "Bruh.h"
+#include "Cat.h"
 #include "Skeleton.h"
 #include "Snail.h"
 #include "Soldier.h"

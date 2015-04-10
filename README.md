@@ -108,5 +108,5 @@ executable.
 - [x] Text library (Charles) 
 - [ ] Make background size not hard coded (Charles)
 - [ ] Clean up images folder (Madelyn)
-- [ ] 3 levels with backgrounds (Madelyn)
+- [x] 3 levels with backgrounds (Madelyn)
 - [ ] Send sprite list to Jared that correspond with backgrounds (Madelyn)
