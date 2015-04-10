@@ -229,6 +229,15 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
     dest.h = _sprite->getHeight();
 
     renderTextureToWindow(_sprite->textureSrc, &src, &dest);
+
+    // Load sprite text
+    // dh and dx between text and sprite
+    int dh = 30;
+    int dx = 15;
+    if (_sprite->getText() != "")
+    {
+        displayText(_sprite->getText(), _sprite->getPosX() + dx, _sprite->getPosY() - dh);
+    }
 }
 
 TRTexture SDLWrapper::loadTextIntoTexture(
