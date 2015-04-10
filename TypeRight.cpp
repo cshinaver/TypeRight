@@ -43,16 +43,14 @@ void TypeRight::startGame()
     // For demo
     SpriteFactory sf;
 
-
+    // instanitate all levels
     Level1 l1(sw); // easiest, country field background
-    l1.startLevel();
-
     Level2 l2(sw); // middle, scary night city
-    l2.startLevel();
-
     Level3 l3(sw); // hardest, Notre Dame
+    
+    l1.startLevel();
+    l2.startLevel();
     l3.startLevel();    
-
 
     // Quit SDL
     sw.quit();

@@ -40,9 +40,6 @@ void Cat::setTexture(TRTexture tex)
     }
     setTextureClips(clips);
 // cat needs width:height ratio 4:3
-
-//    setWidth(200);
-//    setHeight(150);
 }
 
 void Cat::move()
