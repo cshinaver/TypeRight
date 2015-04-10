@@ -289,3 +289,24 @@ TRFont SDLWrapper::getFont(string fontStr, int fontSize)
     fonts.insert (pair<string, TRFont>(fontStr, newFont));
     return newFont;
 }
+
+void SDLWrapper::displayText(string text, int x, int y, int fontSize)
+{
+    /*
+     * Displays text at given position
+    */
+
+    // Get text texture
+    TRTexture textTex = loadTextIntoTexture(text, fontSize);
+
+    // Set dimensions for display
+    SDL_Rect dest;
+    dest.x = x;
+    dest.y = y;
+    dest.w = textTex.getWidth();
+    dest.h = textTex.getHeight();
+
+    // Render to screen
+    renderTextureToWindow(textTex, NULL, &dest);
+}
+

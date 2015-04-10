@@ -34,6 +34,7 @@ class SDLWrapper
         void updateWindow(); // Updates window surface
         void clearWindow(); // Clears window
         void renderTextureToWindow(TRTexture, SDL_Rect* = NULL, SDL_Rect* = NULL); // Renders texture to window
+        void displayText(string text, int x, int y, int fontSize = 28);
         SDL_Surface * loadImg(string);
         TRTexture loadTexture(string imgPath,
                 int shouldChroma = 0,
