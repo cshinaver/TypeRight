@@ -67,7 +67,7 @@ void Level1::generateSprites()
 
         b0->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
         b1->setPos(SCREEN_WIDTH * .3, SCREEN_HEIGHT * .3);
-        s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
+        s->setPos(SCREEN_WIDTH * 1./20, SCREEN_HEIGHT * 5./8);
         b0->setSize(100, 100);
         b1->setSize(100, 100);
         s->setSize(100, 100);
