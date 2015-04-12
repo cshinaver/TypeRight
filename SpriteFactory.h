@@ -27,9 +27,12 @@ enum SpriteType
 class SpriteFactory
 {
     public:
-        SpriteFactory(int generationFrequency, vector<SpriteType>allowedSprites); // 0 to 100
+        SpriteFactory(int _generationFrequency, vector<SpriteType>_allowedSprites); // 0 to 100
         Sprite * getSprite(int typeDesired);
         Sprite * generateSprites();
+    private:
+        const vector<SpriteType> allowedSprites;
+        const int generationFrequency;
 };
 
 #endif
