@@ -40,9 +40,6 @@ void TypeRight::startGame()
     //# Main Game Loop #
     //##################
 
-    // For demo
-    SpriteFactory sf;
-
     // instanitate all levels
     Level1 l1(sw); // easiest, country field background
     Level2 l2(sw); // middle, scary night city
