@@ -60,7 +60,7 @@ int Level::startLevel(int currentLevel)
     }
     else
     {
-        return currentLevel++;
+        return ++currentLevel;
     }
 }
 
@@ -70,10 +70,10 @@ void Level::levelFinished()
      * Run when level ended
     */
     // Free all textures
-    for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
+    for (int i = 0; i < (int)levelSprites.size(); i++)
     {
-        (*i)->destroySprite();
-        delete (*i);
+        levelSprites[i]->destroySprite();
+        delete levelSprites[i];
     }
 
 }
