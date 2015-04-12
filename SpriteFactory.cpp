@@ -40,7 +40,7 @@ Sprite * SpriteFactory::generateSprites()
     SpriteType chosenSprite;
 
     // Get random sprite
-    if (!(count % generationFrequency))
+    if (!(count % generationFrequency) && count != 0)
     {
         chosen = rand() % allowedSprites.size();
         chosenSprite = allowedSprites[chosen];
@@ -64,6 +64,11 @@ Sprite * SpriteFactory::generateSprites()
                 s = new Snail;
                 break;
         }
+        count = 0;
+    }
+    else
+    {
+        count++;
     }
 
     return s;
