@@ -57,9 +57,15 @@ void Level1::generateSprites()
      * Handles sprite generation
     */
 
-    Sprite *s;
+    Sprite *s = NULL;
     SpriteFactory *sf = getFactory();
-    s = sf->generateSprites();
+    //s = sf->generateSprites();
+    if (numSprites() != 2)
+    {
+        s = sf->getSprite(8);
+        sf->setDefault(s);
+        s->setText("hello");
+    }
 
     // Check if new sprite added
     if (s != NULL)
