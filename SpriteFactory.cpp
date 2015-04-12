@@ -6,7 +6,7 @@
 
 #include "SpriteFactory.h"
 
-SpriteFactory::SpriteFactory()
+SpriteFactory::SpriteFactory(int generationFrequency, vector<enum SpriteType>allowedSprites)
 {
     /*
      * Default constructor
@@ -21,4 +21,12 @@ Sprite * SpriteFactory::getSprite(int typeDesired)
     
     Sprite *s = new Bruh;
     return s;
+}
+
+Sprite * SpriteFactory::generateSprites()
+{
+    // Counts frames and generates based on frame number
+    static int count;
+
+    
 }
