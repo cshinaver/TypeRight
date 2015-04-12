@@ -27,6 +27,7 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     SpriteFactory *_sf = new SpriteFactory(100, vs, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     setFactory(_sf);
+    
 }
 
 void Level1::handleKeyboardEvents()

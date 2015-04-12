@@ -35,12 +35,12 @@ class SpriteFactory
                 ); // 0 to 100
         Sprite * getSprite(int typeDesired);
         Sprite * generateSprites();
+        void setDefault(Sprite * _s);
     private:
         const vector<SpriteType> allowedSprites;
         const int generationFrequency;
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;
-        void setDefault(Sprite * _s);
 };
 
 #endif

@@ -36,6 +36,17 @@ int Level::startLevel(int currentLevel)
         addSprite(levelBackground);
     }
 
+    // Add hero
+    Sprite *s = new Bruh;
+
+    // Set defaults for hero
+    sf->setDefault(s);
+
+    // Set position of hero
+    s->setPos(SCREEN_WIDTH * .0125, s->getPosY());
+
+    addSprite(s);
+
     while (!levelEnded)
     {
         handleKeyboardEvents();
