@@ -16,15 +16,6 @@ TEST(SDLTest, IsWindowCreated) {
     ASSERT_TRUE(sw.init() == true);
 }
 
-// Test if bmp image loaded
-TEST(SDLTest, IsBmpImageLoaded) {
-    SDLWrapper sw;
-    sw.init();
-    SDL_Surface *img = sw.loadImg("hello_world.bmp");
-    ASSERT_TRUE( img != NULL);
-    SDL_FreeSurface(img);
-}
-
 // Test exception if image not loaded
 TEST(SDLTest, IsBmpImageNotLoaded) {
     SDLWrapper sw;
@@ -39,15 +30,6 @@ TEST(SDLTest, IsBmpImageNotLoaded) {
         imgProperlyFailed = 1;
     }
     ASSERT_TRUE(imgProperlyFailed == 1);
-}
-
-// Load Texture Test
-TEST(SDLTest, IsTextureLoaded) {
-    SDLWrapper sw;
-    sw.init();
-    TRTexture img = sw.loadTexture("hello_world.bmp");
-    ASSERT_TRUE( img.isTextureLoaded() == 1);
-    img.freeTexture();
 }
 
 // Test texture not loaded returns zero when not loaded
@@ -72,8 +54,14 @@ TEST(SpriteTest, LoadSpriteLoadsSpriteFromSpriteFactory)
 {
     SDLWrapper sw;
     sw.init();
-    SpriteFactory sf;
-    Sprite *s = sf.getSprite(0);
+    
+    vector<SpriteType> vs;
+    vs.push_back(TCat);
+    SpriteFactory sf(1, vs);
+    Sprite *s;
+    s = NULL;
+    s = sf.generateSprites();
+    ASSERT_TRUE(s != NULL);
     sw.loadSprite(s);
     ASSERT_TRUE(s->getIsTextureLoaded() == 1);
 }

@@ -26,7 +26,8 @@ Sprite * SpriteFactory::getSprite(int typeDesired)
 Sprite * SpriteFactory::generateSprites()
 {
     // Counts frames and generates based on frame number
+    Sprite *s = NULL;
     static int count;
 
-    
+    return s;
 }
