@@ -49,8 +49,7 @@ TEST(SpriteTest, IsSpriteLoaded) {
     ASSERT_TRUE(ans == 1);
 }
 
-// Check that loadSprite can load a sprite from the spriteFactory
-TEST(SpriteTest, LoadSpriteLoadsSpriteFromSpriteFactory)
+TEST(SpriteTest, SpriteGeneratedFromFactory)
 {
     SDLWrapper sw;
     sw.init();
@@ -66,3 +65,32 @@ TEST(SpriteTest, LoadSpriteLoadsSpriteFromSpriteFactory)
     ASSERT_TRUE(s->getIsTextureLoaded() == 1);
 }
 
+// Sprite only generated every 40 frames
+TEST(SpriteTest, SpriteGeneratedOnCertainFrequency)
+{
+    SDLWrapper sw;
+    sw.init();
+    int frame = 0;
+    int generateFrame = 40;
+    
+    vector<SpriteType> vs;
+    vs.push_back(TCat);
+    SpriteFactory sf(generateFrame, vs);
+    Sprite *s;
+    s = NULL;
+
+
+    while (frame != generateFrame)
+    {
+        s = sf.generateSprites(); 
+        ASSERT_TRUE(s == NULL);
+        frame++;
+    }
+
+    // Once 40, sprite should be generated
+    s = sf.generateSprites(); 
+    ASSERT_TRUE(s != NULL);
+
+    sw.loadSprite(s);
+    ASSERT_TRUE(s->getIsTextureLoaded() == 1);
+}
