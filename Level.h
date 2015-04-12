@@ -8,6 +8,7 @@
 #define LEVEL_H
 #include <SDL2/SDL.h>
 #include "SDLWrapper.h"
+#include "SpriteFactory.h"
 #include "Background.h"
 #include "Sprite.h"
 
@@ -20,6 +21,8 @@ class Level
         void endLevel();
         void endGame();
         void addSprite(Sprite *);
+        SpriteFactory * getFactory();
+        void setFactory(SpriteFactory *_sf);
         int numSprites();
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;
@@ -34,6 +37,7 @@ class Level
         int gameEnded;
         int nextLevel;
         SDLWrapper &sw;
+        SpriteFactory *sf;
 };
 
 #endif

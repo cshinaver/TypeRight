@@ -16,6 +16,7 @@ Level::Level(SDLWrapper &_sw) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_s
     levelEnded = 0;
     levelBackground = NULL;
     gameEnded = 0;
+
 }
 
 int Level::startLevel(int currentLevel)
@@ -115,4 +116,14 @@ void Level::setBackground(Background *_back)
 int Level::numSprites()
 {
     return (levelSprites.size() - 1);
+}
+
+SpriteFactory * Level::getFactory()
+{
+    return sf;
+}
+
+void Level::setFactory(SpriteFactory *_sf)
+{
+    sf = _sf;
 }

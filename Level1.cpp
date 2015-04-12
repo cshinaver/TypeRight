@@ -19,6 +19,14 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     background->setDb(.3); // Background speed
 
     setBackground(background);
+
+    /* ##################SET ALLOWED SPRITES############### */
+    vector<SpriteType> vs;
+    vs.push_back(TSkeleton);
+    vs.push_back(TCat);
+    SpriteFactory *_sf = new SpriteFactory(100, vs);
+
+    setFactory(_sf);
 }
 
 void Level1::handleKeyboardEvents()
