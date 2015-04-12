@@ -60,6 +60,7 @@ TEST(SpriteTest, SpriteGeneratedFromFactory)
     Sprite *s;
     s = NULL;
     s = sf.generateSprites();
+    s = sf.generateSprites();
     ASSERT_TRUE(s != NULL);
     sw.loadSprite(s);
     ASSERT_TRUE(s->getIsTextureLoaded() == 1);
