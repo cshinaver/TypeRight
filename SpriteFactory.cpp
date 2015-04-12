@@ -10,8 +10,14 @@
 
 SpriteFactory::SpriteFactory(
         int _generationFrequency,
-        vector<enum SpriteType>_allowedSprites
-        ) : allowedSprites(_allowedSprites), generationFrequency(_generationFrequency)
+        vector<enum SpriteType>_allowedSprites,
+        int _SCREEN_WIDTH,
+        int _SCREEN_HEIGHT
+        ) : 
+    allowedSprites(_allowedSprites),
+    generationFrequency(_generationFrequency),
+    SCREEN_WIDTH(_SCREEN_WIDTH),
+    SCREEN_HEIGHT(_SCREEN_HEIGHT)
 {
     /*
      * Default constructor
@@ -64,6 +70,10 @@ Sprite * SpriteFactory::generateSprites()
                 s = new Snail;
                 break;
         }
+        
+
+        // Set default sprite settings
+        setDefault(s);
         count = 0;
     }
     else
@@ -72,4 +82,15 @@ Sprite * SpriteFactory::generateSprites()
     }
 
     return s;
+}
+
+void SpriteFactory::setDefault(Sprite * _s)
+{
+    /*
+     * Sets sprite default characteristsics
+    */
+
+    _s->setPos(SCREEN_WIDTH * 17./20, SCREEN_HEIGHT * .625);
+    _s->setSize(100, 100);
+
 }

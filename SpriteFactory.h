@@ -27,12 +27,20 @@ enum SpriteType
 class SpriteFactory
 {
     public:
-        SpriteFactory(int _generationFrequency, vector<SpriteType>_allowedSprites); // 0 to 100
+        SpriteFactory(
+                int _generationFrequency,
+                vector<SpriteType>_allowedSprites,
+                int _SCREEN_WIDTH,
+                int _SCREEN_HEIGHT
+                ); // 0 to 100
         Sprite * getSprite(int typeDesired);
         Sprite * generateSprites();
     private:
         const vector<SpriteType> allowedSprites;
         const int generationFrequency;
+        const int SCREEN_WIDTH;
+        const int SCREEN_HEIGHT;
+        void setDefault(Sprite * _s);
 };
 
 #endif
