@@ -37,7 +37,7 @@ void Level1::handleKeyboardEvents()
         // User quits
         if (e.type == SDL_QUIT)
         {
-            endLevel();
+            endGame();
         }
     }
 }
@@ -81,10 +81,10 @@ void Level1::generateSprites()
 
 }
 
-void Level1::startLevel()
+int Level1::startLevel()
 {
     /*
      * Starts level
      */
-    Level::startLevel();
+    return Level::startLevel(1);
 }

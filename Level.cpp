@@ -15,12 +15,14 @@ Level::Level(SDLWrapper &_sw) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_s
 
     levelEnded = 0;
     levelBackground = NULL;
+    gameEnded = 0;
 }
 
-void Level::startLevel()
+int Level::startLevel(int currentLevel)
 {
     /*
      * Main level loop
+     * Returns whether or not game should end
     */
 
     // Load background into vector first
@@ -49,6 +51,16 @@ void Level::startLevel()
     }
 
     levelFinished();
+
+    // Return game ended status
+    if (gameEnded)
+    {
+        return 0;
+    }
+    else
+    {
+        return currentLevel++;
+    }
 }
 
 void Level::levelFinished()
@@ -62,11 +74,18 @@ void Level::levelFinished()
         (*i)->destroySprite();
         delete (*i);
     }
+
 }
 
 void Level::endLevel()
 {
     levelEnded = 1;
+}
+
+void Level::endGame()
+{
+    levelEnded = 1;
+    gameEnded = 1;
 }
 
 void Level::addSprite(Sprite *s)

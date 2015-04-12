@@ -33,8 +33,8 @@ void TypeRight::startGame()
      * Starts game
     */
 
-    // Set quit status
-    quit = false;
+    // Set next level
+    int nextLevel = 1;
 
     //##################
     //# Main Game Loop #
@@ -48,9 +48,23 @@ void TypeRight::startGame()
     Level2 l2(sw); // middle, scary night city
     Level3 l3(sw); // hardest, Notre Dame
     
-    l1.startLevel();
-    l2.startLevel();
-    l3.startLevel();    
+
+    while (nextLevel)
+    {
+        switch (nextLevel)
+        {
+            case 1:
+                nextLevel = l1.startLevel();
+                break;
+            case 2:
+                nextLevel = l2.startLevel();
+                break;
+            case 3:
+                nextLevel = l3.startLevel();    
+                break;
+        }
+
+    }
 
     // Quit SDL
     sw.quit();

@@ -15,9 +15,10 @@ class Level
 {
     public:
         Level(SDLWrapper &_sw);
-        void startLevel();
+        int startLevel(int currentLevel);
         void setBackground(Background *_back);
         void endLevel();
+        void endGame();
         void addSprite(Sprite *);
         int numSprites();
         const int SCREEN_WIDTH;
@@ -30,6 +31,8 @@ class Level
         virtual void handleKeyboardEvents() = 0;
         virtual void generateSprites() = 0;
         int levelEnded;
+        int gameEnded;
+        int nextLevel;
         SDLWrapper &sw;
 };
 

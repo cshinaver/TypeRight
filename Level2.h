@@ -12,7 +12,7 @@ class Level2 : public Level
 {
     public:
         Level2(SDLWrapper &sw);
-        void startLevel();
+        int startLevel();
     private:
         void handleKeyboardEvents();
         void generateSprites();
