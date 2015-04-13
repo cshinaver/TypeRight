@@ -170,7 +170,7 @@ void Level::handleKeyboardEvents()
                 endGame();
                 break;
             case SDL_TEXTINPUT:
-                pressedChars.push_back(e.text.text[0]);
+                pressedChars += e.text.text[0];
         }
     }
 }
@@ -181,8 +181,8 @@ void Level::displayInput()
      * Displays the currently entered text
     */
 
-    // Convert entered chars into string
-    string s = "hello";
-
-    sw.displayText(s, 20, 20);
+    if ((int)pressedChars.size())
+    {
+        sw.displayText(pressedChars, 20, 20);
+    }
 }

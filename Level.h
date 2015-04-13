@@ -39,7 +39,7 @@ class Level
         int nextLevel;
         SDLWrapper &sw;
         SpriteFactory *sf;
-        vector<char> pressedChars;
+        string pressedChars;
 };
 
 #endif
