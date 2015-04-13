@@ -7,16 +7,40 @@
 #ifndef SPRITEFACTORY_H
 #define SPRITEFACTORY_H
 
+#include <vector>
 #include "Sprite.h"
+#include "Cat.h"
 #include "Bruh.h"
 #include "Skeleton.h"
 #include "Snail.h"
 #include "Soldier.h"
+
+enum SpriteType
+{
+    TBruh,
+    TCat,
+    TSkeleton,
+    TSnail,
+    TSoldier,
+};
+
 class SpriteFactory
 {
     public:
-        SpriteFactory();
+        SpriteFactory(
+                int _generationFrequency,
+                vector<SpriteType>_allowedSprites,
+                int _SCREEN_WIDTH,
+                int _SCREEN_HEIGHT
+                ); // 0 to 100
         Sprite * getSprite(int typeDesired);
+        Sprite * generateSprites();
+        void setDefault(Sprite * _s);
+    private:
+        const vector<SpriteType> allowedSprites;
+        const int generationFrequency;
+        const int SCREEN_WIDTH;
+        const int SCREEN_HEIGHT;
 };
 
 #endif

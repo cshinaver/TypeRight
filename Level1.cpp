@@ -19,27 +19,16 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     background->setDb(.3); // Background speed
 
     setBackground(background);
-}
 
-void Level1::handleKeyboardEvents()
-{
-    /*
-     * Checks for any events in queue and responds if any
-     * Put responses to events here
-    */
+    /* ##################SET ALLOWED SPRITES############### */
+    vector<SpriteType> vs;
+    vs.push_back(TSkeleton);
+    vs.push_back(TCat);
+    vs.push_back(TBruh);
+    SpriteFactory *_sf = new SpriteFactory(100, vs, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // Event handler
-    SDL_Event e;
-
-    // Event handler loop
-    while (SDL_PollEvent( &e ) != 0)
-    {
-        // User quits
-        if (e.type == SDL_QUIT)
-        {
-            endLevel();
-        }
-    }
+    setFactory(_sf);
+    
 }
 
 void Level1::generateSprites()
@@ -48,29 +37,21 @@ void Level1::generateSprites()
      * Handles sprite generation
     */
 
-    if (numSprites() != 3)
-    {
-        Bruh *b0 = new Bruh();
-        Bruh *b1 = new Bruh();
-        Skeleton *s = new Skeleton();
+    Sprite *s = NULL;
+    SpriteFactory *sf = getFactory();
+    s = sf->generateSprites();
 
-        b0->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
-        b1->setPos(SCREEN_WIDTH * .3, SCREEN_HEIGHT * .3);
-        s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
-        b0->setSize(100, 100);
-        b1->setSize(100, 100);
-        s->setSize(100, 100);
-        addSprite(b0);
-        addSprite(b1);
+    // Check if new sprite added
+    if (s != NULL)
+    {
         addSprite(s);
     }
-
 }
 
-void Level1::startLevel()
+int Level1::startLevel()
 {
     /*
      * Starts level
      */
-    Level::startLevel();
+    return Level::startLevel(1);
 }

@@ -5,12 +5,26 @@
 */
 
 #include "SpriteFactory.h"
+#include <stdlib.h>
+#include <time.h>
 
-SpriteFactory::SpriteFactory()
+SpriteFactory::SpriteFactory(
+        int _generationFrequency,
+        vector<enum SpriteType>_allowedSprites,
+        int _SCREEN_WIDTH,
+        int _SCREEN_HEIGHT
+        ) : 
+    allowedSprites(_allowedSprites),
+    generationFrequency(_generationFrequency),
+    SCREEN_WIDTH(_SCREEN_WIDTH),
+    SCREEN_HEIGHT(_SCREEN_HEIGHT)
 {
     /*
      * Default constructor
     */
+
+    // Seed rand
+    srand(time(NULL));
 }
 
 Sprite * SpriteFactory::getSprite(int typeDesired)
@@ -21,4 +35,67 @@ Sprite * SpriteFactory::getSprite(int typeDesired)
     
     Sprite *s = new Bruh;
     return s;
+}
+
+Sprite * SpriteFactory::generateSprites()
+{
+    // Counts frames and generates based on frame number
+    Sprite *s = NULL;
+    static int count = 0;
+    int chosen;
+    SpriteType chosenSprite;
+
+    // Get random sprite
+    if (!(count % generationFrequency) && count != 0)
+    {
+        chosen = rand() % allowedSprites.size();
+        chosenSprite = allowedSprites[chosen];
+
+        // Select sprite to give
+        switch (chosenSprite)
+        {
+            case TCat:
+                s = new Cat;
+                s->setText("vim");
+                break;
+            case TSkeleton:
+                s = new Skeleton;
+                s->setText("is");
+                break;
+            case TSoldier:
+                s = new Soldier;
+                s->setText("Linux");
+                break;
+            case TBruh:
+                s = new Bruh;
+                s->setText("life");
+                break;
+            case TSnail:
+                s = new Snail;
+                s->setText("Haaaaay");
+                break;
+        }
+        
+
+        // Set default sprite settings
+        setDefault(s);
+        count = 0;
+    }
+    else
+    {
+        count++;
+    }
+
+    return s;
+}
+
+void SpriteFactory::setDefault(Sprite * _s)
+{
+    /*
+     * Sets sprite default characteristsics
+    */
+
+    _s->setPos(SCREEN_WIDTH * 17./20, SCREEN_HEIGHT * .625);
+    _s->setSize(100, 100);
+
 }

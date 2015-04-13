@@ -1,17 +1,17 @@
 /*
- * Level1.h
- * Charles Shinaver
- * Level 1 Class
+ * Level2.h
+ * Madelyn Nelson
+ * Level 2 Class
 */
 
-#ifndef LEVEL1_H
-#define LEVEL1_H
+#ifndef LEVEL2_H
+#define LEVEL2_H
 #include "Level.h"
 
-class Level1 : public Level
+class Level2 : public Level
 {
     public:
-        Level1(SDLWrapper &sw);
+        Level2(SDLWrapper &sw);
         int startLevel();
     private:
         void handleKeyboardEvents();

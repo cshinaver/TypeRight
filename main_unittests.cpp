@@ -16,15 +16,6 @@ TEST(SDLTest, IsWindowCreated) {
     ASSERT_TRUE(sw.init() == true);
 }
 
-// Test if bmp image loaded
-TEST(SDLTest, IsBmpImageLoaded) {
-    SDLWrapper sw;
-    sw.init();
-    SDL_Surface *img = sw.loadImg("hello_world.bmp");
-    ASSERT_TRUE( img != NULL);
-    SDL_FreeSurface(img);
-}
-
 // Test exception if image not loaded
 TEST(SDLTest, IsBmpImageNotLoaded) {
     SDLWrapper sw;
@@ -39,15 +30,6 @@ TEST(SDLTest, IsBmpImageNotLoaded) {
         imgProperlyFailed = 1;
     }
     ASSERT_TRUE(imgProperlyFailed == 1);
-}
-
-// Load Texture Test
-TEST(SDLTest, IsTextureLoaded) {
-    SDLWrapper sw;
-    sw.init();
-    TRTexture img = sw.loadTexture("hello_world.bmp");
-    ASSERT_TRUE( img.isTextureLoaded() == 1);
-    img.freeTexture();
 }
 
 // Test texture not loaded returns zero when not loaded
@@ -67,14 +49,49 @@ TEST(SpriteTest, IsSpriteLoaded) {
     ASSERT_TRUE(ans == 1);
 }
 
-// Check that loadSprite can load a sprite from the spriteFactory
-TEST(SpriteTest, LoadSpriteLoadsSpriteFromSpriteFactory)
+TEST(SpriteTest, SpriteGeneratedFromFactory)
 {
     SDLWrapper sw;
     sw.init();
-    SpriteFactory sf;
-    Sprite *s = sf.getSprite(0);
+    
+    vector<SpriteType> vs;
+    vs.push_back(TCat);
+    SpriteFactory sf(1, vs, 640, 480);
+    Sprite *s;
+    s = NULL;
+    s = sf.generateSprites();
+    s = sf.generateSprites();
+    ASSERT_TRUE(s != NULL);
     sw.loadSprite(s);
     ASSERT_TRUE(s->getIsTextureLoaded() == 1);
 }
 
+// Sprite only generated every 40 frames
+TEST(SpriteTest, SpriteGeneratedOnCertainFrequency)
+{
+    SDLWrapper sw;
+    sw.init();
+    int frame = 0;
+    int generateFrame = 40;
+    
+    vector<SpriteType> vs;
+    vs.push_back(TCat);
+    SpriteFactory sf(generateFrame, vs, 640, 480);
+    Sprite *s;
+    s = NULL;
+
+
+    while (frame != generateFrame)
+    {
+        s = sf.generateSprites(); 
+        ASSERT_TRUE(s == NULL);
+        frame++;
+    }
+
+    // Once 40, sprite should be generated
+    s = sf.generateSprites(); 
+    ASSERT_TRUE(s != NULL);
+
+    sw.loadSprite(s);
+    ASSERT_TRUE(s->getIsTextureLoaded() == 1);
+}

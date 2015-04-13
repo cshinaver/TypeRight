@@ -21,14 +21,19 @@ elseif(CYGWIN)
     set(SDL2_INCLUDE_DIRS "/usr/local/include")
     set(SDL2_IMAGE_LIBRARIES -L"/usr/local/lib" -lSDL2_image)
     set(SDL2_IMAGE_INCLUDE_DIRS "/usr/local/include")
+    set(SDL2_TTF_LIBRARIES -L"/usr/local/lib" -lSDL2_ttf)
+    set(SDL2_TTF_INCLUDE_DIRS "/usr/local/lib")
 else()
     include(FindPkgConfig)
     pkg_search_module(SDL2 REQUIRED sdl2)
     set(SDL2_IMAGE_LIBRARIES -L"/usr/local/lib" -lSDL2_image)
     set(SDL2_IMAGE_INCLUDE_DIRS "/usr/local/include")
+    set(SDL2_TTF_LIBRARIES -L"/usr/local/lib" -lSDL2_ttf)
+    set(SDL2_TTF_INCLUDE_DIRS "/usr/local/include")
 endif()
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
+include_directories(${SDL2_TTF_INCLUDE_DIRS})
 
 # TRTexture Class
 add_library(TRTexture_lib TRTexture.cpp)
@@ -40,7 +45,7 @@ target_link_libraries(Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} 
 
 # SDLWrapper Class
 add_library(sdlwrapper_lib SDLWrapper.cpp)
-target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib SpriteFactory_lib)
+target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib SpriteFactory_lib ${SDL2_TTF_LIBRARIES})
 
 # Bruh Class
 add_library(Bruh_lib Bruh.cpp)
@@ -54,6 +59,10 @@ target_link_libraries(Soldier_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${S
 add_library(Skeleton_lib Skeleton.cpp)
 target_link_libraries(Skeleton_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
+# Cat Class
+add_library(Cat_lib Cat.cpp)
+target_link_libraries(Cat_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
 # Snail Class
 add_library(Snail_lib Snail.cpp)
 target_link_libraries(Snail_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
@@ -64,11 +73,11 @@ target_link_libraries(Background_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${S
 
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Background_lib Bruh_lib Soldier_lib Skeleton_lib Snail_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_lib Background_lib Bruh_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # SpriteFactory Class
 add_library(SpriteFactory_lib SpriteFactory.cpp)
-target_link_libraries(SpriteFactory_lib sdlwrapper_lib)
+target_link_libraries(SpriteFactory_lib sdlwrapper_lib Bruh_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib)
 
 # Level Class
 add_library(Level_lib Level.cpp)
@@ -78,13 +87,21 @@ target_link_libraries(Level_lib Background_lib sdlwrapper_lib Sprite_lib)
 add_library(Level1_lib Level1.cpp)
 target_link_libraries(Level1_lib Level_lib)
 
+# Level 2 Class
+add_library(Level2_lib Level2.cpp)
+target_link_libraries(Level2_lib Level_lib)
+
+# Level 3 Class
+add_library(Level3_lib Level3.cpp)
+target_link_libraries(Level3_lib Level_lib)
+
 # Collision Class
 add_library(Collision_lib collision.cpp)
 target_link_libraries(Collision_lib Sprite_lib)
 
 # main
 add_executable(main main.cpp)
-target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} sdlwrapper_lib TypeRight_lib Collision_lib)
+target_link_libraries(main ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} sdlwrapper_lib TypeRight_lib Collision_lib)
 
 ###########
 # Testing #
