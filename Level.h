@@ -31,13 +31,14 @@ class Level
         vector<Sprite *> levelSprites;
         void loadAndMoveSprites();
         void levelFinished();
-        virtual void handleKeyboardEvents() = 0;
+        void handleKeyboardEvents();
         virtual void generateSprites() = 0;
         int levelEnded;
         int gameEnded;
         int nextLevel;
         SDLWrapper &sw;
         SpriteFactory *sf;
+        vector<char> pressedChars;
 };
 
 #endif

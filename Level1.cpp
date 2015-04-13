@@ -30,27 +30,6 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     
 }
 
-void Level1::handleKeyboardEvents()
-{
-    /*
-     * Checks for any events in queue and responds if any
-     * Put responses to events here
-    */
-
-    // Event handler
-    SDL_Event e;
-
-    // Event handler loop
-    while (SDL_PollEvent( &e ) != 0)
-    {
-        // User quits
-        if (e.type == SDL_QUIT)
-        {
-            endGame();
-        }
-    }
-}
-
 void Level1::generateSprites()
 {
     /*

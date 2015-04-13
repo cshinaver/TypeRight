@@ -7,6 +7,7 @@
 #include "Level.h"
 #include <stdexcept>
 
+
 Level::Level(SDLWrapper &_sw) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_sw.SCREEN_HEIGHT), sw(_sw) 
 {
     /*
@@ -145,4 +146,30 @@ SpriteFactory * Level::getFactory()
 void Level::setFactory(SpriteFactory *_sf)
 {
     sf = _sf;
+}
+
+void Level::handleKeyboardEvents()
+{
+    /*
+     * Checks for any events in queue and responds if any
+     * Put responses to events here
+    */
+
+    // Event handler
+    SDL_Event e;
+
+    SDL_StartTextInput();
+
+    // Event handler loop
+    while (SDL_PollEvent( &e ) != 0)
+    {
+        switch (e.type)
+        {
+            case SDL_QUIT:
+                endGame();
+                break;
+            case SDL_TEXTINPUT:
+                pressedChars.push_back(e.text.text[0]);
+        }
+    }
 }
