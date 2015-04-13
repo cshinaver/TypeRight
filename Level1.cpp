@@ -24,6 +24,7 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     vector<SpriteType> vs;
     vs.push_back(TSkeleton);
     vs.push_back(TCat);
+    vs.push_back(TBruh);
     SpriteFactory *_sf = new SpriteFactory(100, vs, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     setFactory(_sf);
@@ -38,13 +39,7 @@ void Level1::generateSprites()
 
     Sprite *s = NULL;
     SpriteFactory *sf = getFactory();
-    //s = sf->generateSprites();
-    if (numSprites() != 2)
-    {
-        s = sf->getSprite(8);
-        sf->setDefault(s);
-        s->setText("hello");
-    }
+    s = sf->generateSprites();
 
     // Check if new sprite added
     if (s != NULL)

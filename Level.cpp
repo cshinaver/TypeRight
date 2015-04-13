@@ -115,7 +115,7 @@ void Level::loadAndMoveSprites()
      * Loads and moves sprites
     */
 
-    double dt = 1;
+    double dt = 4;
     // Load and move every sprite
     for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
     {
@@ -202,7 +202,7 @@ void Level::checkForDefeatedSprites()
         {
             levelSprites.erase(levelSprites.begin() + 2);
         }
-        else if (pressedChars.size() > firstEnemy->getText().size()) // reset word if exceeds word length
+        else if (firstEnemy->getText().substr(0, pressedChars.size()) != pressedChars ) // reset word if exceeds word length
         {
             pressedChars.clear();
         }

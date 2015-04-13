@@ -56,18 +56,23 @@ Sprite * SpriteFactory::generateSprites()
         {
             case TCat:
                 s = new Cat;
+                s->setText("vim");
                 break;
             case TSkeleton:
                 s = new Skeleton;
+                s->setText("is");
                 break;
             case TSoldier:
                 s = new Soldier;
+                s->setText("Linux");
                 break;
             case TBruh:
                 s = new Bruh;
+                s->setText("life");
                 break;
             case TSnail:
                 s = new Snail;
+                s->setText("Haaaaay");
                 break;
         }
         
