@@ -32,6 +32,7 @@ class Level
         void loadAndMoveSprites();
         void levelFinished();
         void handleKeyboardEvents();
+        void displayInput();
         virtual void generateSprites() = 0;
         int levelEnded;
         int gameEnded;

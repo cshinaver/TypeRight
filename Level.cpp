@@ -58,6 +58,7 @@ int Level::startLevel(int currentLevel)
         sw.clearWindow();
 
         loadAndMoveSprites();
+        displayInput();
         
         // Update screen
         sw.updateWindow();
@@ -172,4 +173,16 @@ void Level::handleKeyboardEvents()
                 pressedChars.push_back(e.text.text[0]);
         }
     }
+}
+
+void Level::displayInput()
+{
+    /*
+     * Displays the currently entered text
+    */
+
+    // Convert entered chars into string
+    string s = "hello";
+
+    sw.displayText(s, 20, 20);
 }
