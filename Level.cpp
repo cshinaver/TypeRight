@@ -53,6 +53,8 @@ int Level::startLevel(int currentLevel)
         handleKeyboardEvents();
         generateSprites();
 
+        checkForDefeatedSprites();
+
         // Clear screen
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
@@ -185,4 +187,25 @@ void Level::displayInput()
     {
         sw.displayText(pressedChars, 20, 20);
     }
+}
+
+void Level::checkForDefeatedSprites()
+{
+    /*
+     * Checks if any of the sprites have been killed
+    */
+
+    if ((int)levelSprites.size() > 2)
+    {
+        Sprite *firstEnemy = levelSprites[2];
+        if (pressedChars == firstEnemy->getText()) // Remove if match
+        {
+            levelSprites.erase(levelSprites.begin() + 2);
+        }
+        else if (pressedChars.size() > firstEnemy->getText().size()) // reset word if exceeds word length
+        {
+            pressedChars.clear();
+        }
+    }
+
 }
