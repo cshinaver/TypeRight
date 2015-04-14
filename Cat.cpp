@@ -8,6 +8,7 @@ Cat::Cat() : Sprite()
 
     setTexturePath("runningcat.png");
     setChromaColor(255, 255, 255);
+    setDirection(1);
 }
 
 void Cat::setTexture(TRTexture tex)
@@ -57,4 +58,14 @@ void Cat::move()
         setTotalFrames(tFrames);
     }
 
+}
+
+void Cat::animate()
+{
+    // MOVEMENT
+    // gets direction and moves sprite based on it
+    if (getDirection() == 0)
+        setPos(getPosX() + getDt(), getPosY());
+    else
+        setPos(getPosX() - getDt(), getPosY());
 }
