@@ -72,7 +72,7 @@ Sprite * SpriteFactory::generateSprites()
                 break;
             case TSnail:
                 s = new Snail;
-                s->setText("Haaaaay");
+                s->setText("hello");
                 break;
         }
         
