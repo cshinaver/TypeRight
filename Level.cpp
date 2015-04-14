@@ -124,9 +124,10 @@ void Level::loadAndMoveSprites()
         // If not background or hero, move towards hero
         if (i > levelSprites.begin() + 1)
         {
-            (*i)->setPos((*i)->getPosX() - dt, (*i)->getPosY());
+            (*i)->move();
+            //(*i)->setPos((*i)->getPosX() - dt, (*i)->getPosY());
         }
-        (*i)->move();
+        (*i)->animate();
     }
 
 }
