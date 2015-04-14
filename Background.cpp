@@ -6,9 +6,6 @@ Background::Background()
     /* Default constructor*/
 
     setPos(0,0); // All backgrounds start at beginning
-
-    /* TEMPORARY UNTIL LEVEL CLASS DONE */
-    db = .35; 
 }
 
 void Background::setTexturePath(string path)
@@ -32,12 +29,13 @@ void Background::setTexture(TRTexture tex)
     // Set background equal to second column sprites
     SDL_Rect frame;
     frame.x = 0;
+    setDt(1);
 
     while ( frame.x < tex.getWidth()*.5 ) 
     {
         frame.w = tex.getWidth()*backFract;
         frame.h = tex.getHeight();
-        frame.x += getDt()*db;
+        frame.x += getDt();
         frame.y = tex.getHeight()-540; // 540 for background3, 0 for background1 
 
         clips.push_back(frame);
@@ -49,7 +47,9 @@ void Background::setTexture(TRTexture tex)
     setHeight(480);
 }
 
-void Background::move()
+void Background::move() {}
+
+void Background::animate()
 {
     int tFrames = getTotalFrames();
     int speedConst = 1; // Modify this to make sprite animation faster or slower

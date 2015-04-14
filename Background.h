@@ -17,11 +17,10 @@ class Background : public Sprite
         Background();
         Background(TRTexture tex);
         virtual void move();
+        virtual void animate();
         void setTexturePath(string path);
-        void setDb(double _db) { db = _db; };
     private:
         void setTexture(TRTexture tex);
-        double db; // derivative of background over time, speed coef of each background
 };
 
 #endif
