@@ -12,7 +12,8 @@ Sprite::Sprite()
      * Default constructor
     */
 
-    dt = 10;
+    dt = 4;
+    direction = 1;
     isTextureLoaded = 0;
     shouldChroma = 0;
     setWidth(0);

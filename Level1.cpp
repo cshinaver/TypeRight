@@ -16,13 +16,13 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     /* ####################SETUP BACKGROUND ################ */ 
     Background *background = new Background();
     background->setTexturePath("typeRightBackground1Double.png");
-    background->setDb(.3); // Background speed
 
     setBackground(background);
 
     /* ##################SET ALLOWED SPRITES############### */
     vector<SpriteType> vs;
     vs.push_back(TSkeleton);
+    vs.push_back(TSnail);
     vs.push_back(TCat);
     vs.push_back(TBruh);
     SpriteFactory *_sf = new SpriteFactory(100, vs, SCREEN_WIDTH, SCREEN_HEIGHT);

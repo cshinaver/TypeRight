@@ -26,6 +26,7 @@ class Sprite
         Sprite();
         virtual ~Sprite();
         virtual void move() = 0;
+        virtual void animate() = 0;
         int getPosX() { return posX; };
         int getPosY() { return posY; };
         void setPos(int x, int y);

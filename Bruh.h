@@ -20,6 +20,7 @@ class Bruh : public Sprite
         Bruh(TRTexture tex);
         void setTexture(TRTexture tex);
         virtual void move();
+        virtual void animate();
 };
 
 #endif

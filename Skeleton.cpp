@@ -8,6 +8,7 @@ Skeleton::Skeleton() : Sprite()
 
     setTexturePath("skeleton.png");
     setChromaColor(0x9D, 0x8E, 0x87);
+    setDirection(1);
 }
 
 void Skeleton::setTexture(TRTexture tex)
@@ -52,7 +53,7 @@ void Skeleton::setTexture(TRTexture tex)
     }
 }
 
-void Skeleton::move()
+void Skeleton::animate()
 {
     int tFrames = getTotalFrames();
     int speedConst = 8; // Modify this to make sprite animation faster or slower
@@ -66,5 +67,16 @@ void Skeleton::move()
         tFrames = 0;
         setTotalFrames(tFrames);
     }
+
+}
+
+void Skeleton::move()
+{
+    // MOVEMENT
+    // gets direction and moves sprite based on it
+    if (getDirection() == 0)
+        setPos(getPosX() + getDt(), getPosY());
+    else
+        setPos(getPosX() - getDt(), getPosY());
 
 }

@@ -17,6 +17,7 @@ class Soldier : public Sprite
         Soldier(TRTexture tex);
         void setTexture(TRTexture tex);
         virtual void move();
+        virtual void animate();
 };
 
 #endif

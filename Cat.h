@@ -17,6 +17,7 @@ class Cat : public Sprite
         Cat(TRTexture tex);
         void setTexture(TRTexture tex);
         virtual void move();
+        virtual void animate();
 };
 
 #endif
