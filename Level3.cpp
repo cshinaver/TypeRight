@@ -16,7 +16,6 @@ Level3::Level3(SDLWrapper &sw) : Level(sw)
     /* ####################SETUP BACKGROUND ################ */ 
     Background *background = new Background();
     background->setTexturePath("Combinedbackground9-9.png"); // ND
-    background->setDb(.35); // Background speed
 
     setBackground(background);
 }

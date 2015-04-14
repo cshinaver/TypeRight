@@ -16,7 +16,6 @@ Level2::Level2(SDLWrapper &sw) : Level(sw)
     /* ####################SETUP BACKGROUND ################ */ 
     Background *background = new Background();
     background->setTexturePath("Combinedbackground5-4.png"); // scary city night
-    background->setDb(.4); // Background speed
 
     setBackground(background);
 }
