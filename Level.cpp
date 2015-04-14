@@ -115,7 +115,6 @@ void Level::loadAndMoveSprites()
      * Loads and moves sprites
     */
 
-    double dt = 4;
     // Load and move every sprite
     for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
     {
@@ -125,7 +124,6 @@ void Level::loadAndMoveSprites()
         if (i > levelSprites.begin() + 1)
         {
             (*i)->move();
-            //(*i)->setPos((*i)->getPosX() - dt, (*i)->getPosY());
         }
         (*i)->animate();
     }
