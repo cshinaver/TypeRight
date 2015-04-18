@@ -11,6 +11,7 @@
 #include "SpriteFactory.h"
 #include "Background.h"
 #include "Sprite.h"
+#include "Collision.h"
 
 class Level
 {
@@ -34,11 +35,13 @@ class Level
         void handleKeyboardEvents();
         void displayInput();
         void checkForDefeatedSprites();
+        void checkForHeroDeath();
         virtual void generateSprites() = 0;
         int levelEnded;
         int gameEnded;
         int nextLevel;
         SDLWrapper &sw;
+        Collision cd;
         SpriteFactory *sf;
         string pressedChars;
 };

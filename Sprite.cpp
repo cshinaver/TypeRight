@@ -12,6 +12,7 @@ Sprite::Sprite()
      * Default constructor
     */
 
+    hero = 0;
     dt = 10;
     isTextureLoaded = 0;
     shouldChroma = 0;
