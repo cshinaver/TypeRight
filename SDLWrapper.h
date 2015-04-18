@@ -35,7 +35,19 @@ class SDLWrapper
         void clearWindow(); // Clears window
         void renderTextureToWindow(TRTexture, SDL_Rect* = NULL, SDL_Rect* = NULL); // Renders texture to window
         void displayText(string text, int x, int y, int fontSize = 28);
+        void displayRectangle(int x, int y, int w, int h, SDL_Color c);
         SDL_Surface * loadImg(string);
+        void displayImage(
+                string imgPath, 
+                int x,
+                int y,
+                int w = 0,
+                int h = 0,
+                int shouldChroma = 0,
+                uint8_t r = -1,
+                uint8_t g = 0,
+                uint8_t b = 0
+                ); // Pass pixel to chroma key, empty for none
         TRTexture loadTexture(string imgPath,
                 int shouldChroma = 0,
                 uint8_t r = -1,

@@ -183,9 +183,16 @@ void Level::displayInput()
      * Displays the currently entered text
     */
 
+    double x = 20;
+    double y = 20;
+
+    // Display square input box
+    sw.displayImage("inputBox.png", x - 6, y, 0, SCREEN_HEIGHT/11, 1, 0xf1, 0x0b, 0xc3 );
+    
+    // Display typed text
     if ((int)pressedChars.size())
     {
-        sw.displayText(pressedChars, 20, 20);
+        sw.displayText(pressedChars, x, y);
     }
 }
 
