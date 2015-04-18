@@ -13,7 +13,7 @@ class Collision {
 		Collision();
 		Collision(vector < Sprite * > * sprites);
 		int checkCollision(Sprite *, Sprite *);
-        	int isDead();
+        int isDead();
 	private:
 		vector< Sprite * > * spr;
 		Sprite * hero;
