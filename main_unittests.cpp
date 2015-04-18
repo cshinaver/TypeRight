@@ -9,6 +9,8 @@
 #include <stdexcept>
 #include "Bruh.h"
 #include "SpriteFactory.h"
+#include "Collision.h"
+#include "Level.h"
 
 // Test if window is instantiated
 TEST(SDLTest, IsWindowCreated) {
@@ -94,4 +96,33 @@ TEST(SpriteTest, SpriteGeneratedOnCertainFrequency)
 
     sw.loadSprite(s);
     ASSERT_TRUE(s->getIsTextureLoaded() == 1);
+}
+
+TEST(SpriteTest, SpriteCollidesWithHero)
+{
+    // Inst sprites
+    Bruh *b = new Bruh;
+    Skeleton *s = new Skeleton;
+    Background *background = new Background();
+
+    // Store in vector
+    vector<Sprite *> vs;
+    vs.push_back(background);
+    vs.push_back(b);
+    vs.push_back(s);
+
+    // Set skeleton as same position as hero
+    b->setPos(50, 50);
+    s->setPos(50, 50);
+
+    // Collision detection
+    Collision cd = Collision(&vs);
+
+    // Check if hero is dead
+    cd.isDead();
+    ASSERT_TRUE(cd.isDead() == 1);
+
+    delete b;
+    delete s;
+    delete background;
 }

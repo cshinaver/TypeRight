@@ -113,7 +113,7 @@ add_subdirectory(gtest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 add_executable(main_unittests main_unittests.cpp)
-target_link_libraries(main_unittests sdlwrapper_lib gtest gtest_main SpriteFactory_lib Bruh_lib)
+target_link_libraries(main_unittests sdlwrapper_lib gtest gtest_main SpriteFactory_lib Bruh_lib Level_lib Collision_lib)
 
 add_test(main_unittests main_unittests)
 
