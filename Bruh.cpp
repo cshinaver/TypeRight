@@ -9,7 +9,7 @@ Bruh::Bruh() : Sprite()
 
     setTexturePath("pirate.png");
     setChromaColor(0x20, 0xB5, 0x62);
-    setDirection(1);
+    setDirection(RIGHT);
 }
 
 void Bruh::setTexture(TRTexture tex)
@@ -76,7 +76,7 @@ void Bruh::move()
 {
     // MOVEMENT
     // gets direction and moves sprite based on it
-    if (getDirection() == 0)
+    if (getDirection() == LEFT)
         setPos(getPosX() + getDt(), getPosY());
     else
         setPos(getPosX() - getDt(), getPosY());

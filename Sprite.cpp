@@ -13,7 +13,7 @@ Sprite::Sprite()
     */
 
     dt = 4;
-    direction = 1;
+    setDirection(RIGHT);
     isTextureLoaded = 0;
     shouldChroma = 0;
     setWidth(0);

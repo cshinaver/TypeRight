@@ -8,7 +8,7 @@ Snail::Snail() : Sprite()
 
     setTexturePath("snail.png");
     setChromaColor(0xFF, 0xFF, 0xFF);
-    setDirection(1);
+    setDirection(RIGHT);
 }
 
 void Snail::setTexture(TRTexture tex)
@@ -74,7 +74,7 @@ void Snail::move()
 {
     // MOVEMENT
     // gets direction and moves sprite based on it
-    if (getDirection() == 0)
+    if (getDirection() == LEFT)
         setPos(getPosX() + getDt(), getPosY());
     else
         setPos(getPosX() - getDt(), getPosY());

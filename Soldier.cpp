@@ -8,7 +8,7 @@ Soldier::Soldier() : Sprite()
 
     setTexturePath("soldier.png");
     setChromaColor(0x4D, 0x4B, 0x76);
-    setDirection(1);
+    setDirection(RIGHT);
 }
 
 void Soldier::setTexture(TRTexture tex)
@@ -73,7 +73,7 @@ void Soldier::move()
 {
     // MOVEMENT
     // gets direction and moves sprite based on it
-    if (getDirection() == 0)
+    if (getDirection() == LEFT)
         setPos(getPosX() + getDt(), getPosY());
     else
         setPos(getPosX() - getDt(), getPosY());

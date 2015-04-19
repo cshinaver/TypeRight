@@ -8,7 +8,7 @@ Skeleton::Skeleton() : Sprite()
 
     setTexturePath("skeleton.png");
     setChromaColor(0x9D, 0x8E, 0x87);
-    setDirection(1);
+    setDirection(RIGHT);
 }
 
 void Skeleton::setTexture(TRTexture tex)
@@ -74,7 +74,7 @@ void Skeleton::move()
 {
     // MOVEMENT
     // gets direction and moves sprite based on it
-    if (getDirection() == 0)
+    if (getDirection() == LEFT)
         setPos(getPosX() + getDt(), getPosY());
     else
         setPos(getPosX() - getDt(), getPosY());
