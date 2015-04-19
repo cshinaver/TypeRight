@@ -105,6 +105,9 @@ TEST(SpriteTest, SpriteCollidesWithHero)
     Skeleton *s = new Skeleton;
     Background *background = new Background();
 
+    // Set Hero
+    b->setIsHero();
+
     // Store in vector
     vector<Sprite *> vs;
     vs.push_back(background);
