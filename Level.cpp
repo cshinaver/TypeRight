@@ -18,6 +18,7 @@ Level::Level(SDLWrapper &_sw) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_s
     levelBackground = NULL;
     gameEnded = 0;
     cd.setSpriteVector(&levelSprites);
+    spritesDefeated = 0;
 
 }
 
@@ -65,6 +66,7 @@ int Level::startLevel(int currentLevel)
 
         loadAndMoveSprites();
         displayInput();
+        displayScore();
         
         // Update screen
         sw.updateWindow();
@@ -210,7 +212,7 @@ void Level::checkForDefeatedSprites()
         Sprite *firstEnemy = levelSprites[2];
         if (pressedChars == firstEnemy->getText()) // Remove if match
         {
-            levelSprites.erase(levelSprites.begin() + 2);
+            spriteDefeated(2);
         }
         else if (firstEnemy->getText().substr(0, pressedChars.size()) != pressedChars ) // reset word if exceeds word length
         {
@@ -230,4 +232,28 @@ void Level::checkForHeroDeath()
     {
         endGame();
     }
+}
+void Level::spriteDefeated(int spriteIndex)
+{
+    /*
+     * Occurs when sprite defeated
+    */
+
+    delete levelSprites[spriteIndex];
+    levelSprites.erase(levelSprites.begin() + spriteIndex);
+    spritesDefeated++;
+}
+
+void Level::displayScore()
+{
+    /*
+     * Displays defeated sprites
+    */
+
+    int x, y;
+    x = SCREEN_WIDTH - 130;
+    y = 20;
+    ostringstream strStream;
+    strStream << "Score: " << spritesDefeated;
+    sw.displayText(strStream.str(), x, y);
 }

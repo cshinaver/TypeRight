@@ -7,6 +7,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 #include <SDL2/SDL.h>
+#include <sstream>
 #include "SDLWrapper.h"
 #include "SpriteFactory.h"
 #include "Background.h"
@@ -34,12 +35,15 @@ class Level
         void levelFinished();
         void handleKeyboardEvents();
         void displayInput();
+        void displayScore();
         void checkForDefeatedSprites();
+        void spriteDefeated(int spriteIndex);
         void checkForHeroDeath();
         virtual void generateSprites() = 0;
         int levelEnded;
         int gameEnded;
         int nextLevel;
+        int spritesDefeated;
         SDLWrapper &sw;
         Collision cd;
         SpriteFactory *sf;
