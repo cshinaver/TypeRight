@@ -8,7 +8,7 @@
 #include <stdexcept>
 
 
-Level::Level(SDLWrapper &_sw) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_sw.SCREEN_HEIGHT), sw(_sw) 
+Level::Level(SDLWrapper &_sw, int _spritesToKill) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_sw.SCREEN_HEIGHT), totalSpritesToKill(_spritesToKill), sw(_sw)
 {
     /*
      * Default base constructor
@@ -19,7 +19,7 @@ Level::Level(SDLWrapper &_sw) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_s
     gameEnded = 0;
     cd.setSpriteVector(&levelSprites);
     spritesDefeated = 0;
-
+    globalSpeedModifier = 0;
 }
 
 int Level::startLevel(int currentLevel)
@@ -54,6 +54,8 @@ int Level::startLevel(int currentLevel)
 
     while (!levelEnded)
     {
+        // Make changes based on number of defeated sprites
+        calculateLevelProgress();
         handleKeyboardEvents();
         generateSprites();
 
@@ -130,6 +132,8 @@ void Level::loadAndMoveSprites()
         if (i > levelSprites.begin() + 1)
         {
             (*i)->move();
+            // Add global speed modifier
+            (*i)->setPos((*i)->getPosX() + -1 * globalSpeedModifier, (*i)->getPosY());
         }
         (*i)->animate();
     }
@@ -256,4 +260,25 @@ void Level::displayScore()
     ostringstream strStream;
     strStream << "Score: " << spritesDefeated;
     sw.displayText(strStream.str(), x, y);
+}
+
+void Level::calculateLevelProgress()
+{
+    /*
+     * Calculates level progress
+    */
+
+    double dg = 1.8;
+
+    // Check defeated number of sprites
+    // if greater or equal to half, increase speed
+    if (spritesDefeated >= .5 * totalSpritesToKill)
+    {
+        globalSpeedModifier = dg;
+    }
+
+    if (spritesDefeated == totalSpritesToKill)
+    {
+        endLevel();
+    }
 }

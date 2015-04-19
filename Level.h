@@ -17,7 +17,7 @@
 class Level
 {
     public:
-        Level(SDLWrapper &_sw);
+        Level(SDLWrapper &_sw, int _spritesToKill = 20);
         int startLevel(int currentLevel);
         void setBackground(Background *_back);
         void endLevel();
@@ -31,6 +31,7 @@ class Level
     private:
         Background *levelBackground;
         vector<Sprite *> levelSprites;
+        void calculateLevelProgress();
         void loadAndMoveSprites();
         void levelFinished();
         void handleKeyboardEvents();
@@ -44,6 +45,8 @@ class Level
         int gameEnded;
         int nextLevel;
         int spritesDefeated;
+        const int totalSpritesToKill;
+        double globalSpeedModifier; // Globaly changes speed
         SDLWrapper &sw;
         Collision cd;
         SpriteFactory *sf;
