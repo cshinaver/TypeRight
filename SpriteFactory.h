@@ -30,6 +30,7 @@ class SpriteFactory
         SpriteFactory(
                 int _generationFrequency,
                 vector<SpriteType>_allowedSprites,
+                vector<string> _wordBank,
                 int _SCREEN_WIDTH,
                 int _SCREEN_HEIGHT
                 ); // 0 to 100
@@ -39,6 +40,7 @@ class SpriteFactory
     private:
         const vector<SpriteType> allowedSprites;
         const int generationFrequency;
+        const vector<string> wordBank,
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;
 };

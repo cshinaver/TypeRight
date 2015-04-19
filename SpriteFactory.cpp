@@ -11,11 +11,13 @@
 SpriteFactory::SpriteFactory(
         int _generationFrequency,
         vector<enum SpriteType>_allowedSprites,
+        vector<string> _wordBank,
         int _SCREEN_WIDTH,
         int _SCREEN_HEIGHT
         ) : 
     allowedSprites(_allowedSprites),
     generationFrequency(_generationFrequency),
+    wordBank(_wordBank),
     SCREEN_WIDTH(_SCREEN_WIDTH),
     SCREEN_HEIGHT(_SCREEN_HEIGHT)
 {
@@ -42,40 +44,43 @@ Sprite * SpriteFactory::generateSprites()
     // Counts frames and generates based on frame number
     Sprite *s = NULL;
     static int count = 0;
-    int chosen;
+    int chosenSpriteIndex, chosenWordIndex;
     SpriteType chosenSprite;
+    string chosenWord;
 
     // Get random sprite
     if (!(count % generationFrequency) && count != 0)
     {
-        chosen = rand() % allowedSprites.size();
-        chosenSprite = allowedSprites[chosen];
+        // Get random sprite
+        chosenSpriteIndex = rand() % allowedSprites.size();
+        chosenSprite = allowedSprites[chosenSpriteIndex];
+        
+        // Get random word
+        chosenWordIndex = rand() % wordBank.size();
+        chosenWord = wordBank[chosenWordIndex];
 
         // Select sprite to give
         switch (chosenSprite)
         {
             case TCat:
                 s = new Cat;
-                s->setText("vim");
                 break;
             case TSkeleton:
                 s = new Skeleton;
-                s->setText("is");
                 break;
             case TSoldier:
                 s = new Soldier;
-                s->setText("Linux");
                 break;
             case TBruh:
                 s = new Bruh;
-                s->setText("life");
                 break;
             case TSnail:
                 s = new Snail;
-                s->setText("Haaaaay");
                 break;
         }
-        
+
+        // Set text
+        s->setText(chosenWord);
 
         // Set default sprite settings
         setDefault(s);
