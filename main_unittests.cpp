@@ -58,7 +58,7 @@ TEST(SpriteTest, SpriteGeneratedFromFactory)
     
     vector<SpriteType> vs;
     vs.push_back(TCat);
-    SpriteFactory sf(1, vs, 640, 480);
+    SpriteFactory sf(1, vs, "level1.txt", 640, 480);
     Sprite *s;
     s = NULL;
     s = sf.generateSprites();
@@ -78,7 +78,7 @@ TEST(SpriteTest, SpriteGeneratedOnCertainFrequency)
     
     vector<SpriteType> vs;
     vs.push_back(TCat);
-    SpriteFactory sf(generateFrame, vs, 640, 480);
+    SpriteFactory sf(generateFrame, vs,"level1.txt",  640, 480);
     Sprite *s;
     s = NULL;
 

@@ -8,16 +8,17 @@
 #include <stdlib.h>
 #include <time.h>
 
+vector<string> loadWordsFromFile(string filePath);
+
 SpriteFactory::SpriteFactory(
         int _generationFrequency,
         vector<enum SpriteType>_allowedSprites,
-        vector<string> _wordBank,
+        string wordBankFilepath,
         int _SCREEN_WIDTH,
         int _SCREEN_HEIGHT
         ) : 
     allowedSprites(_allowedSprites),
     generationFrequency(_generationFrequency),
-    wordBank(_wordBank),
     SCREEN_WIDTH(_SCREEN_WIDTH),
     SCREEN_HEIGHT(_SCREEN_HEIGHT)
 {
@@ -27,6 +28,9 @@ SpriteFactory::SpriteFactory(
 
     // Seed rand
     srand(time(NULL));
+
+    // Set words
+    wordBank = loadWordsFromFile(wordBankFilepath);
 }
 
 Sprite * SpriteFactory::getSprite(int typeDesired)
@@ -104,3 +108,34 @@ void SpriteFactory::setDefault(Sprite * _s)
     _s->setSize(100, 100);
 
 }
+
+vector<string> loadWordsFromFile(string filePath)
+{
+    /*
+     * Loads words from given file
+     * NOTE: filePath needs to only be the name of the text file in the words
+     * directory of the project. 
+     * Eg. for the word file "level1.txt",
+     * the filepath should be the string "level1.txt"
+    */
+
+    string line;
+    vector<string> wordBank;
+    string fullFilePath = "../words/" + filePath;
+    ifstream fin(fullFilePath);
+    if (fin.is_open())
+    {
+        while(getline(fin, line))
+        {
+            wordBank.push_back(line);
+        }
+        fin.close();
+    }
+    else
+    {
+        throw runtime_error("Word file could not be opened");
+    }
+
+    return wordBank;
+}
+
