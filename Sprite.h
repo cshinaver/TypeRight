@@ -13,6 +13,11 @@
 
 using namespace std;
 
+enum DirectionType {
+    RIGHT,
+    LEFT
+};
+
 struct Color {
     uint8_t r;
     uint8_t g;
@@ -26,6 +31,7 @@ class Sprite
         Sprite();
         virtual ~Sprite();
         virtual void move() = 0;
+        virtual void animate() = 0;
         int getPosX() { return posX; };
         int getPosY() { return posY; };
         void setPos(int x, int y);
@@ -57,8 +63,8 @@ class Sprite
         bool isAnimated;
         TRTexture textureSrc;
         vector<SDL_Rect> textureClips;
-        int getDirection();
-        void setDirection(int);
+        DirectionType getDirection();
+        void setDirection(DirectionType);
         void setIsHero() { hero = 1; };
         int isHero() { return hero; };
     private:
@@ -76,7 +82,7 @@ class Sprite
         double dt;
         Color chromaColor;
         int shouldChroma;
-        int direction;
+        DirectionType direction;
         int hero;
 };
 

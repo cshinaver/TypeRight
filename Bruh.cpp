@@ -9,7 +9,7 @@ Bruh::Bruh() : Sprite()
 
     setTexturePath("pirate.png");
     setChromaColor(0x20, 0xB5, 0x62);
-    setDirection(0);
+    setDirection(RIGHT);
 }
 
 void Bruh::setTexture(TRTexture tex)
@@ -54,10 +54,9 @@ void Bruh::setTexture(TRTexture tex)
     }
 }
 
-void Bruh::move()
+void Bruh::animate()
 {
-    int speedConst = 8; // Modify this to make sprite animation faster or slower
-
+    int speedConst = 8;   // Modify this to make sprite animation faster or slower
 
     /* ####################CYCLE FRAMES ################# */
     int tFrames = getTotalFrames();
@@ -70,5 +69,16 @@ void Bruh::move()
         setTotalFrames(tFrames);
     }
     /* ####################CYCLE FRAMES ################# */
+}
+
+
+void Bruh::move()
+{
+    // MOVEMENT
+    // gets direction and moves sprite based on it
+    if (getDirection() == LEFT)
+        setPos(getPosX() + getDt(), getPosY());
+    else
+        setPos(getPosX() - getDt(), getPosY());
 
 }

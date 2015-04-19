@@ -8,6 +8,7 @@ Snail::Snail() : Sprite()
 
     setTexturePath("snail.png");
     setChromaColor(0xFF, 0xFF, 0xFF);
+    setDirection(RIGHT);
 }
 
 void Snail::setTexture(TRTexture tex)
@@ -52,7 +53,7 @@ void Snail::setTexture(TRTexture tex)
     }
 }
 
-void Snail::move()
+void Snail::animate()
 {
     int tFrames = getTotalFrames();
     int speedConst = 16; // Modify this to make sprite animation faster or slower
@@ -66,5 +67,16 @@ void Snail::move()
         tFrames = 0;
         setTotalFrames(tFrames);
     }
+
+}
+
+void Snail::move()
+{
+    // MOVEMENT
+    // gets direction and moves sprite based on it
+    if (getDirection() == LEFT)
+        setPos(getPosX() + getDt(), getPosY());
+    else
+        setPos(getPosX() - getDt(), getPosY());
 
 }

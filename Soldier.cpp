@@ -8,6 +8,7 @@ Soldier::Soldier() : Sprite()
 
     setTexturePath("soldier.png");
     setChromaColor(0x4D, 0x4B, 0x76);
+    setDirection(RIGHT);
 }
 
 void Soldier::setTexture(TRTexture tex)
@@ -51,7 +52,7 @@ void Soldier::setTexture(TRTexture tex)
     }
 }
 
-void Soldier::move()
+void Soldier::animate()
 {
     int tFrames = getTotalFrames();
     int speedConst = 8; // Modify this to make sprite animation faster or slower
@@ -65,5 +66,16 @@ void Soldier::move()
         tFrames = 0;
         setTotalFrames(tFrames);
     }
+
+}
+
+void Soldier::move()
+{
+    // MOVEMENT
+    // gets direction and moves sprite based on it
+    if (getDirection() == LEFT)
+        setPos(getPosX() + getDt(), getPosY());
+    else
+        setPos(getPosX() - getDt(), getPosY());
 
 }

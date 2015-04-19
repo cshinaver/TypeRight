@@ -12,8 +12,9 @@ Sprite::Sprite()
      * Default constructor
     */
 
+    dt = 4;
+    setDirection(RIGHT);
     hero = 0;
-    dt = 10;
     isTextureLoaded = 0;
     shouldChroma = 0;
     setWidth(0);
@@ -85,12 +86,12 @@ void Sprite::setSize(int w, int h)
     setHeight(h);
 }
 
-int Sprite::getDirection()
+DirectionType Sprite::getDirection()
 {
     return direction;
 }
 
-void Sprite::setDirection(int d)
+void Sprite::setDirection(DirectionType d)
 {
     direction = d;
 }
