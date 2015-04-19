@@ -14,6 +14,7 @@ Sprite::Sprite()
 
     dt = 4;
     setDirection(RIGHT);
+    hero = 0;
     isTextureLoaded = 0;
     shouldChroma = 0;
     setWidth(0);

@@ -17,6 +17,7 @@ Level::Level(SDLWrapper &_sw) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_s
     levelEnded = 0;
     levelBackground = NULL;
     gameEnded = 0;
+    cd.setSpriteVector(&levelSprites);
 
 }
 
@@ -46,6 +47,8 @@ int Level::startLevel(int currentLevel)
     // Set position of hero
     s->setPos(SCREEN_WIDTH * .0125, s->getPosY());
 
+    s->setIsHero();
+
     addSprite(s);
 
     while (!levelEnded)
@@ -53,6 +56,7 @@ int Level::startLevel(int currentLevel)
         handleKeyboardEvents();
         generateSprites();
 
+        checkForHeroDeath();
         checkForDefeatedSprites();
 
         // Clear screen
@@ -182,9 +186,16 @@ void Level::displayInput()
      * Displays the currently entered text
     */
 
+    double x = 20;
+    double y = 20;
+
+    // Display square input box
+    sw.displayImage("inputBox.png", x - 6, y, 0, SCREEN_HEIGHT/11, 1, 0xf1, 0x0b, 0xc3 );
+    
+    // Display typed text
     if ((int)pressedChars.size())
     {
-        sw.displayText(pressedChars, 20, 20);
+        sw.displayText(pressedChars, x, y);
     }
 }
 
@@ -207,4 +218,16 @@ void Level::checkForDefeatedSprites()
         }
     }
 
+}
+
+void Level::checkForHeroDeath()
+{
+    /*
+     * Ends game if hero is dead
+    */
+
+    if (cd.isDead())
+    {
+        endGame();
+    }
 }

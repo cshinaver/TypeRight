@@ -8,6 +8,8 @@
 #include "Collision.h"
 #include <stdexcept>
 
+void setHero();
+
 Collision::Collision() {
 	hero = NULL;
 }
@@ -16,18 +18,22 @@ Collision::Collision(vector< Sprite * > * a)
 {
 	// Constructor initializing hero sprite as well as vector of sprites
 	spr = a;
+}
 
-	if (!(*spr)[1]->isHero())
-    		throw runtime_error("Hero is not in second vector slot");
-	else
-    		hero = (*spr)[1];
+void Collision::setSpriteVector(vector<Sprite *> *vs)
+{
+    spr = vs;
 }
 
 int Collision::isDead() {
-    
+
     // Finds out if the character is dead or not
     for ( int i = 2; i < (int)spr->size(); i++ ) {
-        if ( (*spr)[i] != hero && checkCollision(hero, (*spr)[i]) )
+        // Set hero if needed
+        if (hero == NULL)
+            setHero();
+
+        if (checkCollision(hero, (*spr)[i]))
     		return 1;
     }
     return 0;
@@ -58,6 +64,22 @@ int Collision::checkCollision(Sprite * a, Sprite * b) {
 		return 1;
 	else
 		return 0;
+}
+
+void Collision::setHero()
+{
+    /*
+     * Sets hero if vector is big enough
+    */
+
+    // Check if vector big enough
+    if (spr->size() <= 2)
+        return;
+
+    if (!(*spr)[1]->isHero())
+        throw runtime_error("Hero is not in second vector slot");
+    else
+        hero = (*spr)[1];
 }
 
 #endif

@@ -25,7 +25,7 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     vs.push_back(TSnail);
     vs.push_back(TCat);
     vs.push_back(TBruh);
-    SpriteFactory *_sf = new SpriteFactory(100, vs, SCREEN_WIDTH, SCREEN_HEIGHT);
+    SpriteFactory *_sf = new SpriteFactory(100, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
 
     setFactory(_sf);
     

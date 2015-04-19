@@ -319,3 +319,41 @@ void SDLWrapper::displayText(string text, int x, int y, int fontSize)
     renderTextureToWindow(textTex, NULL, &dest);
 }
 
+void SDLWrapper::displayRectangle(int x, int y, int w, int h, SDL_Color c)
+{
+    /*
+     * Displays filled rectangle at given position
+    */
+
+    SDL_Rect fillRect = {x, y, w, h};
+    SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
+    SDL_RenderFillRect(renderer, &fillRect);
+}
+void SDLWrapper::displayImage(
+        string imgPath,
+        int x,
+        int y,
+        int w,
+        int h,
+        int shouldChroma,
+        uint8_t r,
+        uint8_t g,
+        uint8_t b
+        ) // Pass pixel to chroma key, empty for none
+{
+    /*
+     * Loads given image from path
+    */
+
+    TRTexture img = loadTexture(imgPath, shouldChroma, r, g, b);
+
+    // Check if passed size
+    if (!w)
+        w = img.getWidth();
+    if (!h)
+        h = img.getHeight();
+
+    SDL_Rect destRect = {x, y, w, h};
+    renderTextureToWindow(img, NULL, &destRect);
+}
+

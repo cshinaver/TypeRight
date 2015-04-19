@@ -9,6 +9,8 @@
 #include <stdexcept>
 #include "Bruh.h"
 #include "SpriteFactory.h"
+#include "Collision.h"
+#include "Level.h"
 
 // Test if window is instantiated
 TEST(SDLTest, IsWindowCreated) {
@@ -56,7 +58,7 @@ TEST(SpriteTest, SpriteGeneratedFromFactory)
     
     vector<SpriteType> vs;
     vs.push_back(TCat);
-    SpriteFactory sf(1, vs, 640, 480);
+    SpriteFactory sf(1, vs, "level1.txt", 640, 480);
     Sprite *s;
     s = NULL;
     s = sf.generateSprites();
@@ -76,7 +78,7 @@ TEST(SpriteTest, SpriteGeneratedOnCertainFrequency)
     
     vector<SpriteType> vs;
     vs.push_back(TCat);
-    SpriteFactory sf(generateFrame, vs, 640, 480);
+    SpriteFactory sf(generateFrame, vs,"level1.txt",  640, 480);
     Sprite *s;
     s = NULL;
 
@@ -94,4 +96,40 @@ TEST(SpriteTest, SpriteGeneratedOnCertainFrequency)
 
     sw.loadSprite(s);
     ASSERT_TRUE(s->getIsTextureLoaded() == 1);
+}
+
+TEST(SpriteTest, SpriteCollidesWithHero)
+{
+    // Inst sprites
+    Bruh *b = new Bruh;
+    Skeleton *s = new Skeleton;
+    Background *background = new Background();
+
+    // Set Hero
+    b->setIsHero();
+
+    // set sizes
+    b->setSize(30, 30);
+    s->setSize(30, 30);
+
+    // Store in vector
+    vector<Sprite *> vs;
+    vs.push_back(background);
+    vs.push_back(b);
+    vs.push_back(s);
+
+    // Set skeleton as same position as hero
+    b->setPos(50, 50);
+    s->setPos(50, 50);
+
+    // Collision detection
+    Collision cd = Collision(&vs);
+
+    // Check if hero is dead
+    cd.isDead();
+    ASSERT_TRUE(cd.isDead() == 1);
+
+    delete b;
+    delete s;
+    delete background;
 }
