@@ -108,6 +108,10 @@ TEST(SpriteTest, SpriteCollidesWithHero)
     // Set Hero
     b->setIsHero();
 
+    // set sizes
+    b->setSize(30, 30);
+    s->setSize(30, 30);
+
     // Store in vector
     vector<Sprite *> vs;
     vs.push_back(background);
