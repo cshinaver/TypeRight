@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <fstream>
+#include <stdexcept>
 #include "Sprite.h"
 #include "Cat.h"
 #include "Bruh.h"
