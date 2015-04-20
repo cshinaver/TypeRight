@@ -195,7 +195,6 @@ void Level::loadAndMovePowerups()
             powerUpSprites[i]->setDirection(UP);
         }
         powerUpSprites[i]->move();
-        powerUpSprites[i]->animate();
     }
 }
 
@@ -290,8 +289,9 @@ void Level::checkForActivatedPowerups()
         Sprite *firstPowerup = powerUpSprites[0];
         if (pressedChars == firstPowerup->getText()) // Remove if match
         {
-            delete powerUpSprites[0];
-            powerUpSprites.erase(powerUpSprites.begin() + 0);
+            // Call twice to switch to proper frame
+            firstPowerup->animate();
+            firstPowerup->animate();
             pressedChars.clear();
         }
     }

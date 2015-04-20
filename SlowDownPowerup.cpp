@@ -60,7 +60,7 @@ void SlowDownPowerup::setTexture(TRTexture tex)
 
 void SlowDownPowerup::animate()
 {
-    int speedConst = 8;   // Modify this to make sprite animation faster or slower
+    int speedConst = 1;   // Modify this to make sprite animation faster or slower
 
     /* ####################CYCLE FRAMES ################# */
     int tFrames = getTotalFrames();
