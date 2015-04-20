@@ -85,6 +85,8 @@ Sprite * SpriteFactory::generateSprites()
             case TSnail:
                 s = new Snail;
                 s->setFlip(1);
+            case TSlowDownPowerup:
+                s = new SlowDownPowerup;
                 break;
         }
 

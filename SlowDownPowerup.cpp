@@ -30,17 +30,17 @@ void SlowDownPowerup::setTexture(TRTexture tex)
 
     /* Spritesheet is 4x3, so calculate height and width of each clip */
     int cols = 2;
-    double unitCol = 16;
-    double unitRow = 17;
+    double unitCol = 21;
+    double unitRow = 19;
 
     for (int i = 0; i < cols; i++)
     {
         // Set SlowDownPowerup equal to second column sprites
         SDL_Rect frame;
-        frame.w = unitCol;
-        frame.h = unitRow;
-        frame.x = 18 + i*unitCol;
-        frame.y = 50;
+        frame.w = unitRow;
+        frame.h = unitCol;
+        frame.x = 13 + i*unitCol;
+        frame.y = 46;
 
         clips.push_back(frame);
     }
