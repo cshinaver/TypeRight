@@ -23,8 +23,8 @@ class Level
         void endLevel();
         void endGame();
         void addSprite(Sprite *);
-        SpriteFactory * getFactory();
-        void setFactory(SpriteFactory *_sf);
+        SpriteFactory * getEnemyFactory();
+        void setEnemyFactory(SpriteFactory *_sf);
         int numSprites();
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;

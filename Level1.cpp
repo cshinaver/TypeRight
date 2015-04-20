@@ -27,7 +27,7 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     vs.push_back(TBruh);
     SpriteFactory *_sf = new SpriteFactory(100, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    setFactory(_sf);
+    setEnemyFactory(_sf);
     
 }
 
@@ -38,7 +38,7 @@ void Level1::generateSprites()
     */
 
     Sprite *s = NULL;
-    SpriteFactory *sf = getFactory();
+    SpriteFactory *sf = getEnemyFactory();
     s = sf->generateSprites();
 
     // Check if new sprite added

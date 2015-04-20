@@ -150,12 +150,12 @@ int Level::numSprites()
     return (levelSprites.size() - 1);
 }
 
-SpriteFactory * Level::getFactory()
+SpriteFactory * Level::getEnemyFactory()
 {
     return sf;
 }
 
-void Level::setFactory(SpriteFactory *_sf)
+void Level::setEnemyFactory(SpriteFactory *_sf)
 {
     sf = _sf;
 }
