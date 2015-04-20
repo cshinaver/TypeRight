@@ -49,6 +49,49 @@ sub add_class_files
     close $new_sprite_imp;
 }
 
+sub add_to_cmake_file
+{
+    my $sprite_name = $_[0];
+
+    open my $cmake_fh, "<", "../CMakeLists.txt";
+    open my $new_cmake_fh, ">", "../newCMakeLists.txt";
+
+    my $cmake_newsprite_definition = "";
+    while (my $line = <$cmake_fh>)
+    {
+        # For definition, grab next two lines
+        if ($line =~ /Bruh Class/)
+        {
+            print $new_cmake_fh $line;
+
+            $line =~ s/Bruh/$sprite_name/g;
+            $cmake_newsprite_definition .= $line;
+            for my $i (0..1)
+            {
+                $line = <$cmake_fh>;
+                print $new_cmake_fh $line;
+                $line =~ s/Bruh/$sprite_name/g;
+                $cmake_newsprite_definition .= $line;
+            }
+            print $new_cmake_fh "\n$cmake_newsprite_definition";
+        }
+        elsif ($line =~ /Bruh_lib/)
+        {
+            $line =~ s/Bruh_lib/Bruh_lib ${sprite_name}_lib/;
+            print $new_cmake_fh $line;
+        }
+        else
+        {
+            print $new_cmake_fh $line;
+        }
+    }
+
+    # Rename old cmake file
+    `rm ../CMakeLists.txt`;
+    `mv ../newCMakeLists.txt ../CMakeLists.txt`;
+
+}
+
 sub create_new_sprite
 {
     my $sprite_name = $_[0];
@@ -57,6 +100,7 @@ sub create_new_sprite
     add_class_files $sprite_name;
     
     # Add to Cmake file
+    add_to_cmake_file $sprite_name;
 
     # Add to Sprite Factory
 
