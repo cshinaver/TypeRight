@@ -8,7 +8,7 @@ Pegasus::Pegasus() : Sprite()
     */
 
     setTexturePath("pegasus.png");
-    setChromaColor(0x20, 0xB5, 0x62);
+    setChromaColor(0xFF, 0x00, 0xFF);
     setDirection(RIGHT);
 }
 
@@ -36,7 +36,7 @@ void Pegasus::setTexture(TRTexture tex)
         frame.w = unitCol;
         frame.h = unitRow;
         frame.x = unitCol * i; 
-        frame.y = 0
+        frame.y = 0;
 
         clips.push_back(frame);
     }
