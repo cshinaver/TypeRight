@@ -17,6 +17,7 @@
 #include "Snail.h"
 #include "Soldier.h"
 #include "SlowDownPowerup.h"
+#include "Pegasus.h"
 
 enum SpriteType
 {
@@ -26,6 +27,7 @@ enum SpriteType
     TSnail,
     TSoldier,
     TSlowDownPowerup,
+    TPegasus,
 };
 
 class SpriteFactory
