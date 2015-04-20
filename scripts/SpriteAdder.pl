@@ -51,6 +51,7 @@ sub add_class_files
 
 sub add_to_cmake_file
 {
+    print "Adding to cmake file...\n";
     my $sprite_name = $_[0];
 
     open my $cmake_fh, "<", "../CMakeLists.txt";
@@ -92,6 +93,60 @@ sub add_to_cmake_file
 
 }
 
+sub add_to_sprite_factory
+{
+    print "Adding to sprite factory...\n";
+    my $sprite_name = $_[0];
+
+    open my $factory_header, "<", "../SpriteFactory.h";
+    open my $factory_imp, "<", "../SpriteFactory.cpp";
+    open my $new_factory_header, ">", "../newSpriteFactory.h";
+    open my $new_factory_imp, ">", "../newSpriteFactory.cpp";
+
+    while (my $line = <$factory_header>)
+    {
+        print $new_factory_header $line;
+        if ($line =~ /TBruh/)
+        {
+            $line =~ s/Bruh/$sprite_name/g;
+            print $new_factory_header $line;
+        }
+    }
+
+    while (my $line = <$factory_imp>)
+    {
+        my $new_case = "";
+        print $new_factory_imp $line;
+        if ($line =~ /case TBruh/)
+        {
+            $line =~ s/Bruh/$sprite_name/g;
+            $new_case .= $line;
+            $line = <$factory_imp>;
+            until ($line =~ /case/)
+            {
+                print $new_factory_imp $line;
+                $line =~ s/Bruh/$sprite_name/g;
+                $new_case .= $line;
+                $line = <$factory_imp>;
+            }
+            print $new_factory_imp $new_case;
+            print $new_factory_imp $line;
+        }
+    }
+
+    close $factory_header;
+    close $factory_imp;
+    close $new_factory_header;
+    close $new_factory_imp;
+
+    `rm ../SpriteFactory.h`;
+    `rm ../SpriteFactory.cpp`;
+    `mv ../newSpriteFactory.h ../SpriteFactory.h`;
+    `mv ../newSpriteFactory.cpp ../SpriteFactory.cpp`;
+
+
+}
+
 sub create_new_sprite
 {
     my $sprite_name = $_[0];
@@ -103,6 +158,9 @@ sub create_new_sprite
     add_to_cmake_file $sprite_name;
 
     # Add to Sprite Factory
+    add_to_sprite_factory $sprite_name;
+
+    print "Done!\n";
 
 }
 
