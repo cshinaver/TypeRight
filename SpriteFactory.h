@@ -46,6 +46,7 @@ class SpriteFactory
         vector<string> wordBank;
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;
+        int count;
 };
 
 #endif
