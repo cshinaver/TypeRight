@@ -106,6 +106,15 @@ sub add_to_sprite_factory
     while (my $line = <$factory_header>)
     {
         print $new_factory_header $line;
+
+        # Add include
+        if ($line =~ /Bruh\.h/)
+        {
+            $line =~ s/Bruh/$sprite_name/g;
+            print $new_factory_header $line;
+        }
+        
+        # add enum type
         if ($line =~ /TBruh/)
         {
             $line =~ s/Bruh/$sprite_name/g;
