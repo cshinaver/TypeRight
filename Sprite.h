@@ -31,6 +31,11 @@ enum LevelModifierType {
     SLOW_LEVEL,
 };
 
+struct LevelModifier {
+    LevelModifierType type;
+    int duration = 0;
+}
+
 class Sprite 
 {
     friend class SDLWrapper;
@@ -39,7 +44,7 @@ class Sprite
         virtual ~Sprite();
         virtual void move() = 0;
         virtual void animate() = 0;
-        virtual LevelModifier activateLevelModifier();
+        virtual LevelModifierType activateLevelModifier();
         int getPosX() { return posX; };
         int getPosY() { return posY; };
         void setPos(int x, int y);

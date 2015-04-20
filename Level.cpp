@@ -429,7 +429,7 @@ void Level::powerUpActivated(Sprite *powerUp)
      * Gets powerup from sprite
     */
 
-    LevelModifier lm = powerUp->activateLevelModifier();
+    LevelModifierType lm = powerUp->activateLevelModifier();
     activeModifiers.push_back(lm);
 
 }
@@ -443,7 +443,7 @@ void Level::handleActivatedLevelModifiers()
     if (activeModifiers.size() == 0)
         return;
 
-    LevelModifier lm;
+    LevelModifierType lm;
     for (int i = 0; i < (int)activeModifiers.size(); i++)
     {
         lm = activeModifiers[i];
