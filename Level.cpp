@@ -282,3 +282,17 @@ void Level::calculateLevelProgress()
         endLevel();
     }
 }
+
+SpriteFactory * Level::getPowerupFactory()
+{
+    /*
+     * Returns powerup factory
+    */
+
+    return powerupFactory;
+}
+
+void Level::setPowerupFactory(SpriteFactory *_pf)
+{
+    powerupFactory = _pf;
+}

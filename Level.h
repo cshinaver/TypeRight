@@ -25,12 +25,15 @@ class Level
         void addSprite(Sprite *);
         SpriteFactory * getEnemyFactory();
         void setEnemyFactory(SpriteFactory *_sf);
+        SpriteFactory * getPowerupFactory();
+        void setPowerupFactory(SpriteFactory *_pf);
         int numSprites();
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;
     private:
         Background *levelBackground;
         vector<Sprite *> levelSprites;
+        vector<Sprite *> powerUpSprites;
         void calculateLevelProgress();
         void loadAndMoveSprites();
         void levelFinished();
@@ -50,6 +53,7 @@ class Level
         SDLWrapper &sw;
         Collision cd;
         SpriteFactory *sf;
+        SpriteFactory *powerupFactory;
         string pressedChars;
 };
 
