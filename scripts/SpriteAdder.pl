@@ -7,13 +7,15 @@
 use strict;
 use warnings;
 
+my $pwd = `pwd`;
+
+die "Script must be run from scripts directory" if $pwd !~ /scripts/;
 # Check if user passed new sprite name
 if (scalar(@ARGV) == 0)
 {
     print "Usage: perl SpriteAdder.pl NewSpriteName\n";
     exit(1);
 }
-
 
 # Display info to user
 print "Welcome to SpriteAdder!\n";
