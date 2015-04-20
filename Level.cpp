@@ -282,6 +282,26 @@ void Level::checkForDefeatedSprites()
     }
 
 }
+void Level::checkForActivatedPowerups()
+{
+    /*
+     * Check for active powerups
+    */
+    if ((int)powerUpSprites.size() >= 1)
+    {
+        Sprite *firstPowerup = powerUpSprites[0];
+        if (pressedChars == firstPowerup->getText()) // Remove if match
+        {
+            //TODO
+            //spriteDefeated(2);
+        }
+        else if (firstPowerup->getText().substr(0, pressedChars.size()) != pressedChars ) // reset word if exceeds word length
+        {
+            //TODO resolve checking both
+            //pressedChars.clear();
+        }
+    }
+}
 
 void Level::checkForHeroDeath()
 {
