@@ -418,7 +418,7 @@ void Level::generatePowerups()
     s = pf->generateSprites();
 
     // Check if new sprite added
-    if (s != NULL && powerUpSprites.size() != 1)
+    if (s != NULL && powerUpSprites.size() != 1 && !isModifierActive())
     {
         // Set position
         s->setPos(SCREEN_WIDTH * .75, 20);
