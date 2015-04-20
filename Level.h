@@ -50,6 +50,7 @@ class Level
         void spriteDefeated(int spriteIndex);
         void checkForHeroDeath();
         void powerUpActivated(Sprite *powerUp);
+        int isModifierActive();
         virtual void generateSprites() = 0;
         int levelEnded;
         int gameEnded;

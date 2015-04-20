@@ -33,8 +33,8 @@ enum LevelModifierType {
 
 struct LevelModifier {
     LevelModifierType type;
-    int duration = 0;
-}
+    int duration;
+};
 
 class Sprite 
 {

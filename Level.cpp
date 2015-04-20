@@ -7,7 +7,6 @@
 #include "Level.h"
 #include <stdexcept>
 
-
 Level::Level(SDLWrapper &_sw, int _spritesToKill) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_sw.SCREEN_HEIGHT), totalSpritesToKill(_spritesToKill), sw(_sw)
 {
     /*
@@ -71,6 +70,7 @@ int Level::startLevel(int currentLevel)
 
         loadAndMoveSprites();
         loadAndMovePowerups();
+        handleActivatedLevelModifiers();
         displayInput();
         displayScore();
         
@@ -292,6 +292,7 @@ void Level::checkForActivatedPowerups()
             // Call twice to switch to proper frame
             firstPowerup->animate();
             firstPowerup->animate();
+            powerUpActivated(firstPowerup);
             pressedChars.clear();
         }
     }
@@ -368,13 +369,21 @@ void Level::calculateLevelProgress()
      * Calculates level progress
     */
 
-    double dg = 1.8;
+
+    double defaultChange;
 
     // Check defeated number of sprites
     // if greater or equal to half, increase speed
     if (spritesDefeated >= .5 * totalSpritesToKill)
-    {
-        globalSpeedModifier = dg;
+    { 
+        defaultChange = levelSprites[1]->getDt();
+        if (globalSpeedModifier != defaultChange)
+        {
+            if (!isModifierActive())
+            {
+                globalSpeedModifier = defaultChange;
+            }
+        }
     }
 
     if (spritesDefeated == totalSpritesToKill)
@@ -429,7 +438,11 @@ void Level::powerUpActivated(Sprite *powerUp)
      * Gets powerup from sprite
     */
 
-    LevelModifierType lm = powerUp->activateLevelModifier();
+    int totalDuration = 300;
+    LevelModifier lm;
+    lm.duration = totalDuration;
+    lm.type = powerUp->activateLevelModifier();
+
     activeModifiers.push_back(lm);
 
 }
@@ -443,21 +456,35 @@ void Level::handleActivatedLevelModifiers()
     if (activeModifiers.size() == 0)
         return;
 
-    LevelModifierType lm;
+    LevelModifier lm;
     for (int i = 0; i < (int)activeModifiers.size(); i++)
     {
         lm = activeModifiers[i];
 
-        //// Handle level modifications 
-        //switch (lm)
-        //{
-        //    case LEVEL_UNMODIFIED:
-        //        activeModifiers.erase(activeModifiers.begin() + i);
-        //        return;
-        //        break;
-        //    case SLOW_LEVEL:
-
-
-        //}
+        // Handle level modifications 
+        switch (lm.type)
+        {
+            case LEVEL_UNMODIFIED:
+                activeModifiers.erase(activeModifiers.begin() + i);
+                return;
+                break;
+            case SLOW_LEVEL:
+                if (lm.duration == 0)
+                {
+                    globalSpeedModifier = 0;
+                    activeModifiers.erase(activeModifiers.begin() + i);
+                }
+                else
+                {
+                    double dt = levelSprites[1]->getDt();
+                    globalSpeedModifier = -1 *dt*.5;
+                    activeModifiers[i].duration--;
+                }
+        }
     }
+}
+
+int Level::isModifierActive()
+{
+    return ((int)activeModifiers.size() > 0) ? 1 : 0;
 }
