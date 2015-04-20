@@ -189,13 +189,27 @@ void SDLWrapper::clearWindow()
     SDL_RenderClear(renderer);
 }
 
-void SDLWrapper::renderTextureToWindow(TRTexture _texture, SDL_Rect *clip, SDL_Rect *dest)
+void SDLWrapper::renderTextureToWindow(
+        TRTexture _texture,
+        SDL_Rect *clip,
+        SDL_Rect *dest,
+        double angleOfRotation,
+        int flip
+    )
 {
     /*
      * Renders texture to window
     */
 
-    SDL_RenderCopy(renderer, _texture.texture, clip, dest);
+    SDL_RendererFlip desiredFlip;
+    if (flip)
+    {
+        desiredFlip = SDL_FLIP_HORIZONTAL;
+    }
+    else
+        desiredFlip = SDL_FLIP_NONE;
+
+    SDL_RenderCopyEx(renderer, _texture.texture, clip, dest, angleOfRotation, NULL, desiredFlip);
 }
 
 void SDLWrapper::loadSprite( Sprite * _sprite)
@@ -228,7 +242,7 @@ void SDLWrapper::loadSprite( Sprite * _sprite)
     dest.w = _sprite->getWidth();
     dest.h = _sprite->getHeight();
 
-    renderTextureToWindow(_sprite->textureSrc, &src, &dest);
+    renderTextureToWindow(_sprite->textureSrc, &src, &dest, 0, _sprite->getFlip());
 
     // Load sprite text
     // dh and dx between text and sprite

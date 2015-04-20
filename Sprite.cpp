@@ -20,6 +20,7 @@ Sprite::Sprite()
     setWidth(0);
     setHeight(0);
     text = "";
+    flip = 0;
 }
 
 Sprite::~Sprite()

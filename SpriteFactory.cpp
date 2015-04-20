@@ -68,18 +68,23 @@ Sprite * SpriteFactory::generateSprites()
         {
             case TCat:
                 s = new Cat;
+                s->setFlip(1);
                 break;
             case TSkeleton:
                 s = new Skeleton;
+                s->setFlip(1);
                 break;
             case TSoldier:
                 s = new Soldier;
+                s->setFlip(1);
                 break;
             case TBruh:
                 s = new Bruh;
+                s->setFlip(1);
                 break;
             case TSnail:
                 s = new Snail;
+                s->setFlip(1);
                 break;
         }
 
@@ -104,7 +109,7 @@ void SpriteFactory::setDefault(Sprite * _s)
      * Sets sprite default characteristsics
     */
 
-    _s->setPos(SCREEN_WIDTH * 17./20, SCREEN_HEIGHT * .625);
+    _s->setPos(SCREEN_WIDTH * 19./20, SCREEN_HEIGHT * .625);
     _s->setSize(100, 100);
 
 }
