@@ -33,7 +33,13 @@ class SDLWrapper
         void quit(); // Deallocs SDL window and surface
         void updateWindow(); // Updates window surface
         void clearWindow(); // Clears window
-        void renderTextureToWindow(TRTexture, SDL_Rect* = NULL, SDL_Rect* = NULL); // Renders texture to window
+        void renderTextureToWindow(
+            TRTexture,
+            SDL_Rect* = NULL,
+            SDL_Rect* = NULL,
+            double angleOfRotation = 0,
+            int flip = 0
+            ); // Renders texture to window
         void displayText(string text, int x, int y, int fontSize = 28);
         void displayRectangle(int x, int y, int w, int h, SDL_Color c);
         SDL_Surface * loadImg(string);

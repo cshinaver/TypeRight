@@ -67,6 +67,8 @@ class Sprite
         void setDirection(DirectionType);
         void setIsHero() { hero = 1; };
         int isHero() { return hero; };
+        int getFlip() { return flip; };
+        void setFlip(int _flip) { flip = _flip; };
     private:
         string texturePath;
         string text;
@@ -84,6 +86,7 @@ class Sprite
         int shouldChroma;
         DirectionType direction;
         int hero;
+        int flip;
 };
 
 #endif
