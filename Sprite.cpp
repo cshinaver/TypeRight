@@ -12,7 +12,7 @@ Sprite::Sprite()
      * Default constructor
     */
 
-    dt = 4;
+    dt = 1;
     setDirection(RIGHT);
     hero = 0;
     isTextureLoaded = 0;
