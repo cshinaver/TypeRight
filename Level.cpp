@@ -58,6 +58,7 @@ int Level::startLevel(int currentLevel)
         calculateLevelProgress();
         handleKeyboardEvents();
         generateSprites();
+        generatePowerups();
 
         checkForHeroDeath();
         checkForDefeatedSprites();
@@ -67,6 +68,7 @@ int Level::startLevel(int currentLevel)
         sw.clearWindow();
 
         loadAndMoveSprites();
+        loadAndMovePowerups();
         displayInput();
         displayScore();
         
@@ -123,6 +125,8 @@ void Level::loadAndMoveSprites()
      * Loads and moves sprites
     */
 
+    int x, y;
+    int bufferZone = 50;
     // Load and move every sprite
     for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
     {
@@ -131,6 +135,20 @@ void Level::loadAndMoveSprites()
         // If not background or hero, move towards hero
         if (i > levelSprites.begin() + 1)
         {
+            // Check if offscreen
+            x = (*i)->getPosX();
+            y = (*i)->getPosY();
+            if (
+                x > SCREEN_WIDTH + bufferZone ||
+                x < 0 - bufferZone ||
+                y > SCREEN_HEIGHT + bufferZone ||
+                y < 0 - bufferZone
+            )
+            {
+                delete (*i);
+                levelSprites.erase(i);
+                continue;
+            }
             (*i)->move();
             // Add global speed modifier
             (*i)->setPos((*i)->getPosX() + -1 * globalSpeedModifier, (*i)->getPosY());
@@ -138,6 +156,45 @@ void Level::loadAndMoveSprites()
         (*i)->animate();
     }
 
+}
+
+void Level::loadAndMovePowerups()
+{
+    /*
+     * Loads and moves powerups
+    */
+
+    int x,y, bufferZone;
+    bufferZone = 50;
+
+    for (int i = 0; i < (int)powerUpSprites.size(); i++)
+    {
+        // Dealloc powerups if out of range
+        x = powerUpSprites[i]->getPosX();
+        y = powerUpSprites[i]->getPosY();
+        if (
+                x > SCREEN_WIDTH + bufferZone ||
+                x < 0 - bufferZone ||
+                y > SCREEN_HEIGHT + bufferZone ||
+                y < 0 - bufferZone
+           )
+        {
+            delete powerUpSprites[i];
+            powerUpSprites.erase(powerUpSprites.begin() + i);
+            continue;
+        }
+
+        // Load, move, and animate
+        sw.loadSprite(powerUpSprites[i]);
+
+        // Move back up if powerup down part of screen
+        if (y > .25 * SCREEN_HEIGHT)
+        {
+            powerUpSprites[i]->setDirection(UP);
+        }
+        powerUpSprites[i]->move();
+        powerUpSprites[i]->animate();
+    }
 }
 
 void Level::setBackground(Background *_back)
@@ -295,4 +352,30 @@ SpriteFactory * Level::getPowerupFactory()
 void Level::setPowerupFactory(SpriteFactory *_pf)
 {
     powerupFactory = _pf;
+}
+
+void Level::generatePowerups()
+{
+    /*
+     * Generates powerups
+     * Only generates if one is not in play
+    */
+
+    Sprite *s = NULL;
+    SpriteFactory *pf = getPowerupFactory();
+    s = pf->generateSprites();
+
+    // Check if new sprite added
+    if (s != NULL && powerUpSprites.size() != 1)
+    {
+        // Set position
+        s->setPos(SCREEN_WIDTH * .75, 20);
+        s->setDirection(DOWN);
+        powerUpSprites.push_back(s);
+    }
+    else if (s != NULL && powerUpSprites.size() >= 1)
+    {
+        delete s;
+    }
+
 }

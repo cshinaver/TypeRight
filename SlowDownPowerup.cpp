@@ -80,9 +80,19 @@ void SlowDownPowerup::move()
 {
     // MOVEMENT
     // gets direction and moves sprite based on it
-    if (getDirection() == LEFT)
+    switch (getDirection())
+    {
+        case LEFT:
         setPos(getPosX() + getDt(), getPosY());
-    else
+        break;
+        case UP:
+        setPos(getPosX(), getPosY() - getDt());
+        break;
+        case DOWN:
+        setPos(getPosX(), getPosY() + getDt());
+        break;
+        case RIGHT:
         setPos(getPosX() - getDt(), getPosY());
-
+        break;
+    }
 }

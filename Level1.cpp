@@ -21,13 +21,18 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
 
     /* ##################SET ALLOWED SPRITES############### */
     vector<SpriteType> vs;
+    vector<SpriteType> powerupSprites;
     vs.push_back(TSkeleton);
     vs.push_back(TSnail);
     vs.push_back(TCat);
     vs.push_back(TBruh);
+
+    powerupSprites.push_back(TSlowDownPowerup);
     SpriteFactory *_sf = new SpriteFactory(100, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
+    SpriteFactory *_pf = new SpriteFactory(50, powerupSprites, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
 
     setEnemyFactory(_sf);
+    setPowerupFactory(_pf);
     
 }
 

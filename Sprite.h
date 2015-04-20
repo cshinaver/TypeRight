@@ -14,6 +14,8 @@
 using namespace std;
 
 enum DirectionType {
+    UP,
+    DOWN,
     RIGHT,
     LEFT
 };
