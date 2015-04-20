@@ -35,6 +35,7 @@ class Level
         Background *levelBackground;
         vector<Sprite *> levelSprites;
         vector<Sprite *> powerUpSprites;
+        vector<LevelModifier> activeModifiers;
         void calculateLevelProgress();
         void loadAndMoveSprites();
         void loadAndMovePowerups();
@@ -44,9 +45,11 @@ class Level
         void displayScore();
         void checkForDefeatedSprites();
         void checkForActivatedPowerups();
+        void handleActivatedLevelModifiers();
         void checkForIncorrectChars();
         void spriteDefeated(int spriteIndex);
         void checkForHeroDeath();
+        void powerUpActivated(Sprite *powerUp);
         virtual void generateSprites() = 0;
         int levelEnded;
         int gameEnded;

@@ -422,3 +422,42 @@ void Level::generatePowerups()
     }
 
 }
+
+void Level::powerUpActivated(Sprite *powerUp)
+{
+    /*
+     * Gets powerup from sprite
+    */
+
+    LevelModifier lm = powerUp->activateLevelModifier();
+    activeModifiers.push_back(lm);
+
+}
+
+void Level::handleActivatedLevelModifiers()
+{
+    /*
+     * Handles level modifiers
+    */
+
+    if (activeModifiers.size() == 0)
+        return;
+
+    LevelModifier lm;
+    for (int i = 0; i < (int)activeModifiers.size(); i++)
+    {
+        lm = activeModifiers[i];
+
+        //// Handle level modifications 
+        //switch (lm)
+        //{
+        //    case LEVEL_UNMODIFIED:
+        //        activeModifiers.erase(activeModifiers.begin() + i);
+        //        return;
+        //        break;
+        //    case SLOW_LEVEL:
+
+
+        //}
+    }
+}

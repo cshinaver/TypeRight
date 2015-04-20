@@ -18,6 +18,7 @@ class SlowDownPowerup : public Sprite
         void setTexture(TRTexture tex);
         virtual void move();
         virtual void animate();
+        virtual LevelModifier activateLevelModifier();
 };
 
 #endif

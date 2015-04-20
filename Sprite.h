@@ -26,6 +26,11 @@ struct Color {
     uint8_t b;
 };
 
+enum LevelModifierType {
+    LEVEL_UNMODIFIED,
+    SLOW_LEVEL,
+};
+
 class Sprite 
 {
     friend class SDLWrapper;
@@ -34,6 +39,7 @@ class Sprite
         virtual ~Sprite();
         virtual void move() = 0;
         virtual void animate() = 0;
+        virtual LevelModifier activateLevelModifier();
         int getPosX() { return posX; };
         int getPosY() { return posY; };
         void setPos(int x, int y);

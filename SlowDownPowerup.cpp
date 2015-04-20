@@ -96,3 +96,12 @@ void SlowDownPowerup::move()
         break;
     }
 }
+
+LevelModifier SlowDownPowerup::activateLevelModifier()
+{
+    /*
+     * Define in subclasses to activate level modifier
+    */
+    LevelModifier lm = SLOW_LEVEL;
+    return lm;
+}
