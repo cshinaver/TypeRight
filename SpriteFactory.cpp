@@ -130,7 +130,7 @@ vector<string> loadWordsFromFile(string filePath)
     string line;
     vector<string> wordBank;
     string fullFilePath = "../words/" + filePath;
-    ifstream fin(fullFilePath);
+    ifstream fin(fullFilePath.c_str());
     if (fin.is_open())
     {
         while(getline(fin, line))

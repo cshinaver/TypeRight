@@ -81,7 +81,7 @@ target_link_libraries(SpriteFactory_lib sdlwrapper_lib Bruh_lib Cat_lib Soldier_
 
 # Level Class
 add_library(Level_lib Level.cpp)
-target_link_libraries(Level_lib Background_lib sdlwrapper_lib Sprite_lib)
+target_link_libraries(Level_lib Background_lib sdlwrapper_lib Sprite_lib Collision_lib)
 
 # Level 1 Class
 add_library(Level1_lib Level1.cpp)
