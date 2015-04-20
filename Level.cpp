@@ -62,6 +62,8 @@ int Level::startLevel(int currentLevel)
 
         checkForHeroDeath();
         checkForDefeatedSprites();
+        checkForActivatedPowerups();
+        checkForIncorrectChars();
 
         // Clear screen
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
@@ -275,10 +277,6 @@ void Level::checkForDefeatedSprites()
         {
             spriteDefeated(2);
         }
-        else if (firstEnemy->getText().substr(0, pressedChars.size()) != pressedChars ) // reset word if exceeds word length
-        {
-            pressedChars.clear();
-        }
     }
 
 }
@@ -292,17 +290,41 @@ void Level::checkForActivatedPowerups()
         Sprite *firstPowerup = powerUpSprites[0];
         if (pressedChars == firstPowerup->getText()) // Remove if match
         {
-            //TODO
-            //spriteDefeated(2);
-        }
-        else if (firstPowerup->getText().substr(0, pressedChars.size()) != pressedChars ) // reset word if exceeds word length
-        {
-            //TODO resolve checking both
-            //pressedChars.clear();
+            delete powerUpSprites[0];
+            powerUpSprites.erase(powerUpSprites.begin() + 0);
+            pressedChars.clear();
         }
     }
 }
 
+void Level::checkForIncorrectChars()
+{
+    /*
+     * Checks if input characters don't match word or powerup
+    */
+
+    int matches = 0;
+    Sprite *firstPowerup;
+    Sprite *firstEnemy;
+    if (powerUpSprites.size() > 0)
+    {
+        firstPowerup = powerUpSprites[0];
+        if (firstPowerup->getText().substr(0, pressedChars.size()) == pressedChars)
+            matches = 1;
+    }
+    if (levelSprites.size() > 2)
+    {
+        firstEnemy = levelSprites[2];
+        if (firstEnemy->getText().substr(0, pressedChars.size()) == pressedChars)
+            matches = 1;
+    }
+
+    if (!matches)
+    {
+        pressedChars.clear();
+    }
+
+}
 void Level::checkForHeroDeath()
 {
     /*
@@ -323,6 +345,7 @@ void Level::spriteDefeated(int spriteIndex)
     delete levelSprites[spriteIndex];
     levelSprites.erase(levelSprites.begin() + spriteIndex);
     spritesDefeated++;
+    pressedChars.clear();
 }
 
 void Level::displayScore()

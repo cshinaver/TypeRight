@@ -44,6 +44,7 @@ class Level
         void displayScore();
         void checkForDefeatedSprites();
         void checkForActivatedPowerups();
+        void checkForIncorrectChars();
         void spriteDefeated(int spriteIndex);
         void checkForHeroDeath();
         virtual void generateSprites() = 0;
