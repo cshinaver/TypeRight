@@ -29,7 +29,7 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
 
     powerupSprites.push_back(TSlowDownPowerup);
     SpriteFactory *_sf = new SpriteFactory(100, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
-    SpriteFactory *_pf = new SpriteFactory(50, powerupSprites, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
+    SpriteFactory *_pf = new SpriteFactory(500, powerupSprites, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
 
     setEnemyFactory(_sf);
     setPowerupFactory(_pf);
