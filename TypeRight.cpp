@@ -57,7 +57,7 @@ void TypeRight::startGame()
                 nextLevel = l2.startLevel();
                 break;
             case 3:
-                nextLevel = l3.startLevel();    
+                nextLevel = l3.startLevel();
                 break;
         }
 
