@@ -17,7 +17,7 @@
 class Level
 {
     public:
-        Level(SDLWrapper &_sw, int _spritesToKill = 20);
+        Level(SDLWrapper &_sw, string _levelText, int _spritesToKill = 20);
         int startLevel(int currentLevel);
         void setBackground(Background *_back);
         void endLevel();
@@ -36,6 +36,7 @@ class Level
         vector<Sprite *> levelSprites;
         vector<Sprite *> powerUpSprites;
         vector<LevelModifier> activeModifiers;
+        void levelIntro();
         void calculateLevelProgress();
         void loadAndMoveSprites();
         void loadAndMovePowerups();
@@ -57,6 +58,7 @@ class Level
         int nextLevel;
         int spritesDefeated;
         const int totalSpritesToKill;
+        const string levelText;
         double globalSpeedModifier; // Globaly changes speed
         SDLWrapper &sw;
         Collision cd;

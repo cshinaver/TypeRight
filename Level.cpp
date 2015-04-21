@@ -7,7 +7,12 @@
 #include "Level.h"
 #include <stdexcept>
 
-Level::Level(SDLWrapper &_sw, int _spritesToKill) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_sw.SCREEN_HEIGHT), totalSpritesToKill(_spritesToKill), sw(_sw)
+Level::Level(SDLWrapper &_sw, string _levelText, int _spritesToKill) 
+    : SCREEN_WIDTH(_sw.SCREEN_WIDTH),
+    SCREEN_HEIGHT(_sw.SCREEN_HEIGHT),
+    totalSpritesToKill(_spritesToKill),
+    levelText(_levelText),
+    sw(_sw)
 {
     /*
      * Default base constructor
@@ -51,6 +56,9 @@ int Level::startLevel(int currentLevel)
 
     addSprite(s);
 
+    // Show level intro
+    levelIntro();
+
     while (!levelEnded)
     {
         // Make changes based on number of defeated sprites
@@ -89,6 +97,13 @@ int Level::startLevel(int currentLevel)
     {
         return ++currentLevel;
     }
+}
+
+void Level::levelIntro()
+{
+    /*
+     * Shows intro level text, moves hero onscreen
+    */
 }
 
 void Level::levelFinished()
