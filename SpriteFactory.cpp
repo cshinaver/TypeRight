@@ -86,10 +86,6 @@ Sprite * SpriteFactory::generateSprites()
                 s = new Snail;
                 s->setFlip(1);
                 break;
-            case TPegasus:
-                s = new Pegasus;
-                s->setFlip(1);
-                break;
             case TSlowDownPowerup:
                 s = new SlowDownPowerup;
                 break;
