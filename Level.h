@@ -63,6 +63,7 @@ class Level
         SpriteFactory *sf;
         SpriteFactory *powerupFactory;
         string pressedChars;
+        Hero *heroPtr;
 };
 
 #endif

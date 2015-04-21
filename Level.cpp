@@ -39,7 +39,8 @@ int Level::startLevel(int currentLevel)
     }
 
     // Add hero
-    Sprite *s = new Hero;
+    heroPtr = new Hero;
+    Sprite *s = heroPtr;
 
     // Set defaults for hero
     sf->setDefault(s);
@@ -275,6 +276,8 @@ void Level::checkForDefeatedSprites()
         if (pressedChars == firstEnemy->getText()) // Remove if match
         {
             spriteDefeated(2);
+            heroPtr->setAttacking(1);
+            heroPtr->setAttackFlag(1);
         }
     }
 
