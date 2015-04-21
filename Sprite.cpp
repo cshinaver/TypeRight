@@ -97,3 +97,11 @@ void Sprite::setDirection(DirectionType d)
     direction = d;
 }
 
+LevelModifierType Sprite::activateLevelModifier()
+{
+    /*
+     * Define in subclasses to activate level modifier
+    */
+    LevelModifierType lm = LEVEL_UNMODIFIED;
+    return lm;
+}

@@ -14,6 +14,8 @@
 using namespace std;
 
 enum DirectionType {
+    UP,
+    DOWN,
     RIGHT,
     LEFT
 };
@@ -24,6 +26,16 @@ struct Color {
     uint8_t b;
 };
 
+enum LevelModifierType {
+    LEVEL_UNMODIFIED,
+    SLOW_LEVEL,
+};
+
+struct LevelModifier {
+    LevelModifierType type;
+    int duration;
+};
+
 class Sprite 
 {
     friend class SDLWrapper;
@@ -32,6 +44,7 @@ class Sprite
         virtual ~Sprite();
         virtual void move() = 0;
         virtual void animate() = 0;
+        virtual LevelModifierType activateLevelModifier();
         int getPosX() { return posX; };
         int getPosY() { return posY; };
         void setPos(int x, int y);

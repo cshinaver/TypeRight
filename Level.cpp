@@ -7,7 +7,6 @@
 #include "Level.h"
 #include <stdexcept>
 
-
 Level::Level(SDLWrapper &_sw, int _spritesToKill) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_sw.SCREEN_HEIGHT), totalSpritesToKill(_spritesToKill), sw(_sw)
 {
     /*
@@ -58,15 +57,20 @@ int Level::startLevel(int currentLevel)
         calculateLevelProgress();
         handleKeyboardEvents();
         generateSprites();
+        generatePowerups();
 
         checkForHeroDeath();
         checkForDefeatedSprites();
+        checkForActivatedPowerups();
+        checkForIncorrectChars();
 
         // Clear screen
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
         loadAndMoveSprites();
+        loadAndMovePowerups();
+        handleActivatedLevelModifiers();
         displayInput();
         displayScore();
         
@@ -123,6 +127,8 @@ void Level::loadAndMoveSprites()
      * Loads and moves sprites
     */
 
+    int x, y;
+    int bufferZone = 50;
     // Load and move every sprite
     for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
     {
@@ -131,6 +137,20 @@ void Level::loadAndMoveSprites()
         // If not background or hero, move towards hero
         if (i > levelSprites.begin() + 1)
         {
+            // Check if offscreen
+            x = (*i)->getPosX();
+            y = (*i)->getPosY();
+            if (
+                x > SCREEN_WIDTH + bufferZone ||
+                x < 0 - bufferZone ||
+                y > SCREEN_HEIGHT + bufferZone ||
+                y < 0 - bufferZone
+            )
+            {
+                delete (*i);
+                levelSprites.erase(i);
+                continue;
+            }
             (*i)->move();
             // Add global speed modifier
             (*i)->setPos((*i)->getPosX() + -1 * globalSpeedModifier, (*i)->getPosY());
@@ -138,6 +158,44 @@ void Level::loadAndMoveSprites()
         (*i)->animate();
     }
 
+}
+
+void Level::loadAndMovePowerups()
+{
+    /*
+     * Loads and moves powerups
+    */
+
+    int x,y, bufferZone;
+    bufferZone = 50;
+
+    for (int i = 0; i < (int)powerUpSprites.size(); i++)
+    {
+        // Dealloc powerups if out of range
+        x = powerUpSprites[i]->getPosX();
+        y = powerUpSprites[i]->getPosY();
+        if (
+                x > SCREEN_WIDTH + bufferZone ||
+                x < 0 - bufferZone ||
+                y > SCREEN_HEIGHT + bufferZone ||
+                y < 0 - bufferZone
+           )
+        {
+            delete powerUpSprites[i];
+            powerUpSprites.erase(powerUpSprites.begin() + i);
+            continue;
+        }
+
+        // Load, move, and animate
+        sw.loadSprite(powerUpSprites[i]);
+
+        // Move back up if powerup down part of screen
+        if (y > .25 * SCREEN_HEIGHT)
+        {
+            powerUpSprites[i]->setDirection(UP);
+        }
+        powerUpSprites[i]->move();
+    }
 }
 
 void Level::setBackground(Background *_back)
@@ -150,12 +208,12 @@ int Level::numSprites()
     return (levelSprites.size() - 1);
 }
 
-SpriteFactory * Level::getFactory()
+SpriteFactory * Level::getEnemyFactory()
 {
     return sf;
 }
 
-void Level::setFactory(SpriteFactory *_sf)
+void Level::setEnemyFactory(SpriteFactory *_sf)
 {
     sf = _sf;
 }
@@ -218,14 +276,56 @@ void Level::checkForDefeatedSprites()
         {
             spriteDefeated(2);
         }
-        else if (firstEnemy->getText().substr(0, pressedChars.size()) != pressedChars ) // reset word if exceeds word length
-        {
-            pressedChars.clear();
-        }
     }
 
 }
+void Level::checkForActivatedPowerups()
+{
+    /*
+     * Check for active powerups
+    */
+    if ((int)powerUpSprites.size() >= 1)
+    {
+        Sprite *firstPowerup = powerUpSprites[0];
+        if (pressedChars == firstPowerup->getText()) // Remove if match
+        {
+            // Call twice to switch to proper frame
+            firstPowerup->animate();
+            firstPowerup->animate();
+            powerUpActivated(firstPowerup);
+            pressedChars.clear();
+        }
+    }
+}
 
+void Level::checkForIncorrectChars()
+{
+    /*
+     * Checks if input characters don't match word or powerup
+    */
+
+    int matches = 0;
+    Sprite *firstPowerup;
+    Sprite *firstEnemy;
+    if (powerUpSprites.size() > 0)
+    {
+        firstPowerup = powerUpSprites[0];
+        if (firstPowerup->getText().substr(0, pressedChars.size()) == pressedChars)
+            matches = 1;
+    }
+    if (levelSprites.size() > 2)
+    {
+        firstEnemy = levelSprites[2];
+        if (firstEnemy->getText().substr(0, pressedChars.size()) == pressedChars)
+            matches = 1;
+    }
+
+    if (!matches)
+    {
+        pressedChars.clear();
+    }
+
+}
 void Level::checkForHeroDeath()
 {
     /*
@@ -246,6 +346,7 @@ void Level::spriteDefeated(int spriteIndex)
     delete levelSprites[spriteIndex];
     levelSprites.erase(levelSprites.begin() + spriteIndex);
     spritesDefeated++;
+    pressedChars.clear();
 }
 
 void Level::displayScore()
@@ -268,17 +369,122 @@ void Level::calculateLevelProgress()
      * Calculates level progress
     */
 
-    double dg = 1.8;
+
+    double defaultChange;
 
     // Check defeated number of sprites
     // if greater or equal to half, increase speed
     if (spritesDefeated >= .5 * totalSpritesToKill)
-    {
-        globalSpeedModifier = dg;
+    { 
+        defaultChange = levelSprites[1]->getDt();
+        if (globalSpeedModifier != defaultChange)
+        {
+            if (!isModifierActive())
+            {
+                globalSpeedModifier = defaultChange;
+            }
+        }
     }
 
     if (spritesDefeated == totalSpritesToKill)
     {
         endLevel();
     }
+}
+
+SpriteFactory * Level::getPowerupFactory()
+{
+    /*
+     * Returns powerup factory
+    */
+
+    return powerupFactory;
+}
+
+void Level::setPowerupFactory(SpriteFactory *_pf)
+{
+    powerupFactory = _pf;
+}
+
+void Level::generatePowerups()
+{
+    /*
+     * Generates powerups
+     * Only generates if one is not in play
+    */
+
+    Sprite *s = NULL;
+    SpriteFactory *pf = getPowerupFactory();
+    s = pf->generateSprites();
+
+    // Check if new sprite added
+    if (s != NULL && powerUpSprites.size() != 1 && !isModifierActive())
+    {
+        // Set position
+        s->setPos(SCREEN_WIDTH * .75, 20);
+        s->setDirection(DOWN);
+        powerUpSprites.push_back(s);
+    }
+    else if (s != NULL && powerUpSprites.size() >= 1)
+    {
+        delete s;
+    }
+
+}
+
+void Level::powerUpActivated(Sprite *powerUp)
+{
+    /*
+     * Gets powerup from sprite
+    */
+
+    int totalDuration = 300;
+    LevelModifier lm;
+    lm.duration = totalDuration;
+    lm.type = powerUp->activateLevelModifier();
+
+    activeModifiers.push_back(lm);
+
+}
+
+void Level::handleActivatedLevelModifiers()
+{
+    /*
+     * Handles level modifiers
+    */
+
+    if (activeModifiers.size() == 0)
+        return;
+
+    LevelModifier lm;
+    for (int i = 0; i < (int)activeModifiers.size(); i++)
+    {
+        lm = activeModifiers[i];
+
+        // Handle level modifications 
+        switch (lm.type)
+        {
+            case LEVEL_UNMODIFIED:
+                activeModifiers.erase(activeModifiers.begin() + i);
+                return;
+                break;
+            case SLOW_LEVEL:
+                if (lm.duration == 0)
+                {
+                    globalSpeedModifier = 0;
+                    activeModifiers.erase(activeModifiers.begin() + i);
+                }
+                else
+                {
+                    double dt = levelSprites[1]->getDt();
+                    globalSpeedModifier = -1 *dt*.5;
+                    activeModifiers[i].duration--;
+                }
+        }
+    }
+}
+
+int Level::isModifierActive()
+{
+    return ((int)activeModifiers.size() > 0) ? 1 : 0;
 }

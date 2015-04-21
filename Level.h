@@ -23,23 +23,34 @@ class Level
         void endLevel();
         void endGame();
         void addSprite(Sprite *);
-        SpriteFactory * getFactory();
-        void setFactory(SpriteFactory *_sf);
+        SpriteFactory * getEnemyFactory();
+        void setEnemyFactory(SpriteFactory *_sf);
+        SpriteFactory * getPowerupFactory();
+        void setPowerupFactory(SpriteFactory *_pf);
         int numSprites();
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;
     private:
+        void generatePowerups();
         Background *levelBackground;
         vector<Sprite *> levelSprites;
+        vector<Sprite *> powerUpSprites;
+        vector<LevelModifier> activeModifiers;
         void calculateLevelProgress();
         void loadAndMoveSprites();
+        void loadAndMovePowerups();
         void levelFinished();
         void handleKeyboardEvents();
         void displayInput();
         void displayScore();
         void checkForDefeatedSprites();
+        void checkForActivatedPowerups();
+        void handleActivatedLevelModifiers();
+        void checkForIncorrectChars();
         void spriteDefeated(int spriteIndex);
         void checkForHeroDeath();
+        void powerUpActivated(Sprite *powerUp);
+        int isModifierActive();
         virtual void generateSprites() = 0;
         int levelEnded;
         int gameEnded;
@@ -50,6 +61,7 @@ class Level
         SDLWrapper &sw;
         Collision cd;
         SpriteFactory *sf;
+        SpriteFactory *powerupFactory;
         string pressedChars;
 };
 

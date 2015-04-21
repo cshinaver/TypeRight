@@ -81,7 +81,7 @@ target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_
 
 # SpriteFactory Class
 add_library(SpriteFactory_lib SpriteFactory.cpp)
-target_link_libraries(SpriteFactory_lib sdlwrapper_lib Bruh_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib Pegasus_lib)
+target_link_libraries(SpriteFactory_lib sdlwrapper_lib Bruh_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib SlowDownPowerup_lib Pegasus_lib)
 
 # Level Class
 add_library(Level_lib Level.cpp)
@@ -102,6 +102,10 @@ target_link_libraries(Level3_lib Level_lib)
 # Collision Class
 add_library(Collision_lib collision.cpp)
 target_link_libraries(Collision_lib Sprite_lib)
+
+# SlowDownPowerup Class
+add_library(SlowDownPowerup_lib slowDownPowerup.cpp)
+target_link_libraries(SlowDownPowerup_lib Sprite_lib)
 
 # main
 add_executable(main main.cpp)
