@@ -89,6 +89,7 @@ Sprite * SpriteFactory::generateSprites()
             case TPegasus:
                 s = new Pegasus;
                 s->setFlip(1);
+                break;
             case TSlowDownPowerup:
                 s = new SlowDownPowerup;
                 break;
