@@ -6,6 +6,7 @@
 
 #include "Level.h"
 #include <stdexcept>
+#include <cmath>
 
 Level::Level(SDLWrapper &_sw, string _levelText, int _spritesToKill) 
     : SCREEN_WIDTH(_sw.SCREEN_WIDTH),
@@ -62,32 +63,32 @@ int Level::startLevel(int currentLevel)
     // Show level intro
     levelIntro();
 
-    while (!levelEnded)
-    {
-        // Make changes based on number of defeated sprites
-        calculateLevelProgress();
-        handleKeyboardEvents();
-        generateSprites();
-        generatePowerups();
+    //while (!mainLevelEnded)
+    //{
+    //    // Make changes based on number of defeated sprites
+    //    calculateLevelProgress();
+    //    handleKeyboardEvents();
+    //    generateSprites();
+    //    generatePowerups();
 
-        checkForHeroDeath();
-        checkForDefeatedSprites();
-        checkForActivatedPowerups();
-        checkForIncorrectChars();
+    //    checkForHeroDeath();
+    //    checkForDefeatedSprites();
+    //    checkForActivatedPowerups();
+    //    checkForIncorrectChars();
 
-        // Clear screen
-        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
-        sw.clearWindow();
+    //    // Clear screen
+    //    SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
+    //    sw.clearWindow();
 
-        loadAndMoveSprites();
-        loadAndMovePowerups();
-        handleActivatedLevelModifiers();
-        displayInput();
-        displayScore();
-        
-        // Update screen
-        sw.updateWindow();
-    }
+    //    loadAndMoveSprites();
+    //    loadAndMovePowerups();
+    //    handleActivatedLevelModifiers();
+    //    displayInput();
+    //    displayScore();
+    //    
+    //    // Update screen
+    //    sw.updateWindow();
+    //}
     
     bossBattle();
 
@@ -136,6 +137,8 @@ void Level::bossBattle()
      * Runs Boss battle
     */
 
+    double t =  M_PI / 2;
+
     // Clear sprites vector
     if ((int)levelSprites.size() > 2)
     {
@@ -150,11 +153,13 @@ void Level::bossBattle()
     // Fly Dragon in
     Dragon *d = new Dragon;
     d->setPos(SCREEN_WIDTH * 19./20, SCREEN_HEIGHT * .625);
+    double desiredYHeight = d->getPosY();
     d->setSize(40, 40);
     addSprite(d);
     int count = 0;
-    while (count < 200)
+    while (count < 500 && !gameEnded)
     {
+        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
         sw.clearWindow();
 
         // Stop at certain position
@@ -167,9 +172,17 @@ void Level::bossBattle()
             sw.loadSprite(levelSprites[i]);
         }
 
-        if (count > 100)
+        if (count > 100 && count < 200)
         {
             sw.displayText("?", levelSprites[1]->getPosX() + 40, levelSprites[1]->getPosY() - 20, 28);
+        }
+
+        if (count > 200)
+        {
+            double frac = .007;
+            double r = 80;
+            d->setPos(r * cos(t) + SCREEN_WIDTH * 16./20 , r * sin(t) + desiredYHeight - r);
+            t -= M_PI * frac;
         }
 
         // only animate dragon
@@ -180,11 +193,46 @@ void Level::bossBattle()
         count++;
     }
 
+    // Main battle begin
+    vector<SpriteType> vs;
+    vs.push_back(TFireball);
+    SpriteFactory *ff = new SpriteFactory(300, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
+    setEnemyFactory(ff);
     while(!bossBattleEnded && !levelEnded)
     {
-        loadAndMoveSprites();
+        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
+        sw.clearWindow();
         handleKeyboardEvents();
+
+        // Generate new sprites
+        Sprite *s = NULL;
+        s = ff->generateSprites();
+        if (s != NULL)
+        {
+            s->setPos(d->getPosX() - 60, d->getPosY()-70);
+            s->setSize(SCREEN_WIDTH * 4./8, SCREEN_HEIGHT * 4./8);
+            addSprite(s);
+        }
+
+
+        checkForHeroDeath();
+        //checkForDefeatedSprites();
+        checkForIncorrectChars();
+
         // Move hero since not done by first method
+        // Load all sprites
+        loadAndMoveSprites();
+
+
+        double frac = .007;
+        double r = 80;
+        d->setPos(r * cos(t) + SCREEN_WIDTH * 16./20 , r * sin(t) + desiredYHeight - r);
+        t -= M_PI * frac;
+
+        // only animate dragon
+        d->animate();
+
+        displayInput();
 
         // Update screen
         sw.updateWindow();
@@ -436,7 +484,14 @@ void Level::checkForIncorrectChars()
     }
     if (levelSprites.size() > 2)
     {
-        firstEnemy = levelSprites[2];
+        if (mainLevelEnded)
+        {
+            firstEnemy = levelSprites[3];
+        }
+        else
+        {
+            firstEnemy = levelSprites[2];
+        }
         if (firstEnemy->getText().substr(0, pressedChars.size()) == pressedChars)
             matches = 1;
     }
