@@ -78,23 +78,6 @@ void SlowDownPowerup::animate()
 
 void SlowDownPowerup::move()
 {
-    // MOVEMENT
-    // gets direction and moves sprite based on it
-    switch (getDirection())
-    {
-        case LEFT:
-        setPos(getPosX() + getDt(), getPosY());
-        break;
-        case UP:
-        setPos(getPosX(), getPosY() - getDt());
-        break;
-        case DOWN:
-        setPos(getPosX(), getPosY() + getDt());
-        break;
-        case RIGHT:
-        setPos(getPosX() - getDt(), getPosY());
-        break;
-    }
 }
 
 LevelModifierType SlowDownPowerup::activateLevelModifier()

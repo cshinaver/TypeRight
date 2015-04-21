@@ -232,7 +232,7 @@ void Level::loadAndMovePowerups()
 
         if (i == 0)
         {
-            powerUpSprites[i]->setPos(powerUpSprites[1]->getPosX(), powerUpSprites[1]->getPosY());
+            powerUpSprites[i]->setPos(powerUpSprites[1]->getPosX() + 22, powerUpSprites[1]->getPosY() - 15);
         }
         else if (i == 1)
         {
@@ -482,6 +482,7 @@ void Level::generatePowerups()
         // Set position
         p->setPos(SCREEN_WIDTH/3, -90);
         s->setPos(SCREEN_WIDTH/3, -90);
+        s->setSize(40, 40);
         s->setDirection(DOWN);
         powerUpSprites.push_back(s);
         powerUpSprites.push_back(p);
