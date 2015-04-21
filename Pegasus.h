@@ -17,6 +17,10 @@ class Pegasus : public Sprite
         void setTexture(TRTexture tex);
         virtual void move();
         virtual void animate();
+        double xOffset;
+        double yOffset;
+    private:
+        double t;
 };
 
 #endif

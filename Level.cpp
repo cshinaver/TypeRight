@@ -163,7 +163,7 @@ void Level::loadAndMoveSprites()
     */
 
     int x, y;
-    int bufferZone = 50;
+    int bufferZone = 250;
     // Load and move every sprite
     for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
     {
@@ -208,7 +208,7 @@ void Level::loadAndMovePowerups()
     */
 
     int x,y, bufferZone;
-    bufferZone = 50;
+    bufferZone = 200;
 
     for (int i = 0; i < (int)powerUpSprites.size(); i++)
     {
@@ -230,12 +230,25 @@ void Level::loadAndMovePowerups()
         // Load, move, and animate
         sw.loadSprite(powerUpSprites[i]);
 
-        // Move back up if powerup down part of screen
-        if (y > .25 * SCREEN_HEIGHT)
+        if (i == 0)
         {
-            powerUpSprites[i]->setDirection(UP);
+            powerUpSprites[i]->setPos(powerUpSprites[1]->getPosX(), powerUpSprites[1]->getPosY());
         }
+        else if (i == 1)
+        {
+            powerUpSprites[i]->animate();
+        }
+
         powerUpSprites[i]->move();
+
+        // Check if crossed border
+        if (i == ((int)powerUpSprites.size() - 1) && y < 0 - 80 && x > SCREEN_WIDTH / 2)
+        {
+            delete powerUpSprites[i];
+            powerUpSprites.erase(powerUpSprites.begin() + i);
+            delete powerUpSprites[i - 1];
+            powerUpSprites.erase(powerUpSprites.begin() + i - 1);
+        }
     }
 }
 
@@ -459,12 +472,20 @@ void Level::generatePowerups()
     s = pf->generateSprites();
 
     // Check if new sprite added
-    if (s != NULL && powerUpSprites.size() != 1 && !isModifierActive())
+    if (s != NULL && powerUpSprites.size() == 0 && !isModifierActive())
     {
+        // Spawn pegasus
+        Pegasus *p = new Pegasus;
+        p->xOffset = 270;
+        p->yOffset = 0;
+
         // Set position
-        s->setPos(SCREEN_WIDTH * .75, 20);
+        p->setPos(SCREEN_WIDTH/3, -90);
+        s->setPos(SCREEN_WIDTH/3, -90);
         s->setDirection(DOWN);
         powerUpSprites.push_back(s);
+        powerUpSprites.push_back(p);
+
     }
     else if (s != NULL && powerUpSprites.size() >= 1)
     {
