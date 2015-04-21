@@ -8,8 +8,10 @@ Hero::Hero() : Sprite()
     */
 
     setTexturePath("hero.png");
-    setChromaColor(0x20, 0xB5, 0x62);
+    setChromaColor(0xFF, 0x00, 0xFF);
     setDirection(RIGHT);
+    setAttacking(0);
+    setAttackFlag(0);
 }
 
 void Hero::setTexture(TRTexture tex)
@@ -23,7 +25,7 @@ void Hero::setTexture(TRTexture tex)
     setCurrentFrame(0);
     setTotalFrames(0);
 
-    /* Spritesheet is 4x3, so calculate height and width of each clip */
+    /* Spritesheet is 2x4, so calculate height and width of each clip */
     int rows = 2;
     int cols = 4;
     double unitCol = tex.getWidth() / cols;
@@ -40,8 +42,20 @@ void Hero::setTexture(TRTexture tex)
 
         clips.push_back(frame);
     }
+    
+    for (int i = 0; i < cols; i++)
+    {
+        // Set bruh equal to second column sprites
+        SDL_Rect frame;
+        frame.w = unitCol;
+        frame.h = unitRow;
+        frame.x = unitCol * i;
+        frame.y = unitRow;
 
+        clips.push_back(frame);
+    } 
     setTextureClips(clips);
+
 
     // If height or width already set, don't reset
     if (!getWidth())
@@ -60,13 +74,38 @@ void Hero::animate()
 
     /* ####################CYCLE FRAMES ################# */
     int tFrames = getTotalFrames();
-    setCurrentFrame(tFrames / speedConst);
-    tFrames++;
     setTotalFrames(tFrames);
-    if (tFrames / speedConst >= (int)textureClips.size())
+    if (isAttacking())
     {
-        tFrames = 0;
+        if (attackFlag)
+        {
+            tFrames = textureClips.size()/2;
+            setCurrentFrame(tFrames);
+            setAttackFlag(0);
+        }
+        else
+        {
+            setCurrentFrame(tFrames / speedConst + textureClips.size()/2);
+        }
+        tFrames++;
         setTotalFrames(tFrames);
+        if (tFrames / speedConst >= (int)textureClips.size()/2)
+        {
+            tFrames = 0;
+            setTotalFrames(tFrames);
+            setAttacking(0);
+        }
+    }
+    else
+    {
+        setCurrentFrame(tFrames / speedConst);
+        tFrames++;
+        setTotalFrames(tFrames);
+        if (tFrames / speedConst >= (int)textureClips.size()/2)
+        {
+            tFrames = 0;
+            setTotalFrames(tFrames);
+        }
     }
     /* ####################CYCLE FRAMES ################# */
 }
@@ -81,4 +120,23 @@ void Hero::move()
     else
         setPos(getPosX() - getDt(), getPosY());
 
+}
+
+void Hero::attack()
+{
+    int speedConst = 8;   // Modify this to make sprite animation faster or slower
+
+    /* ####################CYCLE FRAMES ################# */
+    int tFrames = getTotalFrames();
+    setCurrentFrame(tFrames / speedConst);
+    tFrames++;
+    setTotalFrames(tFrames);
+    cout << "Running correct 4" << endl;
+    if (tFrames / speedConst >= (int)textureClips.size())
+    {
+        tFrames = 0;
+        setTotalFrames(tFrames);
+//        attacking = 0;
+    }
+    /* ####################CYCLE FRAMES ################# */
 }
