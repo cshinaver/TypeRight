@@ -57,6 +57,7 @@ class Level
         int gameEnded;
         int nextLevel;
         int spritesDefeated;
+        int levelBegun;
         const int totalSpritesToKill;
         const string levelText;
         double globalSpeedModifier; // Globaly changes speed

@@ -20,6 +20,7 @@ Level::Level(SDLWrapper &_sw, string _levelText, int _spritesToKill)
 
     levelEnded = 0;
     levelBackground = NULL;
+    levelBegun = 0;
     gameEnded = 0;
     cd.setSpriteVector(&levelSprites);
     spritesDefeated = 0;
@@ -50,7 +51,7 @@ int Level::startLevel(int currentLevel)
     sf->setDefault(s);
 
     // Set position of hero
-    s->setPos(SCREEN_WIDTH * .0125, s->getPosY());
+    s->setPos(-400, s->getPosY());
 
     s->setIsHero();
 
@@ -104,6 +105,25 @@ void Level::levelIntro()
     /*
      * Shows intro level text, moves hero onscreen
     */
+
+    Sprite *hero = levelSprites[1];
+    double dt = hero->getDt();
+    double desiredX = .0125 * SCREEN_WIDTH;
+    globalSpeedModifier = -1 * dt * 2;
+    while(hero->getPosX() < desiredX && !levelEnded)
+    {
+        loadAndMoveSprites();
+        handleKeyboardEvents();
+        // Move hero since not done by first method
+
+        sw.displayText(levelText, SCREEN_WIDTH / 2.3, SCREEN_HEIGHT / 8, 30);
+
+        // Update screen
+        sw.updateWindow();
+
+    }
+    levelBegun = 1;
+    globalSpeedModifier = 0;
 }
 
 void Level::levelFinished()
@@ -166,6 +186,12 @@ void Level::loadAndMoveSprites()
                 levelSprites.erase(i);
                 continue;
             }
+            (*i)->move();
+            // Add global speed modifier
+            (*i)->setPos((*i)->getPosX() + -1 * globalSpeedModifier, (*i)->getPosY());
+        }
+        else if (i == levelSprites.begin() + 1 && !levelBegun)
+        {
             (*i)->move();
             // Add global speed modifier
             (*i)->setPos((*i)->getPosX() + -1 * globalSpeedModifier, (*i)->getPosY());
