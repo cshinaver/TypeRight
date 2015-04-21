@@ -39,7 +39,7 @@ int Level::startLevel(int currentLevel)
     }
 
     // Add hero
-    Sprite *s = new Bruh;
+    Sprite *s = new Hero;
 
     // Set defaults for hero
     sf->setDefault(s);
