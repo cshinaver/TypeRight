@@ -12,7 +12,7 @@ Sprite::Sprite()
      * Default constructor
     */
 
-    dt = 4;
+    dt = 2;
     setDirection(RIGHT);
     hero = 0;
     isTextureLoaded = 0;
@@ -97,3 +97,11 @@ void Sprite::setDirection(DirectionType d)
     direction = d;
 }
 
+LevelModifierType Sprite::activateLevelModifier()
+{
+    /*
+     * Define in subclasses to activate level modifier
+    */
+    LevelModifierType lm = LEVEL_UNMODIFIED;
+    return lm;
+}

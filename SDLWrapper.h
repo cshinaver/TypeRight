@@ -24,6 +24,8 @@ struct TRFont
     int fontSize;
 };
 
+typedef pair<string, int> FontKey;
+
 class SDLWrapper
 {
     public:
@@ -76,7 +78,7 @@ class SDLWrapper
                 uint8_t b = 0,
                 string fontStr = "OpenSans-Regular.ttf"
                 ); // TTF_Text
-        map<string, TRFont> fonts;
+        map<FontKey, TRFont> fonts;
 };
 
 #endif

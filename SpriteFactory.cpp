@@ -31,6 +31,7 @@ SpriteFactory::SpriteFactory(
 
     // Set words
     wordBank = loadWordsFromFile(wordBankFilepath);
+    count = 0;
 }
 
 Sprite * SpriteFactory::getSprite(int typeDesired)
@@ -47,7 +48,6 @@ Sprite * SpriteFactory::generateSprites()
 {
     // Counts frames and generates based on frame number
     Sprite *s = NULL;
-    static int count = 0;
     int chosenSpriteIndex, chosenWordIndex;
     SpriteType chosenSprite;
     string chosenWord;
@@ -85,6 +85,9 @@ Sprite * SpriteFactory::generateSprites()
             case TSnail:
                 s = new Snail;
                 s->setFlip(1);
+                break;
+            case TSlowDownPowerup:
+                s = new SlowDownPowerup;
                 break;
         }
 

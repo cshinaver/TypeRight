@@ -14,8 +14,10 @@
 #include "Cat.h"
 #include "Bruh.h"
 #include "Skeleton.h"
+#include "Pegasus.h"
 #include "Snail.h"
 #include "Soldier.h"
+#include "SlowDownPowerup.h"
 
 enum SpriteType
 {
@@ -24,6 +26,7 @@ enum SpriteType
     TSkeleton,
     TSnail,
     TSoldier,
+    TSlowDownPowerup,
 };
 
 class SpriteFactory
@@ -45,6 +48,7 @@ class SpriteFactory
         vector<string> wordBank;
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;
+        int count;
 };
 
 #endif
