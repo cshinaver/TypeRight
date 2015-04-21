@@ -7,7 +7,12 @@
 #include "Level.h"
 #include <stdexcept>
 
-Level::Level(SDLWrapper &_sw, int _spritesToKill) : SCREEN_WIDTH(_sw.SCREEN_WIDTH), SCREEN_HEIGHT(_sw.SCREEN_HEIGHT), totalSpritesToKill(_spritesToKill), sw(_sw)
+Level::Level(SDLWrapper &_sw, string _levelText, int _spritesToKill) 
+    : SCREEN_WIDTH(_sw.SCREEN_WIDTH),
+    SCREEN_HEIGHT(_sw.SCREEN_HEIGHT),
+    totalSpritesToKill(_spritesToKill),
+    levelText(_levelText),
+    sw(_sw)
 {
     /*
      * Default base constructor
@@ -15,6 +20,7 @@ Level::Level(SDLWrapper &_sw, int _spritesToKill) : SCREEN_WIDTH(_sw.SCREEN_WIDT
 
     levelEnded = 0;
     levelBackground = NULL;
+    levelBegun = 0;
     gameEnded = 0;
     cd.setSpriteVector(&levelSprites);
     spritesDefeated = 0;
@@ -46,11 +52,14 @@ int Level::startLevel(int currentLevel)
     sf->setDefault(s);
 
     // Set position of hero
-    s->setPos(SCREEN_WIDTH * .0125, s->getPosY());
+    s->setPos(-400, s->getPosY());
 
     s->setIsHero();
 
     addSprite(s);
+
+    // Show level intro
+    levelIntro();
 
     while (!levelEnded)
     {
@@ -92,6 +101,32 @@ int Level::startLevel(int currentLevel)
     }
 }
 
+void Level::levelIntro()
+{
+    /*
+     * Shows intro level text, moves hero onscreen
+    */
+
+    Sprite *hero = levelSprites[1];
+    double dt = hero->getDt();
+    double desiredX = .0125 * SCREEN_WIDTH;
+    globalSpeedModifier = -1 * dt * 2;
+    while(hero->getPosX() < desiredX && !levelEnded)
+    {
+        loadAndMoveSprites();
+        handleKeyboardEvents();
+        // Move hero since not done by first method
+
+        sw.displayText(levelText, SCREEN_WIDTH / 2.3, SCREEN_HEIGHT / 8, 30);
+
+        // Update screen
+        sw.updateWindow();
+
+    }
+    levelBegun = 1;
+    globalSpeedModifier = 0;
+}
+
 void Level::levelFinished()
 {
     /*
@@ -129,7 +164,7 @@ void Level::loadAndMoveSprites()
     */
 
     int x, y;
-    int bufferZone = 50;
+    int bufferZone = 250;
     // Load and move every sprite
     for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
     {
@@ -156,6 +191,12 @@ void Level::loadAndMoveSprites()
             // Add global speed modifier
             (*i)->setPos((*i)->getPosX() + -1 * globalSpeedModifier, (*i)->getPosY());
         }
+        else if (i == levelSprites.begin() + 1 && !levelBegun)
+        {
+            (*i)->move();
+            // Add global speed modifier
+            (*i)->setPos((*i)->getPosX() + -1 * globalSpeedModifier, (*i)->getPosY());
+        }
         (*i)->animate();
     }
 
@@ -168,7 +209,7 @@ void Level::loadAndMovePowerups()
     */
 
     int x,y, bufferZone;
-    bufferZone = 50;
+    bufferZone = 200;
 
     for (int i = 0; i < (int)powerUpSprites.size(); i++)
     {
@@ -190,12 +231,25 @@ void Level::loadAndMovePowerups()
         // Load, move, and animate
         sw.loadSprite(powerUpSprites[i]);
 
-        // Move back up if powerup down part of screen
-        if (y > .25 * SCREEN_HEIGHT)
+        if (i == 0)
         {
-            powerUpSprites[i]->setDirection(UP);
+            powerUpSprites[i]->setPos(powerUpSprites[1]->getPosX() + 22, powerUpSprites[1]->getPosY() - 15);
         }
+        else if (i == 1)
+        {
+            powerUpSprites[i]->animate();
+        }
+
         powerUpSprites[i]->move();
+
+        // Check if crossed border
+        if (i == ((int)powerUpSprites.size() - 1) && y < 0 - 80 && x > SCREEN_WIDTH / 2)
+        {
+            delete powerUpSprites[i];
+            powerUpSprites.erase(powerUpSprites.begin() + i);
+            delete powerUpSprites[i - 1];
+            powerUpSprites.erase(powerUpSprites.begin() + i - 1);
+        }
     }
 }
 
@@ -421,12 +475,21 @@ void Level::generatePowerups()
     s = pf->generateSprites();
 
     // Check if new sprite added
-    if (s != NULL && powerUpSprites.size() != 1 && !isModifierActive())
+    if (s != NULL && powerUpSprites.size() == 0 && !isModifierActive())
     {
+        // Spawn pegasus
+        Pegasus *p = new Pegasus;
+        p->xOffset = 270;
+        p->yOffset = 0;
+
         // Set position
-        s->setPos(SCREEN_WIDTH * .75, 20);
+        p->setPos(SCREEN_WIDTH/3, -90);
+        s->setPos(SCREEN_WIDTH/3, -90);
+        s->setSize(40, 40);
         s->setDirection(DOWN);
         powerUpSprites.push_back(s);
+        powerUpSprites.push_back(p);
+
     }
     else if (s != NULL && powerUpSprites.size() >= 1)
     {

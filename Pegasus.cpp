@@ -1,5 +1,6 @@
 /*############## .cpp ############################### */
 #include "Pegasus.h"
+#include <cmath>
 
 Pegasus::Pegasus() : Sprite()
 {
@@ -10,6 +11,7 @@ Pegasus::Pegasus() : Sprite()
     setTexturePath("pegasus.png");
     setChromaColor(0xFF, 0x00, 0xFF);
     setDirection(RIGHT);
+    t = 7 * M_PI / 6;
 }
 
 void Pegasus::setTexture(TRTexture tex)
@@ -76,9 +78,8 @@ void Pegasus::move()
 {
     // MOVEMENT
     // gets direction and moves sprite based on it
-    if (getDirection() == LEFT)
-        setPos(getPosX() + getDt(), getPosY());
-    else
-        setPos(getPosX() - getDt(), getPosY());
-
+    double frac = .007;
+    double r = 100;
+    setPos(r * cos(t) + xOffset, r * sin(t));
+    t -= M_PI * frac;
 }

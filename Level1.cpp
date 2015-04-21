@@ -7,7 +7,7 @@
 #include "Level1.h"
 #include "SpriteFactory.h"
 
-Level1::Level1(SDLWrapper &sw) : Level(sw)
+Level1::Level1(SDLWrapper &sw) : Level(sw, "Level 1", 20)
 {
     /*
      * Default constructor
@@ -26,7 +26,7 @@ Level1::Level1(SDLWrapper &sw) : Level(sw)
     vs.push_back(TSnail);
     vs.push_back(TCat);
     vs.push_back(TBruh);
-    vs.push_back(TPegasus);
+
     powerupSprites.push_back(TSlowDownPowerup);
     SpriteFactory *_sf = new SpriteFactory(100, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
     SpriteFactory *_pf = new SpriteFactory(500, powerupSprites, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);

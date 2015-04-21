@@ -16,6 +16,7 @@
 #include "Lightsaber.h"
 #include "Hero.h"
 #include "Skeleton.h"
+#include "Pegasus.h"
 #include "Snail.h"
 #include "Soldier.h"
 #include "Pegasus.h"
