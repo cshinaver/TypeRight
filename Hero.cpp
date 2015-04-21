@@ -121,22 +121,3 @@ void Hero::move()
         setPos(getPosX() - getDt(), getPosY());
 
 }
-
-void Hero::attack()
-{
-    int speedConst = 8;   // Modify this to make sprite animation faster or slower
-
-    /* ####################CYCLE FRAMES ################# */
-    int tFrames = getTotalFrames();
-    setCurrentFrame(tFrames / speedConst);
-    tFrames++;
-    setTotalFrames(tFrames);
-    cout << "Running correct 4" << endl;
-    if (tFrames / speedConst >= (int)textureClips.size())
-    {
-        tFrames = 0;
-        setTotalFrames(tFrames);
-//        attacking = 0;
-    }
-    /* ####################CYCLE FRAMES ################# */
-}
