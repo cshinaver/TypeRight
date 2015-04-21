@@ -15,6 +15,7 @@
 #include "Bruh.h"
 #include "Skeleton.h"
 #include "Pegasus.h"
+#include "Dragon.h"
 #include "Snail.h"
 #include "Soldier.h"
 #include "SlowDownPowerup.h"
