@@ -96,7 +96,7 @@ void SDLWrapper::quit()
     SDL_FreeSurface(screenSurface);
 
     // Free fonts
-    for (map<string, TRFont>::iterator i = fonts.begin(); i != fonts.end(); i++)
+    for (map<FontKey, TRFont>::iterator i = fonts.begin(); i != fonts.end(); i++)
     {
         TTF_Font *font = i->second.fontPtr;
         TTF_CloseFont(font);
@@ -294,10 +294,12 @@ TRFont SDLWrapper::getFont(string fontStr, int fontSize)
 
     string fontFullname = "../fonts/" + fontStr;
 
+    FontKey fk(fontStr, fontSize);
+
     // Check if font in map
-    if (fonts.count(fontStr))
+    if (fonts.count(fk))
     {
-        TRFont font = fonts[fontStr];
+        TRFont font = fonts[fk];
         // Check if font size same
         if (fontSize == font.fontSize)
         {
@@ -309,7 +311,7 @@ TRFont SDLWrapper::getFont(string fontStr, int fontSize)
     TRFont newFont;
     newFont.fontSize = fontSize;
     newFont.fontPtr = TTF_OpenFont(fontFullname.c_str(), fontSize);
-    fonts.insert (pair<string, TRFont>(fontStr, newFont));
+    fonts.insert(pair<FontKey, TRFont>(fk, newFont));
     return newFont;
 }
 
