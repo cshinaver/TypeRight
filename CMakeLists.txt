@@ -51,6 +51,14 @@ target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib SpriteFactory_lib 
 add_library(Bruh_lib Bruh.cpp)
 target_link_libraries(Bruh_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
+# Lightsaber Class
+add_library(Lightsaber_lib Lightsaber.cpp)
+target_link_libraries(Lightsaber_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
+# Hero Class
+add_library(Hero_lib Hero.cpp)
+target_link_libraries(Hero_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
 # Soldier Class
 add_library(Soldier_lib Soldier.cpp)
 target_link_libraries(Soldier_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
@@ -77,11 +85,11 @@ target_link_libraries(Background_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${S
 
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_lib Background_lib Bruh_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib Pegasus_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_lib Background_lib Bruh_lib Lightsaber_lib Hero_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib Pegasus_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # SpriteFactory Class
 add_library(SpriteFactory_lib SpriteFactory.cpp)
-target_link_libraries(SpriteFactory_lib sdlwrapper_lib Bruh_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib SlowDownPowerup_lib Pegasus_lib)
+target_link_libraries(SpriteFactory_lib sdlwrapper_lib Bruh_lib Lightsaber_lib Hero_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib SlowDownPowerup_lib Pegasus_lib)
 
 # Level Class
 add_library(Level_lib Level.cpp)
@@ -121,7 +129,7 @@ add_subdirectory(gtest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 add_executable(main_unittests main_unittests.cpp)
-target_link_libraries(main_unittests sdlwrapper_lib gtest gtest_main SpriteFactory_lib Bruh_lib Level_lib Collision_lib)
+target_link_libraries(main_unittests sdlwrapper_lib gtest gtest_main SpriteFactory_lib Bruh_lib Lightsaber_lib Hero_lib Level_lib Collision_lib)
 
 add_test(main_unittests main_unittests)
 
