@@ -150,49 +150,54 @@ void Level::bossBattle()
     }
     powerUpSprites.clear();
 
-    // Fly Dragon in
+    /*####################### Fly Dragon in#############################*/
     Dragon *d = new Dragon;
     d->setPos(SCREEN_WIDTH * 19./20, SCREEN_HEIGHT * .625);
     double desiredYHeight = d->getPosY();
     d->setSize(40, 40);
     addSprite(d);
-    int count = 0;
-    while (count < 500 && !gameEnded)
-    {
-        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
-        sw.clearWindow();
+    //int count = 0;
+    //while (count < 500 && !gameEnded)
+    //{
+    //    SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
+    //    sw.clearWindow();
 
-        // Stop at certain position
-        if (d->getPosX() > SCREEN_WIDTH * 16./20 )
-            d->setPos(d->getPosX() - d->getDt(), d->getPosY());
+    //    // Stop at certain position
+    //    if (d->getPosX() > SCREEN_WIDTH * 16./20 )
+    //        d->setPos(d->getPosX() - d->getDt(), d->getPosY());
 
-        // Load all sprites
-        for (int i = 0; i < (int)levelSprites.size(); i++)
-        {
-            sw.loadSprite(levelSprites[i]);
-        }
+    //    // Load all sprites
+    //    for (int i = 0; i < (int)levelSprites.size(); i++)
+    //    {
+    //        sw.loadSprite(levelSprites[i]);
+    //    }
 
-        if (count > 100 && count < 200)
-        {
-            sw.displayText("?", levelSprites[1]->getPosX() + 40, levelSprites[1]->getPosY() - 20, 28);
-        }
+    //    if (count > 100 && count < 200)
+    //    {
+    //        sw.displayText("?", levelSprites[1]->getPosX() + 40, levelSprites[1]->getPosY() - 20, 28);
+    //    }
 
-        if (count > 200)
-        {
-            double frac = .007;
-            double r = 80;
-            d->setPos(r * cos(t) + SCREEN_WIDTH * 16./20 , r * sin(t) + desiredYHeight - r);
-            t -= M_PI * frac;
-        }
+    //    if (count > 200)
+    //    {
+    //        double frac = .007;
+    //        double r = 80;
+    //        d->setPos(r * cos(t) + SCREEN_WIDTH * 16./20 , r * sin(t) + desiredYHeight - r);
+    //        t -= M_PI * frac;
+    //    }
 
-        // only animate dragon
-        d->animate();
+    //    // only animate dragon
+    //    d->animate();
 
-        // Update screen
-        sw.updateWindow();
-        count++;
-    }
+    //    // Update screen
+    //    sw.updateWindow();
+    //    count++;
+    //}
 
+    /*################################################################*/
+    // Testing
+    d->setPos(SCREEN_WIDTH * 16./20, d->getPosY());
+    /*#############*/
+    /*#######################Battle Begin#############################*/
     // Main battle begin
     vector<SpriteType> vs;
     vs.push_back(TFireball);
@@ -239,6 +244,7 @@ void Level::bossBattle()
 
     }
 
+    /*################################################################*/
 }
 
 void Level::levelFinished()
