@@ -151,6 +151,7 @@ void Level::bossBattle()
     }
     powerUpSprites.clear();
     activeModifiers.clear();
+    globalSpeedModifier = 4;
 
     /*####################### Fly Dragon in#############################*/
     Dragon *d = new Dragon;
@@ -202,7 +203,7 @@ void Level::bossBattle()
     // Main battle begin
     vector<SpriteType> vs;
     vs.push_back(TFireball);
-    SpriteFactory *ff = new SpriteFactory(300, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
+    SpriteFactory *ff = new SpriteFactory(600, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
     setEnemyFactory(ff);
     spritesDefeated = 0;
     while(!bossBattleEnded && !levelEnded)
