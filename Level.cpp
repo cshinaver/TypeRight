@@ -151,7 +151,7 @@ void Level::bossBattle()
     }
     powerUpSprites.clear();
     activeModifiers.clear();
-    globalSpeedModifier = 4;
+    globalSpeedModifier = 2; // set fireball speed
 
     /*####################### Fly Dragon in#############################*/
     Dragon *d = new Dragon;
