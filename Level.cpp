@@ -221,7 +221,7 @@ void Level::bossBattle()
 
 
         checkForHeroDeath();
-        //checkForDefeatedSprites();
+        checkForDefeatedSprites();
         checkForIncorrectChars();
 
         // Move hero since not done by first method
@@ -444,14 +444,28 @@ void Level::checkForDefeatedSprites()
      * Checks if any of the sprites have been killed
     */
 
-    if ((int)levelSprites.size() > 2)
+    if (mainLevelEnded)
     {
-        Sprite *firstEnemy = levelSprites[2];
-        if (pressedChars == firstEnemy->getText()) // Remove if match
+        if ((int)levelSprites.size() > 3)
         {
-            spriteDefeated(2);
+            Sprite *firstEnemy = levelSprites[3];
+            if (pressedChars == firstEnemy->getText()) // Remove if match
+            {
+                spriteDefeated(3);
+            }
         }
     }
+    else
+    {
+        if ((int)levelSprites.size() > 2)
+        {
+            Sprite *firstEnemy = levelSprites[2];
+            if (pressedChars == firstEnemy->getText()) // Remove if match
+            {
+                spriteDefeated(2);
+            }
+        }
+}
 
 }
 void Level::checkForActivatedPowerups()
