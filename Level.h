@@ -60,6 +60,7 @@ class Level
         int spritesDefeated;
         int levelBegun;
         int bossBattleEnded;
+        int bossEndFightBegun;
         int mainLevelEnded;
         const int totalSpritesToKill;
         const string levelText;
