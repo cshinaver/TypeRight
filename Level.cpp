@@ -490,7 +490,7 @@ void Level::checkForIncorrectChars()
     }
     if (levelSprites.size() > 2)
     {
-        if (mainLevelEnded)
+        if (mainLevelEnded && levelSprites.size() > 3)
         {
             firstEnemy = levelSprites[3];
         }
