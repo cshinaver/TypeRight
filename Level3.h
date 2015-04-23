@@ -1,6 +1,6 @@
 /*
  * Level3.h
- * Madelyn Nelson
+ * Charles Shinaver
  * Level 3 Class
 */
 

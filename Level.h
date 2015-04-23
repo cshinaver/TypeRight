@@ -56,11 +56,15 @@ class Level
         void powerUpActivated(Sprite *powerUp);
         int isModifierActive();
         virtual void generateSprites() = 0;
+        void bossBattle();
         int levelEnded;
         int gameEnded;
         int nextLevel;
         int spritesDefeated;
         int levelBegun;
+        int bossBattleEnded;
+        int bossEndFightBegun;
+        int mainLevelEnded;
         const int totalSpritesToKill;
         const string levelText;
         double globalSpeedModifier; // Globaly changes speed

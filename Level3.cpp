@@ -1,6 +1,6 @@
 /*
  * Level3.cpp
- * Madelyn Nelson   
+ * Charles Shinaver
  * Level 3 Class implementation
 */
 
@@ -15,30 +15,24 @@ Level3::Level3(SDLWrapper &sw) : Level(sw, "Level 3", 20)
     
     /* ####################SETUP BACKGROUND ################ */ 
     Background *background = new Background();
-    background->setTexturePath("Combinedbackground9-9.png"); // ND
+    background->setTexturePath("Combinedbackground9-9.png");
 
     setBackground(background);
-}
 
-void Level3::handleKeyboardEvents()
-{
-    /*
-     * Checks for any events in queue and responds if any
-     * Put responses to events here
-    */
+    /* ##################SET ALLOWED SPRITES############### */
+    vector<SpriteType> vs;
+    vector<SpriteType> powerupSprites;
+    vs.push_back(TSkeleton);
+    vs.push_back(TSnail);
+    vs.push_back(TCat);
 
-    // Event handler
-    SDL_Event e;
+    powerupSprites.push_back(TSlowDownPowerup);
+    SpriteFactory *_sf = new SpriteFactory(100, vs, "level3.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
+    SpriteFactory *_pf = new SpriteFactory(600, powerupSprites, "level3.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // Event handler loop
-    while (SDL_PollEvent( &e ) != 0)
-    {
-        // User quits
-        if (e.type == SDL_QUIT)
-        {
-            endGame();
-        }
-    }
+    setEnemyFactory(_sf);
+    setPowerupFactory(_pf);
+    
 }
 
 void Level3::generateSprites()
@@ -47,19 +41,15 @@ void Level3::generateSprites()
      * Handles sprite generation
     */
 
-    if (numSprites() != 2)
-    {
-        Bruh *b = new Bruh();
-        Skeleton *s = new Skeleton();
+    Sprite *s = NULL;
+    SpriteFactory *sf = getEnemyFactory();
+    s = sf->generateSprites();
 
-        b->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .25);
-        s->setPos(SCREEN_WIDTH * .125, SCREEN_HEIGHT * .5);
-        b->setSize(100, 100);
-        s->setSize(100, 100);
-        addSprite(b);
+    // Check if new sprite added
+    if (s != NULL)
+    {
         addSprite(s);
     }
-
 }
 
 int Level3::startLevel()

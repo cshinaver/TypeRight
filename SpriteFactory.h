@@ -15,8 +15,10 @@
 #include "Bruh.h"
 #include "Lightsaber.h"
 #include "Hero.h"
+#include "Fireball.h"
 #include "Skeleton.h"
 #include "Pegasus.h"
+#include "Dragon.h"
 #include "Snail.h"
 #include "Soldier.h"
 #include "Pegasus.h"
@@ -27,6 +29,7 @@ enum SpriteType
     TBruh,
     TLightsaber,
     THero,
+    TFireball,
     TCat,
     TSkeleton,
     TSnail,

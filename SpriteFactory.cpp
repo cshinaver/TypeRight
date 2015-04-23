@@ -88,6 +88,9 @@ Sprite * SpriteFactory::generateSprites()
                 break;
             case THero:
                 s = new Hero;
+                break;
+            case TFireball:
+                s = new Fireball;
                 s->setFlip(1);
                 break;
             case TSnail:
