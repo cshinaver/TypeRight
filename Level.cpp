@@ -80,6 +80,8 @@ int Level::startLevel(int currentLevel)
 
         loadAndMoveSprites();
         loadAndMovePowerups();
+        loadAndMoveThrownWeapon();
+
         handleActivatedLevelModifiers();
         displayInput();
         displayScore();
@@ -329,6 +331,7 @@ void Level::checkForDefeatedSprites()
         Sprite *firstEnemy = levelSprites[2];
         if (pressedChars == firstEnemy->getText()) // Remove if match
         {
+            generateThrownWeapon();
             spriteDefeated(2);
             heroPtr->setAttacking(1);
             heroPtr->setAttackFlag(1);
@@ -554,3 +557,63 @@ int Level::isModifierActive()
 {
     return ((int)activeModifiers.size() > 0) ? 1 : 0;
 }
+
+void Level::generateThrownWeapon()
+{
+    /*
+     * Generates weapon
+    */
+
+    // Check if new sprite added
+        Lightsaber *l = new Lightsaber;
+
+        // Set position
+        l->setPos(heroPtr->getPosX(),heroPtr->getPosY());
+        l->setSize(40, 40);
+        l->setDirection(LEFT);
+        thrownWeaponSprites.push_back(l);
+}
+
+void Level::loadAndMoveThrownWeapon()
+{
+    /*
+     * Loads and moves weapons
+    */
+
+    int x,y, bufferZone;
+    bufferZone = 200;
+
+    for (int i = 0; i < (int)thrownWeaponSprites.size(); i++)
+    {
+        // Dealloc powerups if out of range
+        x = thrownWeaponSprites[i]->getPosX();
+        y = thrownWeaponSprites[i]->getPosY();
+        if (
+                x > SCREEN_WIDTH + bufferZone ||
+                x < 0 - bufferZone ||
+                y > SCREEN_HEIGHT + bufferZone ||
+                y < 0 - bufferZone
+           )
+        {
+            delete thrownWeaponSprites[i];
+            thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
+            continue;
+        }
+
+        // Load, move, and animate
+        sw.loadSprite(thrownWeaponSprites[i]);
+
+        thrownWeaponSprites[i]->animate();
+        thrownWeaponSprites[i]->move();
+
+        // Check if crossed border
+        if (i == ((int)thrownWeaponSprites.size() - 1) && y < 0 - 80 && x > SCREEN_WIDTH / 2)
+        {
+            delete thrownWeaponSprites[i];
+            thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
+            delete thrownWeaponSprites[i - 1];
+            thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i - 1);
+        }
+    }
+}
+
