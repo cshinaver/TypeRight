@@ -32,14 +32,17 @@ class Level
         const int SCREEN_HEIGHT;
     private:
         void generatePowerups();
+        void generateThrownWeapon();
         Background *levelBackground;
         vector<Sprite *> levelSprites;
         vector<Sprite *> powerUpSprites;
+        vector<Sprite *> thrownWeaponSprites;
         vector<LevelModifier> activeModifiers;
         void levelIntro();
         void calculateLevelProgress();
         void loadAndMoveSprites();
         void loadAndMovePowerups();
+        void loadAndMoveThrownWeapon();
         void levelFinished();
         void handleKeyboardEvents();
         void displayInput();
