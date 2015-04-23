@@ -331,10 +331,13 @@ void Level::checkForDefeatedSprites()
         Sprite *firstEnemy = levelSprites[2];
         if (pressedChars == firstEnemy->getText()) // Remove if match
         {
-            generateThrownWeapon();
-            spriteDefeated(2);
-            heroPtr->setAttacking(1);
-            heroPtr->setAttackFlag(1);
+
+            if ((int)thrownWeaponSprites.size()==0)
+            {
+                heroPtr->setAttacking(1);
+                heroPtr->setAttackFlag(1);
+                generateThrownWeapon();
+            }
         }
     }
 
@@ -565,13 +568,18 @@ void Level::generateThrownWeapon()
     */
 
     // Check if new sprite added
+    if(heroPtr->getAttackFlag() && heroPtr->isAttacking())
+    {
+        cout << "Gen" << endl;
         Lightsaber *l = new Lightsaber;
 
         // Set position
-        l->setPos(heroPtr->getPosX(),heroPtr->getPosY());
-        l->setSize(40, 40);
+        l->setPos(heroPtr->getPosX()+20,heroPtr->getPosY()+20);
+        l->setSize(50, 50);
+        l->setDt(20);
         l->setDirection(LEFT);
         thrownWeaponSprites.push_back(l);
+    }
 }
 
 void Level::loadAndMoveThrownWeapon()
@@ -605,6 +613,13 @@ void Level::loadAndMoveThrownWeapon()
 
         thrownWeaponSprites[i]->animate();
         thrownWeaponSprites[i]->move();
+        if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[2]))
+        {
+            spriteDefeated(2);
+            delete thrownWeaponSprites[i];
+            thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
+        }
+        
 
         // Check if crossed border
         if (i == ((int)thrownWeaponSprites.size() - 1) && y < 0 - 80 && x > SCREEN_WIDTH / 2)
