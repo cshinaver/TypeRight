@@ -322,7 +322,7 @@ void SDLWrapper::displayText(string text, int x, int y, int fontSize)
     */
 
     // Get text texture
-    TRTexture textTex = loadTextIntoTexture(text, fontSize);
+    TRTexture textTex = loadTextIntoTexture(text, fontSize, 0x09, 0x0B, 0x51);
 
     // Set dimensions for display
     SDL_Rect dest;
