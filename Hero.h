@@ -23,11 +23,11 @@ class Hero : public Sprite
         int isAttacking() { return attacking; };
         void setAttacking(int _a) { attacking = _a; };
         void setAttackFlag(int _af) { attackFlag = _af; };
+        int getAttackFlag() { return attackFlag; };
 
     private:
         int attacking;
         int attackFlag;
-        vector<Sprite> sabers;
         
 };
 
