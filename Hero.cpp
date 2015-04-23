@@ -77,6 +77,7 @@ void Hero::animate()
     setTotalFrames(tFrames);
     if (isAttacking())
     {
+        speedConst = 6;
         if (attackFlag)
         {
             tFrames = textureClips.size()/2;

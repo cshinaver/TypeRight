@@ -56,7 +56,7 @@ void Lightsaber::setTexture(TRTexture tex)
 
 void Lightsaber::animate()
 {
-    int speedConst = 8;   // Modify this to make sprite animation faster or slower
+    int speedConst = 4;   // Modify this to make sprite animation faster or slower
 
     /* ####################CYCLE FRAMES ################# */
     int tFrames = getTotalFrames();
