@@ -8,7 +8,7 @@ Lightsaber::Lightsaber() : Sprite()
     */
 
     setTexturePath("lightsaber.png");
-    setChromaColor(0x20, 0xB5, 0x62);
+    setChromaColor(0xFF, 0xFF, 0xFF);
     setDirection(RIGHT);
 }
 
@@ -29,7 +29,7 @@ void Lightsaber::setTexture(TRTexture tex)
     double unitCol = tex.getWidth() / cols;
     double unitRow = tex.getHeight() / rows;
 
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < cols; i++)
     {
         // Set bruh equal to second column sprites
         SDL_Rect frame;
