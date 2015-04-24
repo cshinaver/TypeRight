@@ -5,6 +5,7 @@
 */
 
 #include "TypeRight.h"
+#include "menu.h"
 #include "Bruh.h"
 #include "Background.h"
 #include "Soldier.h"
@@ -45,6 +46,8 @@ void TypeRight::startGame()
     Level2 l2(sw); // middle, scary night city
     Level3 l3(sw); // hardest, Notre Dame
     
+    Menu m(sw); // main menu
+    m.menuPlay();
 
     while (nextLevel)
     {
