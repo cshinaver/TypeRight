@@ -2,7 +2,7 @@
  * TypeRight.cpp
  * Charles Shinaver + Jared Rodgers + Madelyn Nelson + Elliott Runburg
  * Main game implementation
-*/
+ */
 
 #include "TypeRight.h"
 #include "menu.h"
@@ -21,7 +21,7 @@ TypeRight::TypeRight()
 {
     /*
      * Default constructor
-    */
+     */
 
     // Init window and initial surface
     sw.init();
@@ -32,7 +32,7 @@ void TypeRight::startGame()
 {
     /*
      * Starts game
-    */
+     */
 
     // Set next level
     int nextLevel = 1;
@@ -45,27 +45,28 @@ void TypeRight::startGame()
     Level1 l1(sw); // easiest, country field background
     Level2 l2(sw); // middle, scary night city
     Level3 l3(sw); // hardest, Notre Dame
-    
+
     Menu m(sw); // main menu
     m.menuPlay();
 
-    while (nextLevel)
+    if( m.getPlayActivation() )
     {
-        switch (nextLevel)
+        while (nextLevel)
         {
-            case 1:
-                nextLevel = l1.startLevel();
-                break;
-            case 2:
-                nextLevel = l2.startLevel();
-                break;
-            case 3:
-                nextLevel = l3.startLevel();
-                break;
+            switch (nextLevel)
+            {
+                case 1:
+                    nextLevel = l1.startLevel();
+                    break;
+                case 2:
+                    nextLevel = l2.startLevel();
+                    break;
+                case 3:
+                    nextLevel = l3.startLevel();
+                    break;
+            }
         }
-
     }
-
     // Quit SDL
     sw.quit();
 

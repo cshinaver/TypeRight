@@ -19,7 +19,7 @@ class Menu {
         void menuPlay();
         void display() const;
         void handleKeyboardEvents();
-        int checkForPlayActivation();
+        int getPlayActivation();
         const int SCREEN_WIDTH;
         const int SCREEN_HEIGHT;
     private:
@@ -27,6 +27,9 @@ class Menu {
         int pressedQuit(); // 1 if quit is pressed, 0 if not
         SDLWrapper &sw;
         int playActivation;
+        int quitActivation;
+        int onLeft;
+        int onRight;
 };
 
 #endif
