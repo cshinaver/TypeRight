@@ -85,7 +85,7 @@ target_link_libraries(Background_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${S
 
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_lib Background_lib Bruh_lib Fireball_lib Dragon_lib Pegasus_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_lib GameOver_lib Background_lib Bruh_lib Fireball_lib Dragon_lib Pegasus_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # SpriteFactory Class
 add_library(SpriteFactory_lib SpriteFactory.cpp)
@@ -106,6 +106,10 @@ target_link_libraries(Level2_lib Level_lib)
 # Level 3 Class
 add_library(Level3_lib Level3.cpp)
 target_link_libraries(Level3_lib Level_lib)
+
+# GameOver Class
+add_library(GameOver_lib GameOver.cpp)
+target_link_libraries(GameOver_lib sdlwrapper_lib)
 
 # Collision Class
 add_library(Collision_lib collision.cpp)
