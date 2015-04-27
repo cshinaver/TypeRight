@@ -70,6 +70,7 @@ class Level
         SpriteFactory *sf;
         SpriteFactory *powerupFactory;
         string pressedChars;
+	void heroDeath();
 };
 
 #endif
