@@ -32,12 +32,10 @@ void Menu::handleKeyboardEvents()
                 switch ( e.key.keysym.sym ) // checks which was pressed
                 {
                     case SDLK_LEFT: // left is highlighted
-                        cout << "left keypress detected " << endl;
                         onRight = 0;
                         onLeft = 1;
                         break;
                     case SDLK_RIGHT: // right is highlighted
-                        cout << "right keypress detected " << endl;
                         onLeft = 0;
                         onRight = 1;
                         break;
@@ -63,13 +61,30 @@ int Menu::getPlayActivation()
 void Menu::display() const
 {
     sw.clearWindow();
+    
     // displays background image
     sw.displayImage("blueMenu.png", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    sw.displayImage("inputBox.png", SCREEN_WIDTH / 7, SCREEN_HEIGHT / 2, 0, SCREEN_HEIGHT/11, 1, 0x67, 0xc8, 0xff );
-    sw.displayImage("inputBox.png", SCREEN_WIDTH*4/7, SCREEN_HEIGHT / 2, 0, SCREEN_HEIGHT/11, 1, 0xf1, 0xfb, 0xfc ); 
+    
+    // displays moving red box around selected button
+    if (onLeft)
+    {
+        sw.displayImage("redMenu2.png", SCREEN_WIDTH*.12, SCREEN_HEIGHT *.485);
+    }
+    else if(onRight)
+    {
+        sw.displayImage("redMenu2.png", SCREEN_WIDTH*.55, SCREEN_HEIGHT*.485);
+    }
+    
+    // displays white button
+    sw.displayImage("inputBox.png", SCREEN_WIDTH / 7, SCREEN_HEIGHT / 2, 0, SCREEN_HEIGHT/11, 1, 0xf1, 0x0b, 0xc3 );
+    sw.displayImage("inputBox.png", SCREEN_WIDTH*4/7, SCREEN_HEIGHT / 2, 0, SCREEN_HEIGHT/11, 1, 0xf1, 0x0b, 0xc3 ); 
+
+    // display pirate picture (might be replaced with Jared's sprite?)
+    sw.displayImage("PirateImg.png", SCREEN_WIDTH*.2, SCREEN_HEIGHT*.2, 0, SCREEN_HEIGHT/4, 1, 0x20, 0xB5, 0x62 );
+    // pirate chroma color is 0x20, 0xB5, 0x62? apparently not
 
     // displays quit and play strings
-    sw.displayText("TypeRight", SCREEN_WIDTH / 3, SCREEN_HEIGHT / 3.5, 50);
+    sw.displayText("TypeRight", SCREEN_WIDTH*.38, SCREEN_HEIGHT / 3.8, 50);
     sw.displayText("PLAY", SCREEN_WIDTH*.25, SCREEN_HEIGHT*.49, 35);
     sw.displayText("QUIT", SCREEN_WIDTH*4/6, SCREEN_HEIGHT*.49, 35);
     sw.displayText("Charles Shinaver, Jared Rodgers, Elliott Runburg, Madelyn Nelson", SCREEN_WIDTH / 27, SCREEN_HEIGHT*.73, 20);
@@ -86,11 +101,5 @@ void Menu::menuPlay()
     {
         handleKeyboardEvents();        
         display();
-    }
-    if (quitActivation){
-        cout << "User quits the game." << endl;
-    }   
-    else { // play is activated
-        cout << "User plays the game." << endl;
     }
 }
