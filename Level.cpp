@@ -800,7 +800,7 @@ void Level::generateThrownWeapon()
         Lightsaber *l = new Lightsaber;
 
         // Set position
-        l->setPos(heroPtr->getPosX()+20,heroPtr->getPosY()+20);
+        l->setPos(heroPtr->getPosX()+20,heroPtr->getPosY()+10);
         l->setSize(60, 60);
         l->setDt(20);
         l->setDirection(LEFT);
