@@ -80,7 +80,7 @@ void Menu::display() const
     sw.displayImage("inputBox.png", SCREEN_WIDTH*4/7, SCREEN_HEIGHT / 2, 0, SCREEN_HEIGHT/11, 1, 0xf1, 0x0b, 0xc3 ); 
 
     // display hero sprite
-    sw.displayImage("betterJaredSprite.png", SCREEN_WIDTH*.21, SCREEN_HEIGHT*.2, 0, SCREEN_HEIGHT*.2, 1, 0xff, 0x00, 0xff );
+    sw.displayImage("hero.png", SCREEN_WIDTH * .03, SCREEN_HEIGHT*.07, 0, 100, 1, 0xff, 0x00, 0xff );
 
     // displays quit and play strings
     sw.displayText("TypeRight", SCREEN_WIDTH*.35, SCREEN_HEIGHT / 3.8, 50);
