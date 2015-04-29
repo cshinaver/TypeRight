@@ -47,6 +47,10 @@ target_link_libraries(Sprite_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} 
 add_library(sdlwrapper_lib SDLWrapper.cpp)
 target_link_libraries(sdlwrapper_lib TRTexture_lib Sprite_lib SpriteFactory_lib ${SDL2_TTF_LIBRARIES})
 
+# Menu Class
+add_library(Menu_lib Menu.cpp)
+target_link_libraries(Menu_lib sdlwrapper_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
 # Bruh Class
 add_library(Bruh_lib Bruh.cpp)
 target_link_libraries(Bruh_lib Sprite_lib TRTexture_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
@@ -93,7 +97,7 @@ target_link_libraries(Background_lib Sprite_lib sdlwrapper_lib TRTexture_lib ${S
 
 # TypeRight Class
 add_library(TypeRight_lib TypeRight.cpp)
-target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_lib GameOver_lib Background_lib Bruh_lib Fireball_lib Dragon_lib Pegasus_lib Lightsaber_lib Hero_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib Pegasus_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(TypeRight_lib sdlwrapper_lib Level1_lib Level2_lib Level3_lib GameOver_lib Background_lib Bruh_lib Fireball_lib Dragon_lib Menu_lib Lightsaber_lib Hero_lib Pegasus_lib Cat_lib Soldier_lib Skeleton_lib Snail_lib ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # SpriteFactory Class
 add_library(SpriteFactory_lib SpriteFactory.cpp)
