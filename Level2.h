@@ -1,6 +1,6 @@
 /*
  * Level2.h
- * Madelyn Nelson
+ * Charles Shinaver
  * Level 2 Class
 */
 

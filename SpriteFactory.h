@@ -13,8 +13,10 @@
 #include "Sprite.h"
 #include "Cat.h"
 #include "Bruh.h"
+#include "Fireball.h"
 #include "Skeleton.h"
 #include "Pegasus.h"
+#include "Dragon.h"
 #include "Snail.h"
 #include "Soldier.h"
 #include "SlowDownPowerup.h"
@@ -22,6 +24,7 @@
 enum SpriteType
 {
     TBruh,
+    TFireball,
     TCat,
     TSkeleton,
     TSnail,

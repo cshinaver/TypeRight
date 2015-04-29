@@ -82,6 +82,10 @@ Sprite * SpriteFactory::generateSprites()
                 s = new Bruh;
                 s->setFlip(1);
                 break;
+            case TFireball:
+                s = new Fireball;
+                s->setFlip(1);
+                break;
             case TSnail:
                 s = new Snail;
                 s->setFlip(1);

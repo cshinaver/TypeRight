@@ -6,6 +6,9 @@
 
 #include "Level.h"
 #include <stdexcept>
+#include <cmath>
+#include <iostream>
+#include <unistd.h>
 
 Level::Level(SDLWrapper &_sw, string _levelText, int _spritesToKill) 
     : SCREEN_WIDTH(_sw.SCREEN_WIDTH),
@@ -19,8 +22,11 @@ Level::Level(SDLWrapper &_sw, string _levelText, int _spritesToKill)
     */
 
     levelEnded = 0;
+    bossEndFightBegun = 0;
+    mainLevelEnded = 0;
     levelBackground = NULL;
     levelBegun = 0;
+    bossBattleEnded = 0;
     gameEnded = 0;
     cd.setSpriteVector(&levelSprites);
     spritesDefeated = 0;
@@ -60,7 +66,7 @@ int Level::startLevel(int currentLevel)
     // Show level intro
     levelIntro();
 
-    while (!levelEnded)
+    while (!mainLevelEnded)
     {
         // Make changes based on number of defeated sprites
         calculateLevelProgress();
@@ -86,18 +92,52 @@ int Level::startLevel(int currentLevel)
         // Update screen
         sw.updateWindow();
     }
+    
+    bossBattle();
 
     levelFinished();
 
     // Return game ended status
     if (gameEnded)
     {
-        return 0;
+        return 5;
     }
     else
     {
         return ++currentLevel;
     }
+}
+
+void Level::heroDeath()
+{
+    // Grabs hero
+    Sprite * hero = levelSprites[1];
+    // Sets fall velocity
+    double vel = 8;
+    // Waits for a moment before continuing
+    usleep(500000);
+
+    while ( hero->getPosY() > 0 && hero->getPosY() < SCREEN_HEIGHT ) { // While the hero is on screen, loop through falling
+        // Update the screen
+        sw.clearWindow();
+
+        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        // Instead of loading and moving all other sprites, just load
+        for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
+            sw.loadSprite(*i);
+        for (int i = 0; i < (int)powerUpSprites.size(); i++)
+            sw.loadSprite(powerUpSprites[i]);
+        displayInput();
+        displayScore();
+
+        // Update screen
+        sw.updateWindow();
+
+        // Move the hero, then adjust the velocity
+        hero->setPos(hero->getPosX(), hero->getPosY()-vel);
+        vel -= 1.4;
+    }
+
 }
 
 void Level::levelIntro()
@@ -126,6 +166,142 @@ void Level::levelIntro()
     globalSpeedModifier = 0;
 }
 
+void Level::bossBattle()
+{
+    /*
+     * Runs Boss battle
+    */
+
+    double t =  M_PI / 2;
+
+    int spritesToRemove = (int)levelSprites.size();
+    // Clear sprites vector
+    if ((int)levelSprites.size() > 2)
+    {
+        for (int i = 2; i < spritesToRemove; i++)
+        {
+            delete levelSprites[2];
+            levelSprites.erase(levelSprites.begin() + 2);
+        }
+    }
+    powerUpSprites.clear();
+    activeModifiers.clear();
+    globalSpeedModifier = 2; // set fireball speed
+
+    /*####################### Fly Dragon in#############################*/
+    Dragon *d = new Dragon;
+    d->setText("");
+    d->setPos(SCREEN_WIDTH * 19./20, SCREEN_HEIGHT * .625);
+    double desiredYHeight = d->getPosY();
+    d->setSize(40, 40);
+    addSprite(d);
+    int count = 0;
+    while (count < 500 && !gameEnded)
+    {
+        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
+        sw.clearWindow();
+
+        // Stop at certain position
+        if (d->getPosX() > SCREEN_WIDTH * 16./20 )
+            d->setPos(d->getPosX() - d->getDt(), d->getPosY());
+
+        // Load all sprites
+        for (int i = 0; i < (int)levelSprites.size(); i++)
+        {
+            sw.loadSprite(levelSprites[i]);
+        }
+
+        if (count > 100 && count < 200)
+        {
+            sw.displayText("?", levelSprites[1]->getPosX() + 40, levelSprites[1]->getPosY() - 20, 28);
+        }
+
+        if (count > 200)
+        {
+            double frac = .007;
+            double r = 80;
+            d->setPos(r * cos(t) + SCREEN_WIDTH * 16./20 , r * sin(t) + desiredYHeight - r);
+            t -= M_PI * frac;
+        }
+
+        // only animate dragon
+        d->animate();
+
+        // Update screen
+        sw.updateWindow();
+        count++;
+    }
+
+    /*################################################################*/
+
+    /*#######################Battle Begin#############################*/
+    // Main battle begin
+    vector<SpriteType> vs;
+    vs.push_back(TFireball);
+    SpriteFactory *ff = new SpriteFactory(600, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
+    setEnemyFactory(ff);
+    spritesDefeated = 0;
+
+    while(!bossBattleEnded && !levelEnded)
+    {
+        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
+        sw.clearWindow();
+        handleKeyboardEvents();
+
+        // Generate new sprites
+        if (bossEndFightBegun)
+        {
+            d->setText("vim is life");
+        }
+        else
+        {
+            Sprite *s = NULL;
+            s = ff->generateSprites();
+            if (s != NULL)
+            {
+                s->setPos(d->getPosX() - 60, d->getPosY()-70);
+                s->setSize(SCREEN_WIDTH * 4./8, SCREEN_HEIGHT * 4./8);
+                addSprite(s);
+            }
+        }
+        
+        checkForHeroDeath();
+        checkForDefeatedSprites();
+        checkForIncorrectChars();
+
+        // Move hero since not done by first method
+        // Load all sprites
+        loadAndMoveSprites();
+
+
+        // move dragon
+        double frac = .007;
+        double r = 80;
+        d->setPos(r * cos(t) + SCREEN_WIDTH * 16./20 , r * sin(t) + desiredYHeight - r);
+        t -= M_PI * frac;
+
+        // only animate dragon
+        if (bossBattleEnded)
+            return;
+
+        d->animate();
+
+        displayInput();
+        
+        // Check if correct number of fireballs killed
+        if (spritesDefeated == (int)(totalSpritesToKill * .25))
+        {
+            bossEndFightBegun = 1;
+        }
+
+        // Update screen
+        sw.updateWindow();
+
+    }
+
+    /*################################################################*/
+}
+
 void Level::levelFinished()
 {
     /*
@@ -149,6 +325,7 @@ void Level::endGame()
 {
     levelEnded = 1;
     gameEnded = 1;
+    mainLevelEnded = 1;
 }
 
 void Level::addSprite(Sprite *s)
@@ -323,14 +500,44 @@ void Level::checkForDefeatedSprites()
      * Checks if any of the sprites have been killed
     */
 
-    if ((int)levelSprites.size() > 2)
+    if (mainLevelEnded)
     {
-        Sprite *firstEnemy = levelSprites[2];
-        if (pressedChars == firstEnemy->getText()) // Remove if match
+        // Boss battle settings
+        if (bossEndFightBegun)
         {
-            spriteDefeated(2);
+            if ((int)levelSprites.size() > 2)
+            {
+                Sprite *firstEnemy = levelSprites[2];
+                if (pressedChars == firstEnemy->getText()) // Remove if match
+                {
+                    spriteDefeated(2);
+                    bossBattleEnded = 1;
+                }
+            }
+        }
+        else
+        {
+            if ((int)levelSprites.size() > 3)
+            {
+                Sprite *firstEnemy = levelSprites[3];
+                if (pressedChars == firstEnemy->getText()) // Remove if match
+                {
+                    spriteDefeated(3);
+                }
+            }
         }
     }
+    else
+    {
+        if ((int)levelSprites.size() > 2)
+        {
+            Sprite *firstEnemy = levelSprites[2];
+            if (pressedChars == firstEnemy->getText()) // Remove if match
+            {
+                spriteDefeated(2);
+            }
+        }
+}
 
 }
 void Level::checkForActivatedPowerups()
@@ -369,7 +576,14 @@ void Level::checkForIncorrectChars()
     }
     if (levelSprites.size() > 2)
     {
-        firstEnemy = levelSprites[2];
+        if (mainLevelEnded && levelSprites.size() > 3)
+        {
+            firstEnemy = levelSprites[3];
+        }
+        else
+        {
+            firstEnemy = levelSprites[2];
+        }
         if (firstEnemy->getText().substr(0, pressedChars.size()) == pressedChars)
             matches = 1;
     }
@@ -388,6 +602,7 @@ void Level::checkForHeroDeath()
 
     if (cd.isDead())
     {
+        heroDeath();
         endGame();
     }
 }
@@ -442,7 +657,7 @@ void Level::calculateLevelProgress()
 
     if (spritesDefeated == totalSpritesToKill)
     {
-        endLevel();
+        mainLevelEnded = 1;
     }
 }
 
