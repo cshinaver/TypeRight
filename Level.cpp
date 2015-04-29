@@ -518,7 +518,6 @@ void Level::checkForDefeatedSprites()
                 {
                     if ((int)thrownWeaponSprites.size()==0)
                     {
-                    cout << "boss" << endl;
                     heroPtr->setAttacking(1);
                     heroPtr->setAttackFlag(1);
                     generateThrownWeapon();
@@ -535,7 +534,6 @@ void Level::checkForDefeatedSprites()
                 {
                     if ((int)thrownWeaponSprites.size()==0)
                     {
-                    cout << "fireball" << endl;
                     heroPtr->setAttacking(1);
                     heroPtr->setAttackFlag(1);
                     generateThrownWeapon();
@@ -554,7 +552,6 @@ void Level::checkForDefeatedSprites()
 
                 if ((int)thrownWeaponSprites.size()==0)
                 {
-                    cout << "enemy" << endl;
                     heroPtr->setAttacking(1);
                     heroPtr->setAttackFlag(1);
                     generateThrownWeapon();
