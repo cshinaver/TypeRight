@@ -44,12 +44,16 @@ void TypeRight::startGame()
     //##################
 
     // instanitate all levels
-    Level1 l1(sw); // easiest, country field background
-    Level2 l2(sw); // middle, scary night city
-    Level3 l3(sw); // hardest, Notre Dame
+//    Level1 l1(sw); // easiest, country field background
+//    Level2 l2(sw); // middle, scary night city
+//    Level3 l3(sw); // hardest, Notre Dame
 
     while (nextLevel)
     {
+	Level1 l1(sw);
+	Level2 l2(sw);
+	Level3 l3(sw);
+
         switch (nextLevel) // 0 will kill the program, 4 will show a winning screen, 5 will show a losing screen
         {
             case 1:
