@@ -28,7 +28,6 @@ class Hero : public Sprite
     private:
         int attacking;
         int attackFlag;
-        
 };
 
 #endif
