@@ -256,7 +256,7 @@ void Level::bossBattle()
         displayInput();
         
         // Check if correct number of fireballs killed
-        if (spritesDefeated == totalSpritesToKill * .25)
+        if (spritesDefeated == (int)(totalSpritesToKill * .25))
         {
             bossEndFightBegun = 1;
         }
