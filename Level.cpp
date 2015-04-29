@@ -93,7 +93,8 @@ int Level::startLevel(int currentLevel)
         sw.updateWindow();
     }
     
-    bossBattle();
+    if (!gameEnded)
+        bossBattle();
 
     levelFinished();
 
@@ -118,27 +119,26 @@ void Level::heroDeath()
     usleep(500000);
 
     while ( hero->getPosY() > 0 && hero->getPosY() < SCREEN_HEIGHT ) { // While the hero is on screen, loop through falling
-	// Update the screen
-	sw.clearWindow();
-
-	SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        // Update the screen
         sw.clearWindow();
-	// Instead of loading and moving all other sprites, just load
+
+        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        // Instead of loading and moving all other sprites, just load
         for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
             sw.loadSprite(*i);
         for (int i = 0; i < (int)powerUpSprites.size(); i++)
-	    sw.loadSprite(powerUpSprites[i]);
+            sw.loadSprite(powerUpSprites[i]);
         displayInput();
         displayScore();
 
         // Update screen
         sw.updateWindow();
 
-	// Move the hero, then adjust the velocity
-	hero->setPos(hero->getPosX(), hero->getPosY()-vel);
-	vel -= 0.2;
+        // Move the hero, then adjust the velocity
+        hero->setPos(hero->getPosX(), hero->getPosY()-vel);
+        vel -= 1.4;
     }
-	
+
 }
 
 void Level::levelIntro()
@@ -265,6 +265,8 @@ void Level::bossBattle()
         }
         
         checkForHeroDeath();
+        if (mainLevelEnded)
+            return;
         checkForDefeatedSprites();
         checkForIncorrectChars();
 
