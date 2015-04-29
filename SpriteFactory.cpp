@@ -82,23 +82,12 @@ Sprite * SpriteFactory::generateSprites()
                 s = new Bruh;
                 s->setFlip(1);
                 break;
-            case TLightsaber:
-                s = new Lightsaber;
-                s->setFlip(1);
-                break;
-            case THero:
-                s = new Hero;
-                break;
             case TFireball:
                 s = new Fireball;
                 s->setFlip(1);
                 break;
             case TSnail:
                 s = new Snail;
-                s->setFlip(1);
-                break;
-            case TPegasus:
-                s = new Pegasus;
                 s->setFlip(1);
                 break;
             case TSlowDownPowerup:
