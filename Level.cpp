@@ -175,13 +175,14 @@ void Level::bossBattle()
 
     double t =  M_PI / 2;
 
+    int spritesToRemove = (int)levelSprites.size();
     // Clear sprites vector
     if ((int)levelSprites.size() > 2)
     {
-        for (int i = 0; i < (int)levelSprites.size(); i++)
+        for (int i = 2; i < spritesToRemove; i++)
         {
-            delete levelSprites[i];
-            levelSprites.erase(levelSprites.begin() + i);
+            delete levelSprites[2];
+            levelSprites.erase(levelSprites.begin() + 2);
         }
     }
     powerUpSprites.clear();
@@ -290,7 +291,7 @@ void Level::bossBattle()
         displayInput();
         
         // Check if correct number of fireballs killed
-        if (spritesDefeated == totalSpritesToKill * .25)
+        if (spritesDefeated == (int)(totalSpritesToKill * .25))
         {
             bossEndFightBegun = 1;
         }
