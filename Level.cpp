@@ -93,8 +93,7 @@ int Level::startLevel(int currentLevel)
         sw.updateWindow();
     }
     
-    if (!gameEnded)
-        bossBattle();
+    bossBattle();
 
     levelFinished();
 
@@ -242,6 +241,7 @@ void Level::bossBattle()
     SpriteFactory *ff = new SpriteFactory(600, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
     setEnemyFactory(ff);
     spritesDefeated = 0;
+
     while(!bossBattleEnded && !levelEnded)
     {
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
@@ -266,8 +266,6 @@ void Level::bossBattle()
         }
         
         checkForHeroDeath();
-        if (mainLevelEnded)
-            return;
         checkForDefeatedSprites();
         checkForIncorrectChars();
 
