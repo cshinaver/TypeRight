@@ -115,6 +115,10 @@ target_link_libraries(Level2_lib Level_lib)
 add_library(Level3_lib Level3.cpp)
 target_link_libraries(Level3_lib Level_lib)
 
+# GameOver Class
+add_library(GameOver_lib GameOver.cpp)
+target_link_libraries(GameOver_lib sdlwrapper_lib)
+
 # Collision Class
 add_library(Collision_lib collision.cpp)
 target_link_libraries(Collision_lib Sprite_lib)

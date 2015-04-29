@@ -7,6 +7,8 @@
 #include "Level.h"
 #include <stdexcept>
 #include <cmath>
+#include <iostream>
+#include <unistd.h>
 
 Level::Level(SDLWrapper &_sw, string _levelText, int _spritesToKill) 
     : SCREEN_WIDTH(_sw.SCREEN_WIDTH),
@@ -101,12 +103,44 @@ int Level::startLevel(int currentLevel)
     // Return game ended status
     if (gameEnded)
     {
-        return 0;
+        return 5;
     }
     else
     {
         return ++currentLevel;
     }
+}
+
+void Level::heroDeath()
+{
+    // Grabs hero
+    Sprite * hero = levelSprites[1];
+    // Sets fall velocity
+    double vel = 8;
+    // Waits for a moment before continuing
+    usleep(500000);
+
+    while ( hero->getPosY() > 0 && hero->getPosY() < SCREEN_HEIGHT ) { // While the hero is on screen, loop through falling
+        // Update the screen
+        sw.clearWindow();
+
+        SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        // Instead of loading and moving all other sprites, just load
+        for (vector<Sprite *>::iterator i = levelSprites.begin(); i != levelSprites.end(); i++)
+            sw.loadSprite(*i);
+        for (int i = 0; i < (int)powerUpSprites.size(); i++)
+            sw.loadSprite(powerUpSprites[i]);
+        displayInput();
+        displayScore();
+
+        // Update screen
+        sw.updateWindow();
+
+        // Move the hero, then adjust the velocity
+        hero->setPos(hero->getPosX(), hero->getPosY()-vel);
+        vel -= 1.4;
+    }
+
 }
 
 void Level::levelIntro()
@@ -143,13 +177,14 @@ void Level::bossBattle()
 
     double t =  M_PI / 2;
 
+    int spritesToRemove = (int)levelSprites.size();
     // Clear sprites vector
     if ((int)levelSprites.size() > 2)
     {
-        for (int i = 0; i < (int)levelSprites.size(); i++)
+        for (int i = 2; i < spritesToRemove; i++)
         {
-            delete levelSprites[i];
-            levelSprites.erase(levelSprites.begin() + i);
+            delete levelSprites[2];
+            levelSprites.erase(levelSprites.begin() + 2);
         }
     }
     powerUpSprites.clear();
@@ -209,6 +244,7 @@ void Level::bossBattle()
     SpriteFactory *ff = new SpriteFactory(600, vs, "level1.txt", SCREEN_WIDTH, SCREEN_HEIGHT);
     setEnemyFactory(ff);
     spritesDefeated = 0;
+
     while(!bossBattleEnded && !levelEnded)
     {
         SDL_SetRenderDrawColor(sw.renderer, 0xFF, 0xFF, 0xFF, 0xFF );        
@@ -587,6 +623,7 @@ void Level::checkForHeroDeath()
 
     if (cd.isDead())
     {
+        heroDeath();
         endGame();
     }
 }

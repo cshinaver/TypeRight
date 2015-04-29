@@ -74,6 +74,7 @@ class Level
         SpriteFactory *powerupFactory;
         string pressedChars;
         Hero *heroPtr;
+        void heroDeath();
 };
 
 #endif
