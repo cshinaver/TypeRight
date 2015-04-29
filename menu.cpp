@@ -34,11 +34,26 @@ void Menu::handleKeyboardEvents()
                     case SDLK_LEFT: // left is highlighted
                         onRight = 0;
                         onLeft = 1;
+                        break; // waits for user to press enter
+                    case SDLK_p: // p is pressed
+                        onRight = 0;
+                        onLeft = 1;
+                        playActivation = 1; // plays game
+                        break;
+                    case SDL_QUIT: // handles most quit codes on keyboard
+                        onLeft = 0;
+                        onRight = 1;
+                        quitActivation = 1; // quits game
+                        break;
+                    case SDLK_q: // q is pressed
+                        onLeft = 0;
+                        onRight = 1;
+                        quitActivation = 1; // quits game
                         break;
                     case SDLK_RIGHT: // right is highlighted
                         onLeft = 0;
                         onRight = 1;
-                        break;
+                        break; // waits for user to press enter
                     case SDLK_RETURN: // user presses enter
                         if (onLeft == 1) { // if play is highlighted
                             playActivation = 1; // plays game
