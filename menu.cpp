@@ -79,12 +79,11 @@ void Menu::display() const
     sw.displayImage("inputBox.png", SCREEN_WIDTH / 7, SCREEN_HEIGHT / 2, 0, SCREEN_HEIGHT/11, 1, 0xf1, 0x0b, 0xc3 );
     sw.displayImage("inputBox.png", SCREEN_WIDTH*4/7, SCREEN_HEIGHT / 2, 0, SCREEN_HEIGHT/11, 1, 0xf1, 0x0b, 0xc3 ); 
 
-    // display pirate picture (might be replaced with Jared's sprite?)
-    sw.displayImage("PirateImg.png", SCREEN_WIDTH*.2, SCREEN_HEIGHT*.2, 0, SCREEN_HEIGHT/4, 1, 0x20, 0xB5, 0x62 );
-    // pirate chroma color is 0x20, 0xB5, 0x62? apparently not
+    // display hero sprite
+    sw.displayImage("betterJaredSprite.png", SCREEN_WIDTH*.21, SCREEN_HEIGHT*.2, 0, SCREEN_HEIGHT*.2, 1, 0xff, 0x00, 0xff );
 
     // displays quit and play strings
-    sw.displayText("TypeRight", SCREEN_WIDTH*.38, SCREEN_HEIGHT / 3.8, 50);
+    sw.displayText("TypeRight", SCREEN_WIDTH*.35, SCREEN_HEIGHT / 3.8, 50);
     sw.displayText("PLAY", SCREEN_WIDTH*.25, SCREEN_HEIGHT*.49, 35);
     sw.displayText("QUIT", SCREEN_WIDTH*4/6, SCREEN_HEIGHT*.49, 35);
     sw.displayText("Charles Shinaver, Jared Rodgers, Elliott Runburg, Madelyn Nelson", SCREEN_WIDTH / 27, SCREEN_HEIGHT*.73, 20);
