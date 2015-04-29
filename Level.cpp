@@ -270,12 +270,15 @@ void Level::bossBattle()
         
         checkForHeroDeath();
         checkForDefeatedSprites();
+
         checkForIncorrectChars();
 
         // Move hero since not done by first method
         // Load all sprites
         loadAndMoveSprites();
         loadAndMoveThrownWeapon();
+        if (bossBattleEnded)
+            return;
 
         // move dragon
         double frac = .007;
@@ -285,7 +288,7 @@ void Level::bossBattle()
 
         // only animate dragon
         if (bossBattleEnded)
-            return;
+            break;
 
         d->animate();
 
@@ -848,18 +851,18 @@ void Level::loadAndMoveThrownWeapon()
         }
         if (mainLevelEnded)
         {
-            if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[2]))
+            if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[2]) && bossEndFightBegun)
             {
-                spriteDefeated(2);
                 bossBattleEnded = 1;
-                delete thrownWeaponSprites[i];
-                thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
             }
-            else if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[3]))
+            if (!bossEndFightBegun)
             {
-                spriteDefeated(3);
-                delete thrownWeaponSprites[i];
-                thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
+                if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[3]))
+                {
+                    spriteDefeated(3);
+                    delete thrownWeaponSprites[i];
+                    thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
+                }
             }
         }
         // Check if crossed border
