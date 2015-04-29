@@ -748,7 +748,6 @@ void Level::generateThrownWeapon()
     // Check if new sprite added
     if(heroPtr->getAttackFlag() && heroPtr->isAttacking())
     {
-        cout << "Gen" << endl;
         Lightsaber *l = new Lightsaber;
 
         // Set position
@@ -791,14 +790,22 @@ void Level::loadAndMoveThrownWeapon()
 
         thrownWeaponSprites[i]->animate();
         thrownWeaponSprites[i]->move();
+
         if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[2]))
         {
             spriteDefeated(2);
             delete thrownWeaponSprites[i];
             thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
         }
-        
-
+        if (mainLevelEnded)
+        {
+            if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[3]))
+            {
+                spriteDefeated(3);
+                delete thrownWeaponSprites[i];
+                thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
+            }
+        }
         // Check if crossed border
         if (i == ((int)thrownWeaponSprites.size() - 1) && y < 0 - 80 && x > SCREEN_WIDTH / 2)
         {
