@@ -239,7 +239,7 @@ void Level::bossBattle()
         // Move hero since not done by first method
         // Load all sprites
         loadAndMoveSprites();
-
+        loadAndMoveThrownWeapon();
 
         // move dragon
         double frac = .007;
@@ -477,8 +477,13 @@ void Level::checkForDefeatedSprites()
                 Sprite *firstEnemy = levelSprites[2];
                 if (pressedChars == firstEnemy->getText()) // Remove if match
                 {
-                    spriteDefeated(2);
-                    bossBattleEnded = 1;
+                    if ((int)thrownWeaponSprites.size()==0)
+                    {
+                    cout << "boss" << endl;
+                    heroPtr->setAttacking(1);
+                    heroPtr->setAttackFlag(1);
+                    generateThrownWeapon();
+                    }
                 }
             }
         }
@@ -489,7 +494,13 @@ void Level::checkForDefeatedSprites()
                 Sprite *firstEnemy = levelSprites[3];
                 if (pressedChars == firstEnemy->getText()) // Remove if match
                 {
-                    spriteDefeated(3);
+                    if ((int)thrownWeaponSprites.size()==0)
+                    {
+                    cout << "fireball" << endl;
+                    heroPtr->setAttacking(1);
+                    heroPtr->setAttackFlag(1);
+                    generateThrownWeapon();
+                    }
                 }
             }
         }
@@ -504,6 +515,7 @@ void Level::checkForDefeatedSprites()
 
                 if ((int)thrownWeaponSprites.size()==0)
                 {
+                    cout << "enemy" << endl;
                     heroPtr->setAttacking(1);
                     heroPtr->setAttackFlag(1);
                     generateThrownWeapon();
@@ -752,7 +764,7 @@ void Level::generateThrownWeapon()
 
         // Set position
         l->setPos(heroPtr->getPosX()+20,heroPtr->getPosY()+20);
-        l->setSize(50, 50);
+        l->setSize(60, 60);
         l->setDt(20);
         l->setDirection(LEFT);
         thrownWeaponSprites.push_back(l);
@@ -799,7 +811,14 @@ void Level::loadAndMoveThrownWeapon()
         }
         if (mainLevelEnded)
         {
-            if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[3]))
+            if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[2]))
+            {
+                spriteDefeated(2);
+                bossBattleEnded = 1;
+                delete thrownWeaponSprites[i];
+                thrownWeaponSprites.erase(thrownWeaponSprites.begin() + i);
+            }
+            else if (cd.checkCollision(thrownWeaponSprites[i],levelSprites[3]))
             {
                 spriteDefeated(3);
                 delete thrownWeaponSprites[i];

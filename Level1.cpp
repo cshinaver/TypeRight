@@ -7,7 +7,7 @@
 #include "Level1.h"
 #include "SpriteFactory.h"
 
-Level1::Level1(SDLWrapper &sw) : Level(sw, "Level 1", 20)
+Level1::Level1(SDLWrapper &sw) : Level(sw, "Level 1", 5)
 {
     /*
      * Default constructor
