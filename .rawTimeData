@@ -32,8 +32,8 @@ charles;in;03-16-2015;12:50:22 AM
 charles;out;03-16-2015;01:24:27 AM
 Madelyn;in;03-16-2015;02:30:22 PM
 Madelyn;out;03-16-2015;02:31:42 PM
-Jared;in;03-16-2015;02:29:56 PM
-Jared;out;03-16-2015;02:30:23 PM
+Jared  ;in;03-16-2015;02:29:56 PM
+Jared  ;out;03-16-2015;02:30:23 PM
 Madelyn;in;03-16-2015;02:49:22 PM
 Madelyn;out;03-16-2015;02:52:08 PM
 charles;in;03-16-2015;04:38:57 PM
@@ -50,16 +50,16 @@ charles;in;03-17-2015;02:31:41 PM
 charles;out;03-18-2015;06:30:46 PM
 charles;in;03-18-2015;12:30:49 AM
 charles;out;03-18-2015;02:14:15 AM
-Jared;in;03-19-2015;01:24:47 AM
-Jared;out;03-19-2015;03:21:00 AM
+Jared  ;in;03-19-2015;01:24:47 AM
+Jared  ;out;03-19-2015;03:21:00 AM
 Madelyn;in;03-19-2015;10:04:12 AM
 Madelyn;out;03-19-2015;01:52:56 PM
-Jared;in;03-19-2015;01:24:47 AM
-Jared;out;03-19-2015;03:21:00 AM
+Jared  ;in;03-19-2015;01:24:47 AM
+Jared  ;out;03-19-2015;03:21:00 AM
 charles;in;03-19-2015;12:39:49 PM
 charles;out;03-19-2015;01:25:47 PM
-Jared;in;03-19-2015;04:09:45 PM
-Jared;out;03-19-2015;06:02:50 PM
+Jared  ;in;03-19-2015;04:09:45 PM
+Jared  ;out;03-19-2015;06:02:50 PM
 charles;in;03-20-2015;12:30:40 AM
 charles;out;03-20-2015;02:08:26 AM
 Elliott;in;03-26-2015;03:36:53 PM
@@ -74,12 +74,12 @@ charles;in;03-24-2015;12:18:17 AM
 charles;out;03-24-2015;02:05:13 AM
 Madelyn;in;03-23-2015;04:41:22 PM
 Madelyn;out;03-23-2015;05:44:27 PM
-Jared;in;03-25-2015; 2:08:38 PM
-Jared;out;03-25-2015; 3:24:50 PM
-Jared;in;03-26-2015; 2:02:27 PM
-Jared;out;03-26-2015; 3:49:40 PM
-Jared;in;04-01-2015; 2:19:35 PM
-Jared;out;04-01-2015; 3:27:51 PM
+Jared  ;in;03-25-2015; 2:08:38 PM
+Jared  ;out;03-25-2015; 3:24:50 PM
+Jared  ;in;03-26-2015; 2:02:27 PM
+Jared  ;out;03-26-2015; 3:49:40 PM
+Jared  ;in;04-01-2015; 2:19:35 PM
+Jared  ;out;04-01-2015; 3:27:51 PM
 Madelyn;in;03-27-2015;03:41:24 PM
 Madelyn;out;03-27-2015;05:55:27 PM
 charles;in;03-30-2015;11:52:01 AM
@@ -110,10 +110,10 @@ charles;in;04-20-2015;01:17:22 PM
 charles;out;04-20-2015;07:25:53 PM
 charles;in;04-20-2015;09:20:33 PM
 charles;out;04-20-2015;10:25:53 PM
-Jared;in;04-20-2015; 9:22:22 PM
-Jared;out;04-20-2015; 11:59:59 PM
-Jared;in;04-21-2015; 12:00:01 AM
-Jared;out;04-21-2015;3:52:47 AM
+Jared  ;in;04-20-2015; 9:22:22 PM
+Jared  ;out;04-20-2015; 11:59:59 PM
+Jared  ;in;04-21-2015; 12:00:01 AM
+Jared  ;out;04-21-2015;3:52:47 AM
 charles;in;04-20-2015;09:00:33 PM
 charles;out;04-20-2015;11:59:33 PM
 charles;in;04-21-2015;12:00:33 AM
